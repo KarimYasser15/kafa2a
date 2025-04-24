@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:kafa2a/config/colors_manager.dart';
+
+class AppTheme {
+  static ThemeData lightTheme = ThemeData(
+    primaryColor: ColorsManager.blue,
+    scaffoldBackgroundColor: Colors.white,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: ColorsManager.blue,
+      brightness: Brightness.light,
+      primary: ColorsManager.blue,
+      onPrimary: Colors.white,
+      secondary: Colors.white,
+      onSecondary: ColorsManager.blue,
+      onSurface: Colors.black,
+      surface: Colors.white,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          textStyle: GoogleFonts.inter(
+              fontSize: 16.sp,
+              textStyle: TextStyle(overflow: TextOverflow.ellipsis)),
+          elevation: 2,
+          fixedSize: Size(300.w, 45.h),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+              side: BorderSide(color: ColorsManager.blue, width: 1.2.w))),
+    ),
+  );
+}
