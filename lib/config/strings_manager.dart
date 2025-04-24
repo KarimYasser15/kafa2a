@@ -6,8 +6,14 @@ class StringsManager {
   static const String login = "Login";
   static const String email = "Email";
   static const String password = "Password";
+  static const String confirmPassword = "Confirm Password";
   static const String enterYourEmail = "Enter Your Email";
   static const String enterYourPassword = "Enter Your Password";
   static const String dontHaveAnAccount = "Don't Have An Account?";
+  static const String alreadyHaveAnAccount = "Already Have An Account?";
+  static const String enterYourPhoneNumber = "Enter Your Phone Number";
+  static const String enterYourName = "Enter Your Name";
   static const String register = "Register";
+  static const String name = "Name";
+  static const String phoneNumber = "Phone Number";
 }

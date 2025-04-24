@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
+import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/validators.dart';
 import 'package:kafa2a/features/auth/login/view/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/login/view/widgets/password_form_field.dart';
 
@@ -63,6 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(height: 10.h),
                         PasswordFormField(
                           controller: passwordController,
+                          validator: (password) =>
+                              Validators.validatePassword(password),
                         ),
                         SizedBox(
                           height: 20.h,
@@ -84,7 +88,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(StringsManager.dontHaveAnAccount),
                   TextButton(
-                      onPressed: () {}, child: Text(StringsManager.register)),
+                      onPressed: () {
+                        if (userType == "user") {
+                          Navigator.pushNamed(
+                              context, RoutesManager.registerUser);
+                        }
+                      },
+                      child: Text(StringsManager.register)),
                 ],
               )
             ],

@@ -5,8 +5,10 @@ import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/validators.dart';
 
 class PasswordFormField extends StatefulWidget {
-  PasswordFormField({super.key, required this.controller});
+  PasswordFormField(
+      {super.key, required this.controller, required this.validator});
   TextEditingController controller;
+  String? Function(String?)? validator;
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
 }
@@ -20,7 +22,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
         controller: widget.controller,
-        validator: (value) => Validators.validatePassword(value),
+        validator: widget.validator,
         obscureText: isVisible,
         style: TextStyle(fontSize: 14.sp),
         decoration: InputDecoration(

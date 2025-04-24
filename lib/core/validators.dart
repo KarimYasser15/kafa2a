@@ -20,4 +20,26 @@ class Validators {
     }
     return null;
   }
+
+  static String? validateConfirmationPasswords(
+      String? password, String? confirmPassword) {
+    if (password != confirmPassword) {
+      return Messages.passwordsDontMatch;
+    }
+    return null;
+  }
+
+  static String? validateName(String? name) {
+    if (name == null || name.trim().isEmpty) {
+      return Messages.nameRequired;
+    }
+    return null;
+  }
+
+  static String? validatePhoneNumber(String? phoneNumber) {
+    if (phoneNumber == null || phoneNumber.trim().isEmpty) {
+      return Messages.phoneNumberRequired;
+    }
+    return null;
+  }
 }
