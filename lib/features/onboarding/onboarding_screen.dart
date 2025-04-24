@@ -35,7 +35,8 @@ class OnboardingScreen extends StatelessWidget {
             ),
             DefaultElevatedButton(
               label: StringsManager.serviceProvider,
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, RoutesManager.login,
+                  arguments: "provider"),
             )
           ],
         ),
