@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
+import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
 
@@ -26,7 +27,8 @@ class OnboardingScreen extends StatelessWidget {
             ),
             DefaultElevatedButton(
               label: StringsManager.user,
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, RoutesManager.login,
+                  arguments: "user"),
             ),
             SizedBox(
               height: 10.h,

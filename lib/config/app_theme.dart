@@ -24,9 +24,9 @@ class AppTheme {
               fontSize: 16.sp,
               textStyle: TextStyle(overflow: TextOverflow.ellipsis)),
           elevation: 2,
-          fixedSize: Size(300.w, 45.h),
+          fixedSize: Size(320.w, 45.h),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(12.r),
               side: BorderSide(color: ColorsManager.blue, width: 1.2.w))),
     ),
   );
