@@ -74,7 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Center(
                           child: ElevatedButton(
                               onPressed: () {
-                                if (formKey.currentState!.validate()) {}
+                                Navigator.pushReplacementNamed(
+                                    context, RoutesManager.homeUser);
                               },
                               child: Text(StringsManager.login)),
                         )

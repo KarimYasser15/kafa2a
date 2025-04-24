@@ -17,6 +17,14 @@ class AppTheme {
       onSurface: Colors.black,
       surface: Colors.white,
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: ColorsManager.blue,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
+      selectedLabelStyle: TextStyle(fontSize: 10.sp),
+      unselectedLabelStyle: TextStyle(fontSize: 10.sp),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
