@@ -27,4 +27,5 @@ class StringsManager {
   static const String cancelled = "Cancelled";
   static const String filter = "Filter";
   static const String offers = "Offers";
+  static const String cancelRequest = "Cancel Request";
 }

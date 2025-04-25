@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kafa2a/config/app_styles.dart';
-import 'package:kafa2a/config/assets_manager.dart';
-import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/offers/user/view/widgets/offer_item_widget.dart';
 
@@ -18,6 +14,20 @@ class UserOffersScreen extends StatelessWidget {
             StringsManager.offers,
           ),
         ),
+        floatingActionButton: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  side: BorderSide(color: Colors.red, width: 1.2.w))),
+          onPressed: () {},
+          child: Text(
+            StringsManager.cancelRequest,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniCenterFloat,
         body: ListView.builder(
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.all(8.0),
