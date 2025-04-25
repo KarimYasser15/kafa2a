@@ -26,4 +26,5 @@ class StringsManager {
   static const String completed = "Completed";
   static const String cancelled = "Cancelled";
   static const String filter = "Filter";
+  static const String offers = "Offers";
 }

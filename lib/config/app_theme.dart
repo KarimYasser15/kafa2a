@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primaryColor: ColorsManager.blue,
+    appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        titleTextStyle: AppStyles.title),
     scaffoldBackgroundColor: Colors.white,
     colorScheme: ColorScheme.fromSeed(
       seedColor: ColorsManager.blue,

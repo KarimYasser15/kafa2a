@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
+import 'package:kafa2a/config/routes_manager.dart';
 
 class RequestItemWidget extends StatelessWidget {
   const RequestItemWidget({super.key});
@@ -8,7 +9,7 @@ class RequestItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, RoutesManager.offerUser),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Container(
