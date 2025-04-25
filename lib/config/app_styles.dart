@@ -8,4 +8,9 @@ class AppStyles {
     fontSize: 22.sp,
     color: Colors.black,
   );
+  static TextStyle title = GoogleFonts.roboto(
+    fontWeight: FontWeight.bold,
+    fontSize: 24.sp,
+    color: Colors.black,
+  );
 }

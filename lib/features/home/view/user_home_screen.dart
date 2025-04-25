@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/features/requests/user/view/screens/user_requests_screen.dart';
 
 class UserHomeScreen extends StatefulWidget {
   UserHomeScreen({super.key});
@@ -15,9 +16,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     Scaffold(
       backgroundColor: Colors.green,
     ),
-    Scaffold(
-      backgroundColor: Colors.red,
-    ),
+    UserRequestsScreen(),
     Scaffold(
       backgroundColor: Colors.yellow,
       resizeToAvoidBottomInset: true,

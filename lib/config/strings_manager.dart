@@ -21,4 +21,9 @@ class StringsManager {
   static const String acceptedRequests = "Accepted";
   static const String chats = "Chats";
   static const String myProfile = "My Profile";
+  static const String open = "Open";
+  static const String accepted = "Accepted";
+  static const String completed = "Completed";
+  static const String cancelled = "Cancelled";
+  static const String filter = "Filter";
 }
