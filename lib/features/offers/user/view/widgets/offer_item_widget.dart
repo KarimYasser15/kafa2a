@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kafa2a/config/assets_manager.dart';
 import 'package:kafa2a/config/colors_manager.dart';
+import 'package:kafa2a/config/routes_manager.dart';
 
 class OfferItemWidget extends StatelessWidget {
   const OfferItemWidget({super.key});
@@ -10,7 +11,8 @@ class OfferItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () =>
+          Navigator.pushNamed(context, RoutesManager.providerProfileDetails),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),

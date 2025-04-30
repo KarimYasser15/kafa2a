@@ -28,4 +28,6 @@ class StringsManager {
   static const String filter = "Filter";
   static const String offers = "Offers";
   static const String cancelRequest = "Cancel Request";
+  static const String providerPetails = "Provider Profile";
+  static const String acceptOffer = "Accept Offer";
 }
