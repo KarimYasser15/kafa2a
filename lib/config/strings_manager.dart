@@ -30,4 +30,7 @@ class StringsManager {
   static const String cancelRequest = "Cancel Request";
   static const String providerPetails = "Provider Profile";
   static const String acceptOffer = "Accept Offer";
+  static const String editProfilePhoto = "Edit Profile Photo";
+  static const String logOut = "Log Out";
+  static const String changeLanguage = "Change Language";
 }

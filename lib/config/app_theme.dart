@@ -31,6 +31,14 @@ class AppTheme {
       selectedLabelStyle: TextStyle(fontSize: 10.sp),
       unselectedLabelStyle: TextStyle(fontSize: 10.sp),
     ),
+    dropdownMenuTheme: DropdownMenuThemeData(
+        textStyle: GoogleFonts.inter(
+            fontSize: 16.sp,
+            textStyle: TextStyle(overflow: TextOverflow.ellipsis)),
+        menuStyle: MenuStyle(
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.r),
+                side: BorderSide(color: ColorsManager.blue, width: 1.2.w))))),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
