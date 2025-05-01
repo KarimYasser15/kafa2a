@@ -18,7 +18,7 @@ class StringsManager {
   static const String phoneNumber = "Phone Number";
   static const String home = "Home";
   static const String myRequests = "My Requests";
-  static const String acceptedRequests = "Accepted";
+  static const String acceptedRequests = "Accepted Requests";
   static const String chats = "Chats";
   static const String myProfile = "My Profile";
   static const String open = "Open";

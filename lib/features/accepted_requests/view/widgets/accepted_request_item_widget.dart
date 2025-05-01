@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/routes_manager.dart';
 
-class RequestItemWidget extends StatelessWidget {
-  const RequestItemWidget({super.key});
+class AcceptedRequestItemWidget extends StatelessWidget {
+  const AcceptedRequestItemWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, RoutesManager.offerUser),
+      onTap: () {},
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Container(
@@ -32,6 +31,20 @@ class RequestItemWidget extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 17.sp, fontWeight: FontWeight.bold),
                     )),
+                    SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: ColorsManager.blue,
+                        ),
+                        Text(
+                          "Service Provider: Ziad Tarek",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        )
+                      ],
+                    ),
                     SizedBox(
                       height: 10.h,
                     ),
@@ -69,7 +82,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "Leaking pipe under my Kitchen Sink",
+                      "Leaking Pipe Under My Kitchen Sink",
                     ),
                     SizedBox(
                       height: 10.h,
@@ -109,22 +122,27 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "25-5-2025 - Fridat - 2 pm",
+                      "25-5-2025 - Friday - 2 pm",
                     ),
                     SizedBox(height: 10.h),
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 30.h,
-                color: Colors.green,
-                child: Center(
-                    child: Text(
-                  "Accepted",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                )),
+              ElevatedButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      "Chat With Provider",
+                    ),
+                    Spacer(),
+                    Icon(Icons.chat)
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
               )
             ],
           ),

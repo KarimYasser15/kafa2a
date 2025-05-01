@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
 import 'package:kafa2a/features/my_profile/view/my_profile_screen.dart';
 import 'package:kafa2a/features/requests/user/view/screens/user_requests_screen.dart';
 
@@ -18,10 +19,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       backgroundColor: Colors.green,
     ),
     UserRequestsScreen(),
-    Scaffold(
-      backgroundColor: Colors.yellow,
-      resizeToAvoidBottomInset: true,
-    ),
+    AcceptedRequestsScreen(),
     Scaffold(
       backgroundColor: Colors.deepOrange,
     ),
@@ -51,8 +49,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   icon: Icon(Icons.edit_document),
                   label: StringsManager.myRequests),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.handshake),
-                  label: StringsManager.acceptedRequests),
+                  icon: Icon(Icons.handshake), label: StringsManager.accepted),
               BottomNavigationBarItem(
                 icon: Icon(Icons.chat),
                 label: StringsManager.chats,
