@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kafa2a/features/auth/login/view/login_screen.dart';
 import 'package:kafa2a/features/auth/register/view/user_register_screen.dart';
-import 'package:kafa2a/features/home/view/provider/provider_home_screen.dart';
-import 'package:kafa2a/features/home/view/user_home_screen.dart';
+import 'package:kafa2a/features/home/view/provider/provider_main_screen.dart';
+import 'package:kafa2a/features/home/view/user_main_screen.dart';
 import 'package:kafa2a/features/offers/user/view/user_offers_screen.dart';
 import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
 import 'package:kafa2a/features/profile-details/view/provider_profile_details.dart';
@@ -32,11 +32,11 @@ class RoutesManager {
         );
       case homeUser:
         return MaterialPageRoute(
-          builder: (context) => UserHomeScreen(),
+          builder: (context) => UserMainScreen(),
         );
       case homeProvider:
         return MaterialPageRoute(
-          builder: (context) => ProviderHomeScreen(),
+          builder: (context) => ProviderMainScreen(),
         );
       case offerUser:
         return MaterialPageRoute(
