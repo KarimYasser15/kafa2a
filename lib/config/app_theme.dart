@@ -7,6 +7,11 @@ import 'package:kafa2a/config/colors_manager.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primaryColor: ColorsManager.blue,
+    bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        )),
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,

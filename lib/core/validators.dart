@@ -42,4 +42,11 @@ class Validators {
     }
     return null;
   }
+
+  static String? validateOffer(String? offer) {
+    if (offer == null) {
+      return Messages.offerRequired;
+    }
+    return null;
+  }
 }

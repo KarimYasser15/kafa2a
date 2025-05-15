@@ -7,4 +7,5 @@ class Messages {
       "Password must be at least 6 characters";
   static const String nameRequired = "Please Enter Your Name";
   static const String phoneNumberRequired = "Please Enter Your Phone Number";
+  static const String offerRequired = "Please Enter Your Offer";
 }

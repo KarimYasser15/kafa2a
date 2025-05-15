@@ -74,10 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         Center(
                           child: ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                  RoutesManager.homeUser,
-                                  (route) => false,
-                                );
+                                if (userType == "user") {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                    RoutesManager.homeUser,
+                                    (route) => false,
+                                  );
+                                } else {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                    RoutesManager.homeProvider,
+                                    (route) => false,
+                                  );
+                                }
                               },
                               child: Text(StringsManager.login)),
                         )

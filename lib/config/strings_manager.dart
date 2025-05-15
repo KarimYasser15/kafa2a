@@ -27,10 +27,13 @@ class StringsManager {
   static const String cancelled = "Cancelled";
   static const String filter = "Filter";
   static const String offers = "Offers";
+  static const String offer = "Offer";
   static const String cancelRequest = "Cancel Request";
   static const String providerPetails = "Provider Profile";
   static const String acceptOffer = "Accept Offer";
   static const String editProfilePhoto = "Edit Profile Photo";
   static const String logOut = "Log Out";
   static const String changeLanguage = "Change Language";
+  static const String sendOffer = "Send Offer";
+  static const String close = "Close";
 }

@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kafa2a/config/colors_manager.dart';
+
+class OfferTextFormField extends StatelessWidget {
+  const OfferTextFormField(
+      {super.key,
+      required this.controller,
+      required this.validator,
+      required this.hintText});
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
+  final String hintText;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+        controller: controller,
+        validator: validator,
+        style: TextStyle(
+          fontSize: 14.sp,
+        ),
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(fontSize: 25.sp),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: ColorsManager.blue),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: ColorsManager.blue),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Colors.red.shade900),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorsManager.blue),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ));
+  }
+}
