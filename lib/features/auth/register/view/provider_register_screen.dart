@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
@@ -8,15 +12,47 @@ import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/features/auth/login/view/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/login/view/widgets/password_form_field.dart';
 
-class UserRegisterScreen extends StatelessWidget {
-  UserRegisterScreen({super.key});
+class ProviderRegisterScreen extends StatefulWidget {
+  const ProviderRegisterScreen({super.key});
+
+  @override
+  State<ProviderRegisterScreen> createState() => _ProviderRegisterScreenState();
+}
+
+class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
   final formKey = GlobalKey<FormState>();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController phoneNumberController = TextEditingController();
+
+  final TextEditingController nationalIdController = TextEditingController();
+
+  final TextEditingController addressController = TextEditingController();
+
+  File? image;
+  File? cameraImage;
+
+  Future pickImageFromGallery() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    final imageTemp = File(image.path);
+    this.image = imageTemp;
+  }
+
+  Future pickImageFromCamera() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image == null) return;
+    final imageTemp = File(image.path);
+    cameraImage = imageTemp;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +131,52 @@ class UserRegisterScreen extends StatelessWidget {
                             validator: (phoneNumber) =>
                                 Validators.validatePhoneNumber(phoneNumber),
                           ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(StringsManager.nationalId),
+                          SizedBox(height: 10.h),
+                          DefaultTextFormField(
+                            controller: nationalIdController,
+                            hintText: StringsManager.enterYourNationalId,
+                            validator: (nationalId) =>
+                                Validators.validateNationalId(nationalId),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(StringsManager.address),
+                          SizedBox(height: 10.h),
+                          DefaultTextFormField(
+                            controller: nationalIdController,
+                            hintText: StringsManager.enterYourAddress,
+                            validator: (address) =>
+                                Validators.validateNationalId(address),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(StringsManager.policeClearanceCertificate),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                pickImageFromGallery();
+                              },
+                              child: Text(StringsManager.pickImage)),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(StringsManager.uploadSelfie),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                pickImageFromCamera();
+                              },
+                              child: Text(StringsManager.takeSelfie)),
                           SizedBox(
                             height: 20.h,
                           ),

@@ -8,4 +8,6 @@ class Messages {
   static const String nameRequired = "Please Enter Your Name";
   static const String phoneNumberRequired = "Please Enter Your Phone Number";
   static const String offerRequired = "Please Enter Your Offer";
+  static const String nationalIdRequired = "Please Enter Your National ID";
+  static const String addressRequired = "Please Enter Your National ID";
 }

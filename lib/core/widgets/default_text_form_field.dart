@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 
 class DefaultTextFormField extends StatelessWidget {
-  DefaultTextFormField(
+  const DefaultTextFormField(
       {super.key,
       required this.controller,
       required this.validator,
       required this.hintText});
-  String? Function(String?)? validator;
-  TextEditingController controller;
-  String hintText;
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
+  final String hintText;
   @override
   Widget build(BuildContext context) {
     return TextFormField(

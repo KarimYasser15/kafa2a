@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DefaultElevatedButton extends StatelessWidget {
-  DefaultElevatedButton(
+  const DefaultElevatedButton(
       {super.key, required this.label, required this.onPressed});
-  String label;
-  void Function() onPressed;
+  final String label;
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

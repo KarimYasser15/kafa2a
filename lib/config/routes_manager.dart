@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kafa2a/features/auth/login/view/login_screen.dart';
+import 'package:kafa2a/features/auth/register/view/provider_register_screen.dart';
 import 'package:kafa2a/features/auth/register/view/user_register_screen.dart';
 import 'package:kafa2a/features/home/view/provider/provider_main_screen.dart';
 import 'package:kafa2a/features/home/view/user_main_screen.dart';
@@ -11,6 +12,7 @@ class RoutesManager {
   static const String onBoarding = '/onboarding';
   static const String login = "/login";
   static const String registerUser = "/registerUser";
+  static const String registerProvider = "/registerProvider";
   static const String homeUser = "/homeUser";
   static const String homeProvider = "/homeProvider";
   static const String offerUser = "/offerUser";
@@ -29,6 +31,10 @@ class RoutesManager {
       case registerUser:
         return MaterialPageRoute(
           builder: (context) => UserRegisterScreen(),
+        );
+      case registerProvider:
+        return MaterialPageRoute(
+          builder: (context) => ProviderRegisterScreen(),
         );
       case homeUser:
         return MaterialPageRoute(

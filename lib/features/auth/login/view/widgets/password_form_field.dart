@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/core/validators.dart';
 
 class PasswordFormField extends StatefulWidget {
-  PasswordFormField(
+  const PasswordFormField(
       {super.key, required this.controller, required this.validator});
-  TextEditingController controller;
-  String? Function(String?)? validator;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
 }
@@ -18,6 +17,13 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
 
   Icon visibilityIcon =
       Icon(Icons.visibility_off_outlined, color: ColorsManager.blue);
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(

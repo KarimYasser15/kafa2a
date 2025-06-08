@@ -49,4 +49,18 @@ class Validators {
     }
     return null;
   }
+
+  static String? validateNationalId(String? nationalId) {
+    if (nationalId == null || nationalId.trim().isEmpty) {
+      return Messages.nationalIdRequired;
+    }
+    return null;
+  }
+
+  static String? validateAddress(String? address) {
+    if (address == null || address.trim().isEmpty) {
+      return Messages.addressRequired;
+    }
+    return null;
+  }
 }

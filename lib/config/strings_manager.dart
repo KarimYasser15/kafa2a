@@ -6,6 +6,8 @@ class StringsManager {
   static const String login = "Login";
   static const String email = "Email";
   static const String password = "Password";
+  static const String nationalId = "National ID";
+  static const String address = "Address";
   static const String confirmPassword = "Confirm Password";
   static const String enterYourEmail = "Enter Your Email";
   static const String enterYourPassword = "Enter Your Password";
@@ -13,6 +15,8 @@ class StringsManager {
   static const String alreadyHaveAnAccount = "Already Have An Account?";
   static const String enterYourPhoneNumber = "Enter Your Phone Number";
   static const String enterYourName = "Enter Your Name";
+  static const String enterYourNationalId = "Enter Your National Id";
+  static const String enterYourAddress = "Enter Your Address";
   static const String register = "Register";
   static const String name = "Name";
   static const String phoneNumber = "Phone Number";
@@ -35,5 +39,10 @@ class StringsManager {
   static const String logOut = "Log Out";
   static const String changeLanguage = "Change Language";
   static const String sendOffer = "Send Offer";
+  static const String policeClearanceCertificate =
+      "Police Clearance Certrificate";
+  static const String uploadSelfie = "Upload A Selfie";
+  static const String takeSelfie = "Take Selfie";
+  static const String pickImage = "Pick Image";
   static const String close = "Close";
 }

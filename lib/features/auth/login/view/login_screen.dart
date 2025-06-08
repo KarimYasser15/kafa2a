@@ -9,7 +9,7 @@ import 'package:kafa2a/features/auth/login/view/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/login/view/widgets/password_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -19,6 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
   var formKey = GlobalKey<FormState>();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (userType == "user") {
                           Navigator.pushNamed(
                               context, RoutesManager.registerUser);
+                        } else {
+                          Navigator.pushNamed(
+                              context, RoutesManager.registerProvider);
                         }
                       },
                       child: Text(StringsManager.register)),

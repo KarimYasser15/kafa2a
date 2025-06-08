@@ -5,8 +5,8 @@ import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/validators.dart';
 
 class EmailFormField extends StatelessWidget {
-  EmailFormField({super.key, required this.controller});
-  TextEditingController controller;
+  const EmailFormField({super.key, required this.controller});
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
