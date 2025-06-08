@@ -19,12 +19,6 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       Icon(Icons.visibility_off_outlined, color: ColorsManager.blue);
 
   @override
-  void dispose() {
-    widget.controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
         controller: widget.controller,
