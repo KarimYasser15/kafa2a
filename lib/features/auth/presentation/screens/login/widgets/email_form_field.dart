@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/core/validators.dart';
+import 'package:kafa2a/core/utils/validators.dart';
 
 class EmailFormField extends StatelessWidget {
   const EmailFormField({super.key, required this.controller});
+
   final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(

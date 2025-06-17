@@ -40,6 +40,13 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   flutter_svg: ^2.1.0
   image_picker: ^1.1.2
+  flutter_bloc: ^9.1.1
+  injectable: ^2.5.0
+  dio: ^5.8.0+1
+  shared_preferences: ^2.5.3
+  get_it: ^8.0.3
+  dartz: ^0.10.1
+  fluttertoast: ^8.2.12
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +58,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  injectable_generator:
+  # add build runner if not already added
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

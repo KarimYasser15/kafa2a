@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/assets_manager.dart';
 import 'package:kafa2a/config/colors_manager.dart';
+import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/my_profile/models/language.dart';
+import 'package:kafa2a/core/widgets/ui_utils.dart';
+import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
+import 'package:kafa2a/features/my_profile/data/models/language.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});
@@ -166,25 +171,41 @@ class MyProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        side: BorderSide(color: Colors.red),
-                        backgroundColor: Colors.red),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Spacer(),
-                        Text(StringsManager.logOut),
-                        Spacer(),
-                        Icon(
-                          Icons.logout,
-                          color: Colors.white,
-                          size: 20,
-                          weight: 30,
-                        ),
-                      ],
+                  BlocListener<AuthCubit, AuthStates>(
+                    listener: (context, state) {
+                      if (state is AuthLoadingState) {
+                        UIUtils.showLoading(context);
+                      } else if (state is AuthErrorState) {
+                        UIUtils.hideLoading(context);
+                        UIUtils.showMessage(state.error);
+                      } else if (state is AuthSuccessState) {
+                        UIUtils.hideLoading(context);
+                        Navigator.of(context)
+                            .pushReplacementNamed(RoutesManager.onBoarding);
+                      }
+                    },
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<AuthCubit>().logOut();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          side: BorderSide(color: Colors.red),
+                          backgroundColor: Colors.red),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Spacer(),
+                          Text(StringsManager.logOut),
+                          Spacer(),
+                          Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                            size: 20,
+                            weight: 30,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ]),

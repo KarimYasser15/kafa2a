@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
 import 'package:kafa2a/features/home/view/provider/provider_home_tab.dart';
-import 'package:kafa2a/features/my_profile/view/my_profile_screen.dart';
+import 'package:kafa2a/features/my_profile/presentation/my_profile_screen.dart';
 import 'package:kafa2a/features/requests/user/view/screens/user_requests_screen.dart';
 
 class ProviderMainScreen extends StatefulWidget {

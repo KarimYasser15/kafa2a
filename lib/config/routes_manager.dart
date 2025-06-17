@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kafa2a/features/auth/login/view/login_screen.dart';
-import 'package:kafa2a/features/auth/register/view/provider_register_screen.dart';
-import 'package:kafa2a/features/auth/register/view/user_register_screen.dart';
+import 'package:kafa2a/features/auth/presentation/screens/login/login_screen.dart';
+import 'package:kafa2a/features/auth/presentation/screens/register/provider_register_screen.dart';
+import 'package:kafa2a/features/auth/presentation/screens/register/user_register_screen.dart';
 import 'package:kafa2a/features/home/view/provider/provider_main_screen.dart';
 import 'package:kafa2a/features/home/view/user_main_screen.dart';
 import 'package:kafa2a/features/offers/user/view/user_offers_screen.dart';

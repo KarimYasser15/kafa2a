@@ -6,15 +6,16 @@ import 'package:kafa2a/config/strings_manager.dart';
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField(
       {super.key, required this.controller, required this.validator});
-  final TextEditingController controller;
+
   final String? Function(String?)? validator;
+  final TextEditingController controller;
+
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
 }
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
   bool isVisible = true;
-
   Icon visibilityIcon =
       Icon(Icons.visibility_off_outlined, color: ColorsManager.blue);
 

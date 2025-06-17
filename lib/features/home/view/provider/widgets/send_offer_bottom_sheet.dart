@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/core/validators.dart';
+import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/features/home/view/provider/widgets/offer_text_form_field.dart';
 
 class SendOfferBottomSheet extends StatefulWidget {

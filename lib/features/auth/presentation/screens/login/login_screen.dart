@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/core/validators.dart';
-import 'package:kafa2a/features/auth/login/view/widgets/email_form_field.dart';
-import 'package:kafa2a/features/auth/login/view/widgets/password_form_field.dart';
+import 'package:kafa2a/core/utils/validators.dart';
+import 'package:kafa2a/core/widgets/ui_utils.dart';
+import 'package:kafa2a/features/auth/data/models/login_request.dart';
+import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
+import 'package:kafa2a/features/auth/presentation/screens/login/widgets/email_form_field.dart';
+import 'package:kafa2a/features/auth/presentation/screens/login/widgets/password_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,9 +21,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
 
   @override
   void dispose() {
@@ -79,8 +84,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 20.h,
                         ),
                         Center(
-                          child: ElevatedButton(
-                              onPressed: () {
+                          child: BlocListener<AuthCubit, AuthStates>(
+                            listener: (_, state) {
+                              if (state is AuthLoadingState) {
+                                UIUtils.showLoading(context);
+                              } else if (state is AuthErrorState) {
+                                UIUtils.hideLoading(context);
+                                UIUtils.showMessage(state.error);
+                              } else if (state is AuthSuccessState) {
+                                UIUtils.hideLoading(context);
                                 if (userType == "user") {
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                     RoutesManager.homeUser,
@@ -92,8 +104,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                     (route) => false,
                                   );
                                 }
-                              },
-                              child: Text(StringsManager.login)),
+                              }
+                            },
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  if (userType == "user") {
+                                    context.read<AuthCubit>().loginUser(
+                                          LoginRequest(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text),
+                                        );
+                                  } else {
+                                    context.read<AuthCubit>().loginProvider(
+                                          LoginRequest(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text),
+                                        );
+                                  }
+                                },
+                                child: Text(StringsManager.login)),
+                          ),
                         )
                       ],
                     ),
