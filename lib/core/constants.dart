@@ -7,6 +7,7 @@ class ApiConstants {
   static const String registerUserEndPoint = 'register';
   static const String getCategories = 'categories';
   static const String requestService = 'service-requests';
+  static const String getAllRequests = 'requests';
 }
 
 class CacheConstants {

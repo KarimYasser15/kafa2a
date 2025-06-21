@@ -22,4 +22,5 @@ class Messages {
   String errorMessage = "Failed to get categories";
   static const String failedToGetCategories = "Failed to Get Categories";
   static const String failedToRequestService = "Failed to Request Service";
+  static const String failedToGetRequests = "Failed to Get Requests";
 }

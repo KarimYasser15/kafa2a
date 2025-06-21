@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/home/provider/presentation/widgets/send_offer_bottom_sheet.dart';
+import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/presentation/screens/widgets/send_offer_bottom_sheet.dart';
 
-class ProviderOfferItemWidget extends StatefulWidget {
-  const ProviderOfferItemWidget({super.key});
+class ProviderOfferItemWidget extends StatelessWidget {
+  const ProviderOfferItemWidget({super.key, required this.request});
+  final GetAllRequestsResponse request;
 
-  @override
-  State<ProviderOfferItemWidget> createState() =>
-      _ProviderOfferItemWidgetState();
-}
-
-class _ProviderOfferItemWidgetState extends State<ProviderOfferItemWidget> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -39,19 +35,17 @@ class _ProviderOfferItemWidgetState extends State<ProviderOfferItemWidget> {
                         color: ColorsManager.blue,
                       ),
                       Text(
-                        "Ziad Tarek",
+                        request.user.name,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20.sp),
                       ),
-                      Spacer(),
-                      Text("Requested 2 hrs ago"),
                     ],
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
                   Text(
-                    "Price: 200LE",
+                    "Price: ${request.price}",
                     style:
                         TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
@@ -92,7 +86,7 @@ class _ProviderOfferItemWidgetState extends State<ProviderOfferItemWidget> {
                     height: 5.h,
                   ),
                   Text(
-                    "Leaking Pipe Under My Kitchen Sink",
+                    request.description,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -132,7 +126,7 @@ class _ProviderOfferItemWidgetState extends State<ProviderOfferItemWidget> {
                     height: 5.h,
                   ),
                   Text(
-                    "25-5-2025 - Friday - 2 pm",
+                    request.scheduledAt,
                   ),
                   SizedBox(height: 10.h),
                 ],
