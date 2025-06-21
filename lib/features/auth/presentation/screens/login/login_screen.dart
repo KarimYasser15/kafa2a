@@ -5,6 +5,7 @@ import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 UIUtils.showMessage(state.error);
                               } else if (state is AuthSuccessState) {
                                 UIUtils.hideLoading(context);
-                                if (userType == "user") {
+                                if (userType == UserType.user) {
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                     RoutesManager.homeUser,
                                     (route) => false,
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: ElevatedButton(
                                 onPressed: () {
-                                  if (userType == "user") {
+                                  if (userType == UserType.user) {
                                     context.read<AuthCubit>().loginUser(
                                           LoginRequest(
                                               email: emailController.text,
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(StringsManager.dontHaveAnAccount),
                   TextButton(
                       onPressed: () {
-                        if (userType == "user") {
+                        if (userType == UserType.user) {
                           Navigator.pushNamed(
                               context, RoutesManager.registerUser);
                         } else {

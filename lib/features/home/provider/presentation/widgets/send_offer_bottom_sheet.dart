@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
-import 'package:kafa2a/features/home/view/provider/widgets/offer_text_form_field.dart';
+import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
 
 class SendOfferBottomSheet extends StatefulWidget {
   const SendOfferBottomSheet({super.key});
@@ -84,7 +85,8 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                         fontSize: 25.sp, fontWeight: FontWeight.bold))),
             OfferTextFormField(
                 controller: offerController,
-                validator: (offer) => Validators.validateOffer(offer),
+                validator: (offer) =>
+                    Validators.validateNull(offer, Messages.priceRequired),
                 hintText: "Enter Your Offer"),
             SizedBox(
               height: 15.h,

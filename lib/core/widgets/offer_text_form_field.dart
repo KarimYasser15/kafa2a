@@ -17,14 +17,9 @@ class OfferTextFormField extends StatelessWidget {
     return TextFormField(
         controller: controller,
         validator: validator,
-        style: TextStyle(
-          fontSize: 14.sp,
-        ),
-        textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(fontSize: 25.sp),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.r),

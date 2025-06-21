@@ -5,6 +5,7 @@ import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
@@ -81,7 +82,10 @@ class UserRegisterScreen extends StatelessWidget {
                           DefaultTextFormField(
                             controller: nameController,
                             hintText: StringsManager.enterYourName,
-                            validator: (name) => Validators.validateName(name),
+                            validator: (name) => Validators.validateNull(
+                              name,
+                              Messages.nameRequired,
+                            ),
                           ),
                           SizedBox(
                             height: 10.h,
@@ -138,10 +142,8 @@ class UserRegisterScreen extends StatelessWidget {
                           DefaultTextFormField(
                             controller: phoneNumberController,
                             hintText: StringsManager.enterYourPhoneNumber,
-                            validator: (phoneNumber) =>
-                                Validators.validatePhoneNumber(
-                              phoneNumber,
-                            ),
+                            validator: (phoneNumber) => Validators.validateNull(
+                                phoneNumber, Messages.phoneNumberRequired),
                           ),
                           SizedBox(
                             height: 20.h,

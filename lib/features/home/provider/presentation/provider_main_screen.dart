@@ -2,22 +2,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
+import 'package:kafa2a/features/home/provider/presentation/provider_home_tab.dart';
 import 'package:kafa2a/features/my_profile/presentation/my_profile_screen.dart';
 import 'package:kafa2a/features/requests/user/view/screens/user_requests_screen.dart';
 
-class UserMainScreen extends StatefulWidget {
-  const UserMainScreen({super.key});
+class ProviderMainScreen extends StatefulWidget {
+  const ProviderMainScreen({super.key});
 
   @override
-  State<UserMainScreen> createState() => _UserMainScreenState();
+  State<ProviderMainScreen> createState() => _ProviderMainScreenState();
 }
 
-class _UserMainScreenState extends State<UserMainScreen> {
+class _ProviderMainScreenState extends State<ProviderMainScreen> {
   int selectedTab = 0;
   List<Widget> tabs = [
-    Scaffold(
-      backgroundColor: Colors.green,
-    ),
+    ProviderHomeTab(),
     UserRequestsScreen(),
     AcceptedRequestsScreen(),
     Scaffold(

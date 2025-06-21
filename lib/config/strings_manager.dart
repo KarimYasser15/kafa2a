@@ -33,6 +33,7 @@ class StringsManager {
   static const String offers = "Offers";
   static const String offer = "Offer";
   static const String cancelRequest = "Cancel Request";
+  static const String requestService = "Request Service";
   static const String providerPetails = "Provider Profile";
   static const String acceptOffer = "Accept Offer";
   static const String editProfilePhoto = "Edit Profile Photo";
@@ -45,4 +46,16 @@ class StringsManager {
   static const String takeSelfie = "Take Selfie";
   static const String pickImage = "Pick Image";
   static const String close = "Close";
+  static const String category = "Category";
+  static const String selectCategory = "Select Category";
+  static const String services = "Services";
+  static const String selectService = "Select Service";
+  static const String description = "Description";
+  static const String preferedTime = "Prefered Time";
+  static const String price = "Price";
+  static const String pleaseEnterDescription = "Please Enter Description";
+  static const String pleaseEnterTitle = "Please Enter Title";
+  static const String pleaseEnterYourPrice = "Please Enter Your Price";
+  static const String selectDateAndTime = "Select Date and Time";
+  static const String title = "Title";
 }

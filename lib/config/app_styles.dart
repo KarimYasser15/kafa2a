@@ -13,4 +13,9 @@ class AppStyles {
     fontSize: 24.sp,
     color: Colors.black,
   );
+  static TextStyle body = GoogleFonts.roboto(
+    fontWeight: FontWeight.w500,
+    fontSize: 18.sp,
+    color: Colors.black,
+  );
 }

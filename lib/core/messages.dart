@@ -7,10 +7,19 @@ class Messages {
   static const String invalidEmail = "Please Enter a Valid Email";
   static const String nameRequired = "Please Enter Your Name";
   static const String nationalIdRequired = "Please Enter Your National ID";
-  static const String offerRequired = "Please Enter Your Offer";
+  static const String priceRequired = "Please Enter Your Price";
+  static const String titleRequired = "Please Enter a Title";
   static const String passwordIsSmall =
       "Password must be at least 6 characters";
   static const String passwordRequired = "Please Enter Your Password";
   static const String passwordsDontMatch = "Passwords Don't Match";
   static const String phoneNumberRequired = "Please Enter Your Phone Number";
+  static const String serviceRequestedSuccessfully =
+      "Service Requested Successfully!";
+  static const String failedToLogin = "Failed to Login";
+  static const String failedToRegister = "Failed to Register";
+  static const String failedToLogOut = "Failed to log out";
+  String errorMessage = "Failed to get categories";
+  static const String failedToGetCategories = "Failed to Get Categories";
+  static const String failedToRequestService = "Failed to Request Service";
 }

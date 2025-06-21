@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kafa2a/config/routes_manager.dart';
+import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/widgets/default_elevated_button.dart';
+
+class UserHomeTab extends StatefulWidget {
+  const UserHomeTab({super.key});
+
+  @override
+  State<UserHomeTab> createState() => _UserHomeTabState();
+}
+
+class _UserHomeTabState extends State<UserHomeTab> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Placeholder(),
+        Padding(
+          padding: EdgeInsets.only(bottom: 100.h, left: 20.w, right: 20.w),
+          child: DefaultElevatedButton(
+            label: StringsManager.requestService,
+            onPressed: () => Navigator.pushNamed(
+              context,
+              RoutesManager.requestAService,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

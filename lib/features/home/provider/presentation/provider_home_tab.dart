@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/home/view/provider/widgets/provider_offer_item_widget.dart';
+import 'package:kafa2a/features/home/provider/presentation/widgets/provider_offer_item_widget.dart';
 
 class ProviderHomeTab extends StatelessWidget {
   const ProviderHomeTab({super.key});

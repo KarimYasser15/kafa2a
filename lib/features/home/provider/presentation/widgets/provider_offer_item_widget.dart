@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/home/view/provider/widgets/send_offer_bottom_sheet.dart';
+import 'package:kafa2a/features/home/provider/presentation/widgets/send_offer_bottom_sheet.dart';
 
 class ProviderOfferItemWidget extends StatefulWidget {
   const ProviderOfferItemWidget({super.key});

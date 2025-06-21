@@ -29,37 +29,9 @@ class Validators {
     return null;
   }
 
-  static String? validateName(String? name) {
-    if (name == null || name.trim().isEmpty) {
-      return Messages.nameRequired;
-    }
-    return null;
-  }
-
-  static String? validatePhoneNumber(String? phoneNumber) {
-    if (phoneNumber == null || phoneNumber.trim().isEmpty) {
-      return Messages.phoneNumberRequired;
-    }
-    return null;
-  }
-
-  static String? validateOffer(String? offer) {
-    if (offer == null) {
-      return Messages.offerRequired;
-    }
-    return null;
-  }
-
-  static String? validateNationalId(String? nationalId) {
-    if (nationalId == null || nationalId.trim().isEmpty) {
-      return Messages.nationalIdRequired;
-    }
-    return null;
-  }
-
-  static String? validateAddress(String? address) {
-    if (address == null || address.trim().isEmpty) {
-      return Messages.addressRequired;
+  static String? validateNull(String? text, String message) {
+    if (text == null || text.trim().isEmpty) {
+      return message;
     }
     return null;
   }

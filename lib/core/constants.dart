@@ -5,8 +5,15 @@ class ApiConstants {
   static const String loginUserEndPoint = 'token';
   static const String registerProviderEndPoint = 'register-provider';
   static const String registerUserEndPoint = 'register';
+  static const String getCategories = 'categories';
+  static const String requestService = 'service-requests';
 }
 
 class CacheConstants {
   static const String token = "token";
+}
+
+class UserType {
+  static const String user = "user";
+  static const String provider = "provider";
 }

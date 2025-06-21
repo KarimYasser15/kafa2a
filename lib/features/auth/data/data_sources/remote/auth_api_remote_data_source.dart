@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/error/exceptions.dart';
+import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:kafa2a/features/auth/data/models/log_out_response.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
@@ -26,11 +27,11 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
       );
       return LogOutResponse.fromJson(response.data);
     } catch (exception) {
-      String errorMessage = "Failed to log out";
+      String errorMessage = Messages.failedToLogOut;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;
       }
-      throw RemoteException('Failed to log out');
+      throw RemoteException(errorMessage);
     }
   }
 
@@ -43,7 +44,7 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
       );
       return AuthResponse.fromJson(response.data);
     } catch (exception) {
-      String errorMessage = "Failed to login provider";
+      String errorMessage = Messages.failedToLogin;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;
       }
@@ -60,9 +61,9 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
       );
       return AuthResponse.fromJson(response.data);
     } catch (exception) {
-      String errorMessage = "Failed to login user";
+      String errorMessage = Messages.failedToLogin;
       if (exception is DioException) {
-        errorMessage = exception.response?.data['message'] ?? errorMessage;
+        errorMessage = errorMessage;
       }
       throw (RemoteException(errorMessage));
     }
@@ -78,7 +79,7 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
       );
       return AuthResponse.fromJson(response.data);
     } catch (exception) {
-      String errorMessage = "Failed to register provider";
+      String errorMessage = Messages.failedToRegister;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;
       }
@@ -96,7 +97,7 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
       );
       return AuthResponse.fromJson(response.data);
     } catch (exception) {
-      String errorMessage = "Failed to register user";
+      String errorMessage = Messages.failedToRegister;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;
       }

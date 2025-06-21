@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -11,7 +12,8 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +30,7 @@ class OnboardingScreen extends StatelessWidget {
             DefaultElevatedButton(
               label: StringsManager.user,
               onPressed: () => Navigator.pushNamed(context, RoutesManager.login,
-                  arguments: "user"),
+                  arguments: UserType.user),
             ),
             SizedBox(
               height: 10.h,
@@ -36,7 +38,7 @@ class OnboardingScreen extends StatelessWidget {
             DefaultElevatedButton(
               label: StringsManager.serviceProvider,
               onPressed: () => Navigator.pushNamed(context, RoutesManager.login,
-                  arguments: "provider"),
+                  arguments: UserType.provider),
             )
           ],
         ),

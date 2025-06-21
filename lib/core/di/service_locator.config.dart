@@ -25,6 +25,14 @@ import 'package:kafa2a/features/auth/data/repository/auth_repository.dart'
     as _i349;
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart'
     as _i290;
+import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
+    as _i195;
+import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
+    as _i519;
+import 'package:kafa2a/features/home/user/data/repository/request_service_repository.dart'
+    as _i110;
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart'
+    as _i378;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -46,14 +54,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
+        () => _i195.RequestServiceApiDataSource(gh<_i361.Dio>()));
     gh.singleton<_i819.AuthLocalDataSource>(() =>
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.singleton<_i349.AuthRepository>(() => _i349.AuthRepository(
           gh<_i755.AuthRemoteDataSource>(),
           gh<_i819.AuthLocalDataSource>(),
         ));
+    gh.lazySingleton<_i110.RequestServiceRepository>(
+        () => _i110.RequestServiceRepository(
+              gh<_i519.RequestServiceRemoteDataSource>(),
+              gh<_i819.AuthLocalDataSource>(),
+            ));
     gh.singleton<_i290.AuthCubit>(
         () => _i290.AuthCubit(gh<_i349.AuthRepository>()));
+    gh.factory<_i378.RequestServiceCubit>(
+        () => _i378.RequestServiceCubit(gh<_i110.RequestServiceRepository>()));
     return this;
   }
 }
