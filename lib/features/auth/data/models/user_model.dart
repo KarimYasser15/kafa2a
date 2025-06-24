@@ -5,7 +5,7 @@ class UserModel {
     required this.email,
     this.emailVerifiedAt,
     required this.type,
-    this.phone,
+    required this.phone,
     this.address,
     this.policeCertificatePath,
     this.selfiePath,
@@ -22,7 +22,7 @@ class UserModel {
         email: json['email'] as String,
         emailVerifiedAt: json['email_verified_at'] as dynamic,
         type: json['type'] as String,
-        phone: json['phone'] as dynamic,
+        phone: json['phone'] as String,
         address: json['address'] as String?,
         policeCertificatePath: json['police_certificate_path'] as String?,
         selfiePath: json['selfie_path'] as String?,
@@ -41,7 +41,7 @@ class UserModel {
   int id;
   String name;
   String? nationalId;
-  String? phone;
+  String phone;
   String? policeCertificatePath;
   String? selfiePath;
   String? service;

@@ -12,7 +12,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:kafa2a/core/di/register_module.dart';
+import 'package:kafa2a/core/di/register_module.dart' as _i213;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i819;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_shared_pref_local_data_source.dart';
@@ -20,8 +20,18 @@ import 'package:kafa2a/features/auth/data/data_sources/remote/auth_api_remote_da
     as _i386;
 import 'package:kafa2a/features/auth/data/data_sources/remote/auth_remote_data_source.dart'
     as _i755;
-import 'package:kafa2a/features/auth/data/repository/auth_repository.dart'
-    as _i349;
+import 'package:kafa2a/features/auth/data/repository/auth_repository_impl.dart'
+    as _i887;
+import 'package:kafa2a/features/auth/domain/repository/auth_repository.dart'
+    as _i998;
+import 'package:kafa2a/features/auth/domain/use_cases/log_out.dart' as _i23;
+import 'package:kafa2a/features/auth/domain/use_cases/login_provider.dart'
+    as _i160;
+import 'package:kafa2a/features/auth/domain/use_cases/login_user.dart' as _i684;
+import 'package:kafa2a/features/auth/domain/use_cases/register_provider.dart'
+    as _i619;
+import 'package:kafa2a/features/auth/domain/use_cases/register_user.dart'
+    as _i0;
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart'
     as _i290;
 import 'package:kafa2a/features/home/provider/data/data_source/provider_offers_api_data_source.dart'
@@ -39,7 +49,7 @@ import 'package:kafa2a/features/home/user/data/data_sources/request_service_remo
 import 'package:kafa2a/features/home/user/data/repository/request_service_repository.dart'
     as _i110;
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -53,7 +63,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
-    await gh.factoryAsync<SharedPreferences>(
+    await gh.factoryAsync<_i460.SharedPreferences>(
       () => registerModule.sharedPref,
       preResolve: true,
     );
@@ -61,8 +71,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
     gh.singleton<_i819.AuthLocalDataSource>(
-        () => AuthSharedPrefLocalDataSource(gh<SharedPreferences>()));
-    gh.singleton<_i349.AuthRepository>(() => _i349.AuthRepository(
+        () => AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
+    gh.singleton<_i998.AuthRepository>(() => _i887.AuthRepositoryImpl(
           gh<_i755.AuthRemoteDataSource>(),
           gh<_i819.AuthLocalDataSource>(),
         ));
@@ -80,14 +90,28 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i519.RequestServiceRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
-    gh.singleton<_i290.AuthCubit>(
-        () => _i290.AuthCubit(gh<_i349.AuthRepository>()));
     gh.factory<RequestServiceCubit>(
         () => RequestServiceCubit(gh<_i110.RequestServiceRepository>()));
+    gh.singleton<_i160.LoginProvider>(
+        () => _i160.LoginProvider(gh<_i998.AuthRepository>()));
+    gh.singleton<_i684.LoginUser>(
+        () => _i684.LoginUser(gh<_i998.AuthRepository>()));
+    gh.singleton<_i23.LogOut>(() => _i23.LogOut(gh<_i998.AuthRepository>()));
+    gh.singleton<_i619.RegisterProvider>(
+        () => _i619.RegisterProvider(gh<_i998.AuthRepository>()));
+    gh.singleton<_i0.RegisterUser>(
+        () => _i0.RegisterUser(gh<_i998.AuthRepository>()));
     gh.lazySingleton<_i42.ProviderOffersCubit>(
         () => _i42.ProviderOffersCubit(gh<_i723.ProviderOffersRepository>()));
+    gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
+          gh<_i684.LoginUser>(),
+          gh<_i160.LoginProvider>(),
+          gh<_i0.RegisterUser>(),
+          gh<_i619.RegisterProvider>(),
+          gh<_i23.LogOut>(),
+        ));
     return this;
   }
 }
 
-class _$RegisterModule extends RegisterModule {}
+class _$RegisterModule extends _i213.RegisterModule {}
