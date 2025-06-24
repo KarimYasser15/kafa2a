@@ -4,18 +4,20 @@ import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart';
+import 'package:kafa2a/features/home/user/data/mappers/category_mapper.dart';
 import 'package:kafa2a/features/home/user/data/models/get_categories_response/get_categories_response.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_request.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_response.dart';
+import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 
 @LazySingleton(as: RequestServiceRemoteDataSource)
 class RequestServiceApiDataSource extends RequestServiceRemoteDataSource {
-  final Dio _dio;
-
   RequestServiceApiDataSource(this._dio);
 
+  final Dio _dio;
+
   @override
-  Future<List<GetCategoriesResponse>> getAllCategories(String token) async {
+  Future<List<Category>> getAllCategories(String token) async {
     try {
       final Response response = await _dio.get(ApiConstants.getCategories,
           options: Options(
@@ -24,8 +26,12 @@ class RequestServiceApiDataSource extends RequestServiceRemoteDataSource {
       List<GetCategoriesResponse> categories = (response.data as List)
           .map((category) => GetCategoriesResponse.fromJson(category))
           .toList();
-      return categories;
+      print('RAW categories JSON: ${response.data}');
+
+      print("HELLOOO");
+      return categories.map((category) => category.toCategoryEntity).toList();
     } catch (exception) {
+      print(exception.toString());
       String errorMessage = Messages.failedToGetCategories;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/features/home/user/data/models/get_categories_response/get_categories_response.dart';
+import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 
 class CategoriesDropDownWidget extends StatefulWidget {
   const CategoriesDropDownWidget({
@@ -13,10 +13,11 @@ class CategoriesDropDownWidget extends StatefulWidget {
     required this.categories,
     required this.onChanged,
   });
-  final String label;
+
+  final Function(Category)? onChanged;
+  final List<Category> categories;
   final String hint;
-  final List<GetCategoriesResponse> categories;
-  final Function(GetCategoriesResponse)? onChanged;
+  final String label;
 
   @override
   State<CategoriesDropDownWidget> createState() =>
@@ -24,7 +25,7 @@ class CategoriesDropDownWidget extends StatefulWidget {
 }
 
 class _CategoriesDropDownWidgetState extends State<CategoriesDropDownWidget> {
-  GetCategoriesResponse? selectedItem;
+  Category? selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +60,8 @@ class _CategoriesDropDownWidgetState extends State<CategoriesDropDownWidget> {
                 textStyle: TextStyle(overflow: TextOverflow.ellipsis)),
             value: null,
             isExpanded: true,
-            items: widget.categories.map((GetCategoriesResponse category) {
-              return DropdownMenuItem<GetCategoriesResponse>(
+            items: widget.categories.map((Category category) {
+              return DropdownMenuItem<Category>(
                 value: category,
                 child: Text(category.name),
               );

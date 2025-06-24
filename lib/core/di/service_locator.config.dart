@@ -46,8 +46,14 @@ import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_
     as _i195;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
     as _i519;
-import 'package:kafa2a/features/home/user/data/repository/request_service_repository.dart'
-    as _i110;
+import 'package:kafa2a/features/home/user/data/repository/request_service_repository_impl.dart'
+    as _i142;
+import 'package:kafa2a/features/home/user/domain/repository/request_service_repository.dart'
+    as _i234;
+import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.dart'
+    as _i86;
+import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart'
+    as _i574;
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
@@ -76,6 +82,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i755.AuthRemoteDataSource>(),
           gh<_i819.AuthLocalDataSource>(),
         ));
+    gh.factory<RequestServiceCubit>(() => RequestServiceCubit(
+          gh<_i86.GetAllCategories>(),
+          gh<_i574.RequestService>(),
+        ));
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
         () => _i0.ProviderOffersApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
@@ -85,13 +95,11 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i633.ProviderOffersRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
-    gh.lazySingleton<_i110.RequestServiceRepository>(
-        () => _i110.RequestServiceRepository(
+    gh.lazySingleton<_i234.RequestServiceRepository>(
+        () => _i142.RequestServiceRepositoryImpl(
               gh<_i519.RequestServiceRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
-    gh.factory<RequestServiceCubit>(
-        () => RequestServiceCubit(gh<_i110.RequestServiceRepository>()));
     gh.singleton<_i160.LoginProvider>(
         () => _i160.LoginProvider(gh<_i998.AuthRepository>()));
     gh.singleton<_i684.LoginUser>(
@@ -101,6 +109,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i619.RegisterProvider(gh<_i998.AuthRepository>()));
     gh.singleton<_i0.RegisterUser>(
         () => _i0.RegisterUser(gh<_i998.AuthRepository>()));
+    gh.singleton<_i86.GetAllCategories>(
+        () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
+    gh.singleton<_i574.RequestService>(
+        () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
     gh.lazySingleton<_i42.ProviderOffersCubit>(
         () => _i42.ProviderOffersCubit(gh<_i723.ProviderOffersRepository>()));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(

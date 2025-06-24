@@ -1,12 +1,5 @@
-class Service {
-  int id;
-  String name;
-  dynamic description;
-  int categoryId;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  Service({
+class ServiceModel {
+  ServiceModel({
     required this.id,
     required this.name,
     required this.description,
@@ -15,7 +8,7 @@ class Service {
     required this.updatedAt,
   });
 
-  factory Service.fromJson(Map<String, dynamic> json) => Service(
+  factory ServiceModel.fromJson(Map<String, dynamic> json) => ServiceModel(
         id: json['id'] as int,
         name: json['name'] as String,
         description: json['description'] as dynamic,
@@ -25,6 +18,13 @@ class Service {
         updatedAt: json['updated_at'] =
             DateTime.parse(json['updated_at'] as String),
       );
+
+  int categoryId;
+  DateTime createdAt;
+  dynamic description;
+  int id;
+  String name;
+  DateTime updatedAt;
 
   Map<String, dynamic> toJson() => {
         'id': id,

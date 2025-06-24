@@ -1,12 +1,13 @@
-import 'package:kafa2a/features/home/user/data/models/get_categories_response/get_categories_response.dart';
+import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 
 class RequestServiceStates {}
 
 class RequestServiceInitialState extends RequestServiceStates {}
 
 class GetCategoriesSuccessState extends RequestServiceStates {
-  final List<GetCategoriesResponse> categories;
   GetCategoriesSuccessState(this.categories);
+
+  final List<Category> categories;
 }
 
 class GetCategoriesLoadingState extends RequestServiceStates {}
