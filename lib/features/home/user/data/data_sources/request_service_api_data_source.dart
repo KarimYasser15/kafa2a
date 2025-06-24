@@ -54,7 +54,7 @@ class RequestServiceApiDataSource extends RequestServiceRemoteDataSource {
     } catch (exception) {
       String errorMessage = Messages.failedToRequestService;
       if (exception is DioException) {
-        errorMessage = errorMessage;
+        errorMessage = exception.response?.data['message'] ?? errorMessage;
       }
       throw (RemoteException(errorMessage));
     }

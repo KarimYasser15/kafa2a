@@ -63,7 +63,7 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
     } catch (exception) {
       String errorMessage = Messages.failedToLogin;
       if (exception is DioException) {
-        errorMessage = errorMessage;
+        errorMessage = exception.response?.data['message'] ?? errorMessage;
       }
       throw (RemoteException(errorMessage));
     }

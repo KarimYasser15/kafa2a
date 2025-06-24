@@ -10,6 +10,10 @@ abstract class RegisterModule {
         BaseOptions(
           baseUrl: ApiConstants.baseUrl,
           receiveDataWhenStatusError: true,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
         ),
       );
 
