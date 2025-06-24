@@ -5,6 +5,8 @@ import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/home/provider/data/data_source/provider_offers_remote_data_source.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/data/models/send_offer_request.dart';
+import 'package:kafa2a/features/home/provider/data/models/send_offer_response/send_offer_response.dart';
 
 @LazySingleton(as: ProviderOffersRemoteDataSource)
 class ProviderOffersApiDataSource extends ProviderOffersRemoteDataSource {
@@ -33,8 +35,23 @@ class ProviderOffersApiDataSource extends ProviderOffersRemoteDataSource {
   }
 
   @override
-  Future<void> sendOffer(String token) {
-    // TODO: implement sendOffer
-    throw UnimplementedError();
+  Future<SendOfferResponse> sendOffer(
+      String token, SendOfferRequest sendOfferRequest) async {
+    try {
+      final Response response = await _dio.post(
+        ApiConstants.sendOffer(sendOfferRequest.offerId),
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+        data: sendOfferRequest.toJson(),
+      );
+      return response.data;
+    } catch (exception) {
+      String errorMessage = Messages.failedToSendOffer;
+      if (exception is DioException) {
+        errorMessage = exception.response?.data['error'] ?? errorMessage;
+      }
+      throw RemoteException(errorMessage);
+    }
   }
 }

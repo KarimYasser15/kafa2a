@@ -13,13 +13,13 @@ class ProviderHomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(StringsManager.home),
-        ),
-        body: BlocProvider(
-          create: (context) => getIt.get<ProviderOffersCubit>(),
-          child: BlocBuilder<ProviderOffersCubit, ProviderOffersStates>(
+    return BlocProvider(
+      create: (context) => getIt.get<ProviderOffersCubit>(),
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(StringsManager.home),
+          ),
+          body: BlocBuilder<ProviderOffersCubit, ProviderOffersStates>(
             builder: (context, state) {
               if (state is GetAllRequestsLoadingState) {
                 return LoadingIndicator();
@@ -43,10 +43,10 @@ class ProviderHomeTab extends StatelessWidget {
                   ),
                 );
               } else {
-                return Container();
+                return const SizedBox();
               }
             },
-          ),
-        ));
+          )),
+    );
   }
 }

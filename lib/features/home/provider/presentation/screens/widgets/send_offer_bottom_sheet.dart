@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
+import 'package:kafa2a/core/widgets/ui_utils.dart';
+import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/data/models/send_offer_request.dart';
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_states.dart';
 
 class SendOfferBottomSheet extends StatefulWidget {
-  const SendOfferBottomSheet({super.key});
+  const SendOfferBottomSheet({super.key, required this.request});
+  final GetAllRequestsResponse request;
 
   @override
   State<SendOfferBottomSheet> createState() => _SendOfferBottomSheetState();
 }
 
 class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
-  TextEditingController offerController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    offerController.dispose();
+    priceController.dispose();
     super.dispose();
   }
 
@@ -35,13 +43,13 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("500 LE",
+            Text(widget.request.price,
                 style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold)),
             SizedBox(
               height: 5.h,
             ),
             Text(
-              "Service: Plumber",
+              "Service: ${widget.request.serviceId}",
               style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -55,7 +63,7 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
               height: 5.h,
             ),
             Text(
-              "Leaking Pipe Under My Kitchen Sink",
+              " ${widget.request.description}",
               style: TextStyle(
                 fontSize: 20.sp,
               ),
@@ -73,7 +81,7 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
               height: 10.h,
             ),
             Text(
-              "Time: Monday 8 pm",
+              "Time:  ${widget.request.scheduledAt}",
               style: TextStyle(fontSize: 25.sp),
             ),
             SizedBox(
@@ -83,22 +91,50 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                 child: Text("Your Offer Details",
                     style: TextStyle(
                         fontSize: 25.sp, fontWeight: FontWeight.bold))),
-            OfferTextFormField(
-                controller: offerController,
-                validator: (offer) =>
-                    Validators.validateNull(offer, Messages.priceRequired),
-                hintText: "Enter Your Offer"),
+            Form(
+              key: formKey,
+              child: OfferTextFormField(
+                  controller: priceController,
+                  validator: (offer) =>
+                      Validators.validateNull(offer, Messages.priceRequired),
+                  hintText: "Enter Your Offer"),
+            ),
             SizedBox(
               height: 15.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                    onPressed: () {},
-                    style:
-                        ElevatedButton.styleFrom(fixedSize: Size(150.w, 45.h)),
-                    child: Text(StringsManager.sendOffer)),
+                BlocConsumer<ProviderOffersCubit, ProviderOffersStates>(
+                  listener: (_, state) {
+                    if (state is SendOfferLoadingState) {
+                      UIUtils.showLoading(context);
+                    } else if (state is SendOfferErrorState) {
+                      UIUtils.hideLoading(context);
+                      Navigator.pop(context);
+                      UIUtils.showMessage(state.error);
+                      context.read<ProviderOffersCubit>().getAllRequests();
+                    } else if (state is SendOfferSuccessState) {
+                      UIUtils.showMessage(state.message);
+                      Navigator.pop(context);
+                      context.read<ProviderOffersCubit>().getAllRequests();
+                    }
+                  },
+                  builder: (context, state) => ElevatedButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          context.read<ProviderOffersCubit>().sendOffer(
+                                SendOfferRequest(
+                                  price: int.parse(priceController.text),
+                                  offerId: widget.request.id,
+                                ),
+                              );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(150.w, 45.h)),
+                      child: Text(StringsManager.sendOffer)),
+                ),
                 SizedBox(
                   width: 20.w,
                 ),

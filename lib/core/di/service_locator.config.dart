@@ -15,7 +15,8 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:kafa2a/core/di/register_module.dart' as _i213;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i819;
-import 'package:kafa2a/features/auth/data/data_sources/local/auth_shared_pref_local_data_source.dart';
+import 'package:kafa2a/features/auth/data/data_sources/local/auth_shared_pref_local_data_source.dart'
+    as _i818;
 import 'package:kafa2a/features/auth/data/data_sources/remote/auth_api_remote_data_source.dart'
     as _i386;
 import 'package:kafa2a/features/auth/data/data_sources/remote/auth_remote_data_source.dart'
@@ -40,8 +41,13 @@ import 'package:kafa2a/features/home/provider/data/data_source/provider_offers_r
     as _i633;
 import 'package:kafa2a/features/home/provider/data/repository/provider_offers_repository.dart'
     as _i723;
-import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart'
-    as _i42;
+import 'package:kafa2a/features/home/provider/domain/repository/provider_offers_repository.dart'
+    as _i1052;
+import 'package:kafa2a/features/home/provider/domain/use_cases/get_all_requests.dart'
+    as _i995;
+import 'package:kafa2a/features/home/provider/domain/use_cases/send_offer.dart'
+    as _i616;
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
     as _i195;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
@@ -54,7 +60,8 @@ import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.da
     as _i86;
 import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart'
     as _i574;
-import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart'
+    as _i378;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -76,25 +83,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
-    gh.singleton<_i819.AuthLocalDataSource>(
-        () => AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
-    gh.singleton<_i998.AuthRepository>(() => _i887.AuthRepositoryImpl(
-          gh<_i755.AuthRemoteDataSource>(),
-          gh<_i819.AuthLocalDataSource>(),
-        ));
-    gh.factory<RequestServiceCubit>(() => RequestServiceCubit(
-          gh<_i86.GetAllCategories>(),
-          gh<_i574.RequestService>(),
-        ));
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
         () => _i0.ProviderOffersApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
         () => _i195.RequestServiceApiDataSource(gh<_i361.Dio>()));
-    gh.lazySingleton<_i723.ProviderOffersRepository>(
-        () => _i723.ProviderOffersRepository(
+    gh.factory<ProviderOffersCubit>(() => ProviderOffersCubit(
+          gh<_i995.GetAllRequests>(),
+          gh<_i616.SendOffer>(),
+        ));
+    gh.singleton<_i819.AuthLocalDataSource>(() =>
+        _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i1052.ProviderOffersRepository>(
+        () => _i723.ProviderOffersRepositoryImpl(
               gh<_i633.ProviderOffersRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
+    gh.singleton<_i998.AuthRepository>(() => _i887.AuthRepositoryImpl(
+          gh<_i755.AuthRemoteDataSource>(),
+          gh<_i819.AuthLocalDataSource>(),
+        ));
+    gh.singleton<_i995.GetAllRequests>(
+        () => _i995.GetAllRequests(gh<_i1052.ProviderOffersRepository>()));
+    gh.singleton<_i616.SendOffer>(
+        () => _i616.SendOffer(gh<_i1052.ProviderOffersRepository>()));
     gh.lazySingleton<_i234.RequestServiceRepository>(
         () => _i142.RequestServiceRepositoryImpl(
               gh<_i519.RequestServiceRemoteDataSource>(),
@@ -113,14 +124,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
     gh.singleton<_i574.RequestService>(
         () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
-    gh.lazySingleton<_i42.ProviderOffersCubit>(
-        () => _i42.ProviderOffersCubit(gh<_i723.ProviderOffersRepository>()));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),
           gh<_i160.LoginProvider>(),
           gh<_i0.RegisterUser>(),
           gh<_i619.RegisterProvider>(),
           gh<_i23.LogOut>(),
+        ));
+    gh.factory<_i378.RequestServiceCubit>(() => _i378.RequestServiceCubit(
+          gh<_i86.GetAllCategories>(),
+          gh<_i574.RequestService>(),
         ));
     return this;
   }

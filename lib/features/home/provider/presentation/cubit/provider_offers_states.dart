@@ -7,20 +7,23 @@ class ProviderOffersInitialState extends ProviderOffersStates {}
 class GetAllRequestsLoadingState extends ProviderOffersStates {}
 
 class GetAllRequestsErrorState extends ProviderOffersStates {
-  String error;
+  final String error;
   GetAllRequestsErrorState(this.error);
 }
 
 class GetAllRequestsSuccessState extends ProviderOffersStates {
-  List<GetAllRequestsResponse> requests;
+  final List<GetAllRequestsResponse> requests;
   GetAllRequestsSuccessState(this.requests);
 }
 
 class SendOfferLoadingState extends ProviderOffersStates {}
 
 class SendOfferErrorState extends ProviderOffersStates {
-  String error;
+  final String error;
   SendOfferErrorState(this.error);
 }
 
-class SendOfferSuccessState extends ProviderOffersStates {}
+class SendOfferSuccessState extends ProviderOffersStates {
+  final String message;
+  SendOfferSuccessState(this.message);
+}

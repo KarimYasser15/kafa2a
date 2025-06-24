@@ -26,12 +26,8 @@ class RequestServiceApiDataSource extends RequestServiceRemoteDataSource {
       List<GetCategoriesResponse> categories = (response.data as List)
           .map((category) => GetCategoriesResponse.fromJson(category))
           .toList();
-      print('RAW categories JSON: ${response.data}');
-
-      print("HELLOOO");
       return categories.map((category) => category.toCategoryEntity).toList();
     } catch (exception) {
-      print(exception.toString());
       String errorMessage = Messages.failedToGetCategories;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

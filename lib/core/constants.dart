@@ -8,6 +8,7 @@ class ApiConstants {
   static const String getCategories = 'categories';
   static const String requestService = 'service-requests';
   static const String getAllRequests = 'requests';
+  static sendOffer(int id) => 'request/$id/offer';
 }
 
 class CacheConstants {

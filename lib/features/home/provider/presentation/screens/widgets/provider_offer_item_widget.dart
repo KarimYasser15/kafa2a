@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/widgets/send_offer_bottom_sheet.dart';
 
 class ProviderOfferItemWidget extends StatelessWidget {
@@ -136,7 +138,12 @@ class ProviderOfferItemWidget extends StatelessWidget {
               onPressed: () => showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
-                  builder: (context) => SendOfferBottomSheet()),
+                  builder: (_) => BlocProvider.value(
+                        value: context.read<ProviderOffersCubit>(),
+                        child: SendOfferBottomSheet(
+                          request: request,
+                        ),
+                      )),
               child: Text(
                 StringsManager.offer,
               ),
