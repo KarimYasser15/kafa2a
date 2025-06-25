@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
+import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
 
 class RequestItemWidget extends StatelessWidget {
-  const RequestItemWidget({super.key});
+  const RequestItemWidget({super.key, required this.pendingRequests});
+  final PendingRequests pendingRequests;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class RequestItemWidget extends StatelessWidget {
                   children: [
                     Center(
                         child: Text(
-                      "200LE",
+                      pendingRequests.price,
                       style: TextStyle(
                           fontSize: 17.sp, fontWeight: FontWeight.bold),
                     )),
@@ -42,7 +45,7 @@ class RequestItemWidget extends StatelessWidget {
                           color: ColorsManager.blue,
                         ),
                         Text(
-                          "Service",
+                          StringsManager.service,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -51,7 +54,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "Plumber",
+                      pendingRequests.service.name,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -60,7 +63,7 @@ class RequestItemWidget extends StatelessWidget {
                       children: [
                         Icon(Icons.description, color: ColorsManager.blue),
                         Text(
-                          "Description",
+                          StringsManager.description,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -69,7 +72,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "Leaking pipe under my Kitchen Sink",
+                      pendingRequests.description,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -81,7 +84,7 @@ class RequestItemWidget extends StatelessWidget {
                           color: Colors.red,
                         ),
                         Text(
-                          "Location",
+                          StringsManager.location,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -90,7 +93,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "ElDokki Street, Giza",
+                      pendingRequests.location,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -100,7 +103,7 @@ class RequestItemWidget extends StatelessWidget {
                         Icon(Icons.access_time_rounded,
                             color: ColorsManager.blue),
                         Text(
-                          "Time",
+                          StringsManager.time,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -109,7 +112,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "25-5-2025 - Fridat - 2 pm",
+                      pendingRequests.scheduledAt,
                     ),
                     SizedBox(height: 10.h),
                   ],
@@ -121,7 +124,7 @@ class RequestItemWidget extends StatelessWidget {
                 color: Colors.green,
                 child: Center(
                     child: Text(
-                  "Accepted",
+                  pendingRequests.status.toUpperCase(),
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 )),

@@ -1,4 +1,4 @@
-import 'user_model.dart';
+import '../../../../core/models/user_model.dart';
 
 class AuthResponse {
   AuthResponse({this.message, required this.token, required this.user});

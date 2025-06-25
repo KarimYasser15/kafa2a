@@ -9,6 +9,8 @@ class ApiConstants {
   static const String requestService = 'service-requests';
   static const String getAllRequests = 'requests';
   static sendOffer(int id) => 'request/$id/offer';
+  static const String getAcceptedUserOffers = "/accepted-offers";
+  static const String getAllPendingUserRequests = "service-requests";
 }
 
 class CacheConstants {

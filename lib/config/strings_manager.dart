@@ -58,4 +58,7 @@ class StringsManager {
   static const String pleaseEnterYourPrice = "Please Enter Your Price";
   static const String selectDateAndTime = "Select Date and Time";
   static const String title = "Title";
+  static const String service = "Service";
+  static const String location = "Location";
+  static const String time = "Time";
 }

@@ -24,4 +24,10 @@ class Messages {
   static const String failedToRequestService = "Failed to Request Service";
   static const String failedToGetRequests = "Failed to Get Requests";
   static const String failedToSendOffer = "Failed to Send Offer";
+  static const String failedToGetPendingRequests =
+      "Failed to Get Pending Requests";
+  static const String failedToGetAcceptedOffers =
+      "Failed to Get Accepted Offers";
+  static const String noPendingRequetsAtTheMoment =
+      "No Pending Requests At The Moment!";
 }

@@ -1,4 +1,4 @@
-import 'offer_model.dart';
+import '../../../../../../core/models/offer_model.dart';
 
 class SendOfferResponse {
   String? message;

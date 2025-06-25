@@ -47,7 +47,8 @@ import 'package:kafa2a/features/home/provider/domain/use_cases/get_all_requests.
     as _i995;
 import 'package:kafa2a/features/home/provider/domain/use_cases/send_offer.dart'
     as _i616;
-import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart'
+    as _i42;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
     as _i195;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
@@ -62,6 +63,20 @@ import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart'
     as _i574;
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart'
     as _i378;
+import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_api_data_source.dart'
+    as _i652;
+import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_remote_data_source.dart'
+    as _i444;
+import 'package:kafa2a/features/requests/user/data/repository/user_requests_repository_impl.dart'
+    as _i514;
+import 'package:kafa2a/features/requests/user/domain/repository/user_requests_repository.dart'
+    as _i598;
+import 'package:kafa2a/features/requests/user/domain/use_cases/get_accepted_requests.dart'
+    as _i995;
+import 'package:kafa2a/features/requests/user/domain/use_cases/get_pending_requests.dart'
+    as _i314;
+import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart'
+    as _i838;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -83,14 +98,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i444.UserRequestsRemoteDataSource>(
+        () => _i652.UserRequestsApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
         () => _i0.ProviderOffersApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
         () => _i195.RequestServiceApiDataSource(gh<_i361.Dio>()));
-    gh.factory<ProviderOffersCubit>(() => ProviderOffersCubit(
-          gh<_i995.GetAllRequests>(),
-          gh<_i616.SendOffer>(),
-        ));
     gh.singleton<_i819.AuthLocalDataSource>(() =>
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(
@@ -111,6 +124,15 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i519.RequestServiceRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
+    gh.factory<_i42.ProviderOffersCubit>(() => _i42.ProviderOffersCubit(
+          gh<_i995.GetAllRequests>(),
+          gh<_i616.SendOffer>(),
+        ));
+    gh.lazySingleton<_i598.UserRequestsRepository>(
+        () => _i514.UserRequestsRepositoryImpl(
+              gh<_i819.AuthLocalDataSource>(),
+              gh<_i444.UserRequestsRemoteDataSource>(),
+            ));
     gh.singleton<_i160.LoginProvider>(
         () => _i160.LoginProvider(gh<_i998.AuthRepository>()));
     gh.singleton<_i684.LoginUser>(
@@ -120,10 +142,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i619.RegisterProvider(gh<_i998.AuthRepository>()));
     gh.singleton<_i0.RegisterUser>(
         () => _i0.RegisterUser(gh<_i998.AuthRepository>()));
+    gh.lazySingleton<_i314.GetPendingRequests>(
+        () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
+    gh.lazySingleton<_i995.GetAcceptedRequests>(
+        () => _i995.GetAcceptedRequests(gh<_i598.UserRequestsRepository>()));
     gh.singleton<_i86.GetAllCategories>(
         () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
     gh.singleton<_i574.RequestService>(
         () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
+    gh.factory<_i838.UserRequestsCubit>(() => _i838.UserRequestsCubit(
+          gh<_i314.GetPendingRequests>(),
+          gh<_i995.GetAcceptedRequests>(),
+        ));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),
           gh<_i160.LoginProvider>(),

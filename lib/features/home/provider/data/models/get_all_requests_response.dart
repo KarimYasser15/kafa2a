@@ -1,4 +1,4 @@
-import 'package:kafa2a/features/auth/data/models/user_model.dart';
+import 'package:kafa2a/core/models/user_model.dart';
 
 class GetAllRequestsResponse {
   int id;

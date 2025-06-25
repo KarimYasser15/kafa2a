@@ -5,7 +5,7 @@ import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart';
 import 'package:kafa2a/features/home/user/data/mappers/category_mapper.dart';
-import 'package:kafa2a/features/home/user/data/models/get_categories_response/get_categories_response.dart';
+import 'package:kafa2a/features/home/user/data/models/get_categories_response.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_request.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_response.dart';
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';

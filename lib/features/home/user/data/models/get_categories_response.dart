@@ -1,4 +1,4 @@
-import 'service_model.dart';
+import '../../../../../core/models/service_model.dart';
 
 class GetCategoriesResponse {
   int id;
