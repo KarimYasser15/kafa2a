@@ -250,11 +250,11 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                                 nationalIdController.text,
                                             address: addressController.text,
                                             service: 'Cleaning',
-                                            policeCertificate: context
+                                            policeCertificate:
+                                                context.read<AuthCubit>().image,
+                                            selfie: context
                                                 .read<AuthCubit>()
                                                 .cameraImage,
-                                            selfie:
-                                                context.read<AuthCubit>().image,
                                           ),
                                         );
                                   }

@@ -49,8 +49,7 @@ import 'package:kafa2a/features/home/provider/domain/use_cases/send_offer.dart'
     as _i616;
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart'
     as _i42;
-import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
-    as _i195;
+import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart';
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
     as _i519;
 import 'package:kafa2a/features/home/user/data/repository/request_service_repository_impl.dart'
@@ -103,7 +102,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
         () => _i0.ProviderOffersApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
-        () => _i195.RequestServiceApiDataSource(gh<_i361.Dio>()));
+        () => RequestServiceApiDataSource(gh<_i361.Dio>()));
     gh.singleton<_i819.AuthLocalDataSource>(() =>
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(

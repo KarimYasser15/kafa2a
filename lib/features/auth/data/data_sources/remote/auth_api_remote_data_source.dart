@@ -75,10 +75,11 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
     try {
       final Response response = await _dio.post(
         ApiConstants.registerProviderEndPoint,
-        data: registerProviderRequest.toFormData(),
+        data: await registerProviderRequest.toFormData(),
       );
       return AuthResponse.fromJson(response.data);
     } catch (exception) {
+      print(exception.toString());
       String errorMessage = Messages.failedToRegister;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

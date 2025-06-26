@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/widgets/send_offer_bottom_sheet.dart';
 
 class ProviderOfferItemWidget extends StatelessWidget {
   const ProviderOfferItemWidget({super.key, required this.request});
-  final GetAllRequestsResponse request;
+  final AllProviderRequests request;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     height: 10.h,
                   ),
                   Text(
-                    "Price: ${request.price}",
+                    "${StringsManager.price}: ${request.price}",
                     style:
                         TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
@@ -61,7 +61,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                         color: ColorsManager.blue,
                       ),
                       Text(
-                        "Service",
+                        StringsManager.service,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -79,7 +79,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     children: [
                       Icon(Icons.description, color: ColorsManager.blue),
                       Text(
-                        "Description",
+                        StringsManager.description,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -100,7 +100,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                         color: Colors.red,
                       ),
                       Text(
-                        "Location",
+                        StringsManager.location,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -119,7 +119,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                       Icon(Icons.access_time_rounded,
                           color: ColorsManager.blue),
                       Text(
-                        "Time",
+                        StringsManager.time,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],

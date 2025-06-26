@@ -1,4 +1,4 @@
-import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 
 abstract class ProviderOffersStates {}
 
@@ -12,7 +12,7 @@ class GetAllRequestsErrorState extends ProviderOffersStates {
 }
 
 class GetAllRequestsSuccessState extends ProviderOffersStates {
-  final List<GetAllRequestsResponse> requests;
+  final List<AllProviderRequests> requests;
   GetAllRequestsSuccessState(this.requests);
 }
 

@@ -112,9 +112,7 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   Future pickImageFromGallery() async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
     final imageTemp = File(
       image.path,
@@ -125,6 +123,7 @@ class AuthCubit extends Cubit<AuthStates> {
   Future pickImageFromCamera() async {
     final image = await ImagePicker().pickImage(
       source: ImageSource.camera,
+      imageQuality: 50,
     );
     if (image == null) return;
     final imageTemp = File(

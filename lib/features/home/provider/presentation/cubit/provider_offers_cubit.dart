@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kafa2a/core/error/failure.dart';
-import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 import 'package:kafa2a/features/home/provider/data/models/send_offer_request.dart';
 import 'package:kafa2a/features/home/provider/data/models/send_offer_response/send_offer_response.dart';
 import 'package:kafa2a/features/home/provider/domain/use_cases/get_all_requests.dart';
@@ -22,7 +22,7 @@ class ProviderOffersCubit extends Cubit<ProviderOffersStates> {
     emit(
       GetAllRequestsLoadingState(),
     );
-    final Either<List<GetAllRequestsResponse>, Failure> result =
+    final Either<List<AllProviderRequests>, Failure> result =
         await _getAllRequests();
     result.fold(
       (requests) => emit(

@@ -6,14 +6,14 @@ import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
-import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response.dart';
+import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 import 'package:kafa2a/features/home/provider/data/models/send_offer_request.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_states.dart';
 
 class SendOfferBottomSheet extends StatefulWidget {
   const SendOfferBottomSheet({super.key, required this.request});
-  final GetAllRequestsResponse request;
+  final AllProviderRequests request;
 
   @override
   State<SendOfferBottomSheet> createState() => _SendOfferBottomSheetState();

@@ -12,7 +12,6 @@ abstract class RegisterModule {
           receiveDataWhenStatusError: true,
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
           },
         ),
       );

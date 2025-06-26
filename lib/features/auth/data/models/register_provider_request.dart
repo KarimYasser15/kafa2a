@@ -26,7 +26,7 @@ class RegisterProviderRequest {
   final File selfie;
   final String service;
 
-  FormData toFormData() {
+  Future<FormData> toFormData() async {
     return FormData.fromMap({
       'name': name,
       'email': email,
@@ -36,10 +36,10 @@ class RegisterProviderRequest {
       'national_id': nationalId,
       'address': address,
       'phone': phone,
-      'police_certificate': MultipartFile.fromFileSync(
+      'police_certificate': await MultipartFile.fromFile(
         policeCertificate.path,
       ),
-      'selfie': MultipartFile.fromFileSync(
+      'selfie': await MultipartFile.fromFile(
         selfie.path,
       ),
     });

@@ -30,4 +30,5 @@ class Messages {
       "Failed to Get Accepted Offers";
   static const String noPendingRequetsAtTheMoment =
       "No Pending Requests At The Moment!";
+  static const String noRequestsAtTheMoment = "No Requests At The Moment!";
 }
