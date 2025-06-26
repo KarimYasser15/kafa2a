@@ -7,6 +7,7 @@ import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/utils/validators.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                               }
                             },
-                            child: ElevatedButton(
+                            child: DefaultSubmitButton(
                                 onPressed: () {
                                   if (userType == UserType.user) {
                                     context.read<AuthCubit>().loginUser(
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         );
                                   }
                                 },
-                                child: Text(StringsManager.login)),
+                                label: StringsManager.login),
                           ),
                         )
                       ],

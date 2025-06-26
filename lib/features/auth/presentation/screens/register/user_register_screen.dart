@@ -7,6 +7,7 @@ import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/auth/data/models/register_user_request.dart';
@@ -164,7 +165,7 @@ class UserRegisterScreen extends StatelessWidget {
                                   );
                                 }
                               },
-                              child: ElevatedButton(
+                              child: DefaultSubmitButton(
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     context.read<AuthCubit>().registerUser(
@@ -179,9 +180,7 @@ class UserRegisterScreen extends StatelessWidget {
                                         );
                                   }
                                 },
-                                child: Text(
-                                  StringsManager.register,
-                                ),
+                                label: StringsManager.register,
                               ),
                             ),
                           )

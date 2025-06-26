@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/widgets/send_offer_bottom_sheet.dart';
@@ -134,7 +135,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton(
+            DefaultSubmitButton(
               onPressed: () => showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
@@ -144,9 +145,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                           request: request,
                         ),
                       )),
-              child: Text(
-                StringsManager.offer,
-              ),
+              label: StringsManager.offer,
             ),
             SizedBox(
               height: 10.h,

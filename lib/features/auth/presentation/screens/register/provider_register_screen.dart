@@ -7,6 +7,8 @@ import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
+import 'package:kafa2a/core/widgets/default_elevated_button.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/auth/data/models/register_provider_request.dart';
@@ -191,13 +193,11 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          ElevatedButton(
+                          DefaultElevatedButton(
                             onPressed: () {
                               context.read<AuthCubit>().pickImageFromGallery();
                             },
-                            child: Text(
-                              StringsManager.pickImage,
-                            ),
+                            label: StringsManager.pickImage,
                           ),
                           SizedBox(
                             height: 10.h,
@@ -208,13 +208,11 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          ElevatedButton(
+                          DefaultElevatedButton(
                             onPressed: () {
                               context.read<AuthCubit>().pickImageFromCamera();
                             },
-                            child: Text(
-                              StringsManager.takeSelfie,
-                            ),
+                            label: StringsManager.takeSelfie,
                           ),
                           SizedBox(
                             height: 20.h,
@@ -235,7 +233,7 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                   );
                                 }
                               },
-                              child: ElevatedButton(
+                              child: DefaultSubmitButton(
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     context.read<AuthCubit>().registerProvider(
@@ -259,9 +257,7 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                         );
                                   }
                                 },
-                                child: Text(
-                                  StringsManager.register,
-                                ),
+                                label: StringsManager.register,
                               ),
                             ),
                           )

@@ -10,6 +10,7 @@ import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
@@ -148,12 +149,13 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                         ),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                pickDateTime();
-                              },
-                              child: Text(selectedDate ??
-                                  StringsManager.selectDateAndTime)),
+                          child: DefaultElevatedButton(
+                            onPressed: () {
+                              pickDateTime();
+                            },
+                            label: selectedDate ??
+                                StringsManager.selectDateAndTime,
+                          ),
                         ),
                         SizedBox(
                           height: 10.h,
@@ -174,7 +176,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        DefaultElevatedButton(
+                        DefaultSubmitButton(
                             label: StringsManager.requestService,
                             onPressed: () {
                               if (formKey.currentState!.validate() &&

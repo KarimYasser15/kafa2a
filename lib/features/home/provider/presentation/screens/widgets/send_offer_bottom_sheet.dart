@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
@@ -120,7 +121,7 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                       context.read<ProviderOffersCubit>().getAllRequests();
                     }
                   },
-                  builder: (context, state) => ElevatedButton(
+                  builder: (context, state) => DefaultSubmitButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           context.read<ProviderOffersCubit>().sendOffer(
@@ -131,9 +132,7 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                               );
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: Size(150.w, 45.h)),
-                      child: Text(StringsManager.sendOffer)),
+                      label: StringsManager.sendOffer),
                 ),
                 SizedBox(
                   width: 20.w,
