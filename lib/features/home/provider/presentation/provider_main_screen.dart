@@ -2,9 +2,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
-import 'package:kafa2a/features/home/provider/presentation/provider_home_tab.dart';
+import 'package:kafa2a/features/home/provider/presentation/screens/provider_home_tab.dart';
 import 'package:kafa2a/features/my_profile/presentation/my_profile_screen.dart';
-import 'package:kafa2a/features/requests/user/view/screens/user_requests_screen.dart';
+import 'package:kafa2a/features/requests/user/presentation/screens/user_requests_screen.dart';
 
 class ProviderMainScreen extends StatefulWidget {
   const ProviderMainScreen({super.key});

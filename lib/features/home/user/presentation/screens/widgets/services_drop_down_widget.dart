@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/features/home/user/data/models/get_categories_response/service.dart';
+import 'package:kafa2a/features/home/user/domain/entities/services.dart';
 
 class ServicesDropDownWidget extends StatefulWidget {
   const ServicesDropDownWidget({
@@ -13,19 +13,18 @@ class ServicesDropDownWidget extends StatefulWidget {
     required this.services,
     required this.onChanged,
   });
-  final String label;
 
+  final Function(Services)? onChanged;
   final String hint;
+  final String label;
+  final List<Services>? services;
 
-  final List<Service>? services;
-
-  final Function(Service)? onChanged;
   @override
   State<ServicesDropDownWidget> createState() => _ServicesDropDownWidgetState();
 }
 
 class _ServicesDropDownWidgetState extends State<ServicesDropDownWidget> {
-  Service? selectedItem;
+  Services? selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +59,8 @@ class _ServicesDropDownWidgetState extends State<ServicesDropDownWidget> {
                 textStyle: TextStyle(overflow: TextOverflow.ellipsis)),
             value: null,
             isExpanded: true,
-            items: widget.services?.map((Service service) {
-              return DropdownMenuItem<Service>(
+            items: widget.services?.map((Services service) {
+              return DropdownMenuItem<Services>(
                 value: service,
                 child: Text(service.name),
               );

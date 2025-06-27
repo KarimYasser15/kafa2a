@@ -8,25 +8,35 @@ import 'package:kafa2a/features/auth/data/models/log_out_response.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
 import 'package:kafa2a/features/auth/data/models/register_provider_request.dart';
 import 'package:kafa2a/features/auth/data/models/register_user_request.dart';
-import 'package:kafa2a/features/auth/data/models/user_model.dart';
-import 'package:kafa2a/features/auth/data/repository/auth_repository.dart';
+import 'package:kafa2a/features/auth/domain/entities/provider.dart';
+import 'package:kafa2a/features/auth/domain/entities/user.dart';
+import 'package:kafa2a/features/auth/domain/use_cases/log_out.dart';
+import 'package:kafa2a/features/auth/domain/use_cases/login_provider.dart';
+import 'package:kafa2a/features/auth/domain/use_cases/login_user.dart';
+import 'package:kafa2a/features/auth/domain/use_cases/register_provider.dart';
+import 'package:kafa2a/features/auth/domain/use_cases/register_user.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
 
 @singleton
 class AuthCubit extends Cubit<AuthStates> {
-  AuthCubit(this._authRepository) : super(AuthInitialState());
+  AuthCubit(this._loginUser, this._loginProvider, this._registerUser,
+      this._registerProvider, this._logOut)
+      : super(AuthInitialState());
+
+  final LoginUser _loginUser;
+  final LoginProvider _loginProvider;
+  final RegisterUser _registerUser;
+  final RegisterProvider _registerProvider;
+  final LogOut _logOut;
 
   late File cameraImage;
   late File image;
-
-  final AuthRepository _authRepository;
 
   Future<void> loginUser(LoginRequest loginRequest) async {
     emit(
       AuthLoadingState(),
     );
-    final Either<UserModel, Failure> response =
-        await _authRepository.loginUser(loginRequest);
+    final Either<User, Failure> response = await _loginUser(loginRequest);
     response.fold(
       (_) => emit(
         AuthSuccessState(),
@@ -41,8 +51,8 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(
       AuthLoadingState(),
     );
-    final Either<UserModel, Failure> response =
-        await _authRepository.loginProvider(loginRequest);
+    final Either<Provider, Failure> response =
+        await _loginProvider(loginRequest);
     response.fold(
       (_) => emit(
         AuthSuccessState(),
@@ -57,8 +67,8 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(
       AuthLoadingState(),
     );
-    final Either<UserModel, Failure> response =
-        await _authRepository.registerUser(registerUserRequest);
+    final Either<User, Failure> response =
+        await _registerUser(registerUserRequest);
     response.fold(
       (_) => emit(
         AuthSuccessState(),
@@ -74,8 +84,8 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(
       AuthLoadingState(),
     );
-    final Either<UserModel, Failure> response =
-        await _authRepository.registerProvider(registerProviderRequest);
+    final Either<Provider, Failure> response =
+        await _registerProvider(registerProviderRequest);
     response.fold(
       (_) => emit(
         AuthSuccessState(),
@@ -90,8 +100,7 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(
       AuthLoadingState(),
     );
-    final Either<LogOutResponse, Failure> response =
-        await _authRepository.logOut();
+    final Either<LogOutResponse, Failure> response = await _logOut();
     response.fold(
       (_) => emit(
         AuthSuccessState(),
@@ -103,9 +112,7 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   Future pickImageFromGallery() async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
     final imageTemp = File(
       image.path,
@@ -116,6 +123,7 @@ class AuthCubit extends Cubit<AuthStates> {
   Future pickImageFromCamera() async {
     final image = await ImagePicker().pickImage(
       source: ImageSource.camera,
+      imageQuality: 50,
     );
     if (image == null) return;
     final imageTemp = File(

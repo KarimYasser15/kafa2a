@@ -10,12 +10,13 @@ import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
+import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
-import 'package:kafa2a/features/home/user/data/models/get_categories_response/get_categories_response.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_request.dart';
+import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service_states.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/widgets/categories_drop_down_widget.dart';
@@ -30,13 +31,13 @@ class RequestServiceScreen extends StatefulWidget {
 
 class _RequestServiceScreenState extends State<RequestServiceScreen> {
   final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController titleController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController priceController = TextEditingController();
-  GetCategoriesResponse? selectedCategory;
+  Category? selectedCategory;
   String? selectedDate;
   int? selectedService;
   DateTime? selectedTimePicker;
+  final TextEditingController titleController = TextEditingController();
 
   @override
   void dispose() {
@@ -148,12 +149,13 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                         ),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                pickDateTime();
-                              },
-                              child: Text(selectedDate ??
-                                  StringsManager.selectDateAndTime)),
+                          child: DefaultElevatedButton(
+                            onPressed: () {
+                              pickDateTime();
+                            },
+                            label: selectedDate ??
+                                StringsManager.selectDateAndTime,
+                          ),
                         ),
                         SizedBox(
                           height: 10.h,
@@ -174,7 +176,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        DefaultElevatedButton(
+                        DefaultSubmitButton(
                             label: StringsManager.requestService,
                             onPressed: () {
                               if (formKey.currentState!.validate() &&

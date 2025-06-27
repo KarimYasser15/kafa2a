@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
+import 'package:kafa2a/config/assets_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/constants.dart';
@@ -18,6 +19,7 @@ class OnboardingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(AssetsManager.appLogo),
             Text(
               "${StringsManager.welcome},",
               style: AppStyles.onBoarding,

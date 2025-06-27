@@ -1,11 +1,11 @@
 class LogOutResponse {
-  LogOutResponse({this.message});
+  LogOutResponse({required this.message});
 
   factory LogOutResponse.fromJson(Map<String, dynamic> json) {
     return LogOutResponse(
-      message: json['message'] as String?,
+      message: json['message'] as String,
     );
   }
 
-  String? message;
+  String message;
 }
