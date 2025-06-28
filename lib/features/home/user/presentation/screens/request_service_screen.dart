@@ -5,9 +5,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:kafa2a/config/app_styles.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
-import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
@@ -21,6 +19,7 @@ import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cub
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service_states.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/widgets/categories_drop_down_widget.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/widgets/services_drop_down_widget.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class RequestServiceScreen extends StatefulWidget {
   const RequestServiceScreen({super.key});
@@ -72,7 +71,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(StringsManager.requestService),
+        title: Text(AppLocalizations.of(context).requestService),
         centerTitle: true,
       ),
       body: BlocProvider(
@@ -89,8 +88,8 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CategoriesDropDownWidget(
-                          label: StringsManager.category,
-                          hint: StringsManager.selectCategory,
+                          label: AppLocalizations.of(context).category,
+                          hint: AppLocalizations.of(context).selectCategory,
                           categories: state.categories,
                           onChanged: (value) {
                             selectedCategory = value;
@@ -98,15 +97,15 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                           },
                         ),
                         ServicesDropDownWidget(
-                          label: StringsManager.services,
-                          hint: StringsManager.selectService,
+                          label: AppLocalizations.of(context).services,
+                          hint: AppLocalizations.of(context).selectService,
                           services: selectedCategory?.services,
                           onChanged: (value) {
                             selectedService = value.id;
                           },
                         ),
                         Text(
-                          StringsManager.title,
+                          AppLocalizations.of(context).title,
                           style: AppStyles.body,
                         ),
                         SizedBox(
@@ -114,15 +113,17 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                         ),
                         DefaultTextFormField(
                           controller: titleController,
-                          hintText: StringsManager.pleaseEnterTitle,
+                          hintText:
+                              AppLocalizations.of(context).pleaseEnterTitle,
                           validator: (address) => Validators.validateNull(
-                              address, Messages.titleRequired),
+                              address,
+                              AppLocalizations.of(context).titleRequired),
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
                         Text(
-                          StringsManager.description,
+                          AppLocalizations.of(context).description,
                           style: AppStyles.body,
                         ),
                         SizedBox(
@@ -141,7 +142,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                           height: 10.h,
                         ),
                         Text(
-                          StringsManager.preferedTime,
+                          AppLocalizations.of(context).preferedTime,
                           style: AppStyles.body,
                         ),
                         SizedBox(
@@ -154,30 +155,31 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                               pickDateTime();
                             },
                             label: selectedDate ??
-                                StringsManager.selectDateAndTime,
+                                AppLocalizations.of(context).selectDateAndTime,
                           ),
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
                         Text(
-                          StringsManager.price,
+                          AppLocalizations.of(context).price,
                           style: AppStyles.body,
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
                         OfferTextFormField(
-                          hintText: StringsManager.pleaseEnterYourPrice,
+                          hintText:
+                              AppLocalizations.of(context).pleaseEnterYourPrice,
                           controller: priceController,
-                          validator: (price) => Validators.validateNull(
-                              price, Messages.priceRequired),
+                          validator: (price) => Validators.validateNull(price,
+                              AppLocalizations.of(context).priceRequired),
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
                         DefaultSubmitButton(
-                            label: StringsManager.requestService,
+                            label: AppLocalizations.of(context).requestService,
                             onPressed: () {
                               if (formKey.currentState!.validate() &&
                                   selectedCategory != null &&
@@ -222,7 +224,8 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
             } else if (state is RequestServiceSuccessState) {
               UIUtils.hideLoading(context);
               await Future.delayed(const Duration(milliseconds: 300));
-              UIUtils.showMessage(Messages.serviceRequestedSuccessfully);
+              UIUtils.showMessage(
+                  AppLocalizations.of(context).serviceRequestedSuccessfully);
               if (context.mounted) {
                 Navigator.pop(context);
               }

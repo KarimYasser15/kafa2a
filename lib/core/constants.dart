@@ -15,6 +15,7 @@ class ApiConstants {
 
 class CacheConstants {
   static const String token = "token";
+  static const String language = "language";
 }
 
 class UserType {

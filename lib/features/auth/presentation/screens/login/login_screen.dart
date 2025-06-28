@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
@@ -14,6 +13,7 @@ import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/password_form_field.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -62,25 +62,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(padding: EdgeInsets.only(top: 20.h)),
                         Center(
                             child: Text(
-                          StringsManager.login,
+                          AppLocalizations.of(context).login,
                           style: AppStyles.onBoarding.copyWith(
                               fontSize: 32.sp, fontWeight: FontWeight.normal),
                         )),
                         SizedBox(
                           height: 20.h,
                         ),
-                        Text(StringsManager.email),
+                        Text(AppLocalizations.of(context).email),
                         SizedBox(height: 10.h),
                         EmailFormField(
                           controller: emailController,
                         ),
                         SizedBox(height: 20.h),
-                        Text(StringsManager.password),
+                        Text(AppLocalizations.of(context).password),
                         SizedBox(height: 10.h),
                         PasswordFormField(
                           controller: passwordController,
                           validator: (password) =>
-                              Validators.validatePassword(password),
+                              Validators.validatePassword(password, context),
                         ),
                         SizedBox(
                           height: 20.h,
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         );
                                   }
                                 },
-                                label: StringsManager.login),
+                                label: AppLocalizations.of(context).login),
                           ),
                         )
                       ],
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(StringsManager.dontHaveAnAccount),
+                  Text(AppLocalizations.of(context).dontHaveAnAccount),
                   TextButton(
                       onPressed: () {
                         if (userType == UserType.user) {
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               context, RoutesManager.registerProvider);
                         }
                       },
-                      child: Text(StringsManager.register)),
+                      child: Text(AppLocalizations.of(context).register)),
                 ],
               )
             ],

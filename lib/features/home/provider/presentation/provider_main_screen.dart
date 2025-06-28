@@ -1,10 +1,10 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/provider_home_tab.dart';
-import 'package:kafa2a/features/my_profile/presentation/my_profile_screen.dart';
+import 'package:kafa2a/features/my_profile/presentation/screens/my_profile_screen.dart';
 import 'package:kafa2a/features/requests/user/presentation/screens/user_requests_screen.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class ProviderMainScreen extends StatefulWidget {
   const ProviderMainScreen({super.key});
@@ -42,20 +42,21 @@ class _ProviderMainScreenState extends State<ProviderMainScreen> {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: StringsManager.home,
+                label: AppLocalizations.of(context).home,
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.edit_document),
-                  label: StringsManager.myRequests),
+                  label: AppLocalizations.of(context).myRequests),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.handshake), label: StringsManager.accepted),
+                  icon: Icon(Icons.handshake),
+                  label: AppLocalizations.of(context).accepted),
               BottomNavigationBarItem(
                 icon: Icon(Icons.chat),
-                label: StringsManager.chats,
+                label: AppLocalizations.of(context).chats,
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle),
-                  label: StringsManager.myProfile),
+                  label: AppLocalizations.of(context).myProfile),
             ]),
       ),
     );

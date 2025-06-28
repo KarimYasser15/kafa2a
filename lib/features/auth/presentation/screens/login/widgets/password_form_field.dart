@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField(
@@ -27,7 +27,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         obscureText: isVisible,
         style: TextStyle(fontSize: 14.sp),
         decoration: InputDecoration(
-            hintText: StringsManager.enterYourPassword,
+            hintText: AppLocalizations.of(context).enterYourPassword,
             hintStyle: TextStyle(fontSize: 14.sp),
             contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
             enabledBorder: OutlineInputBorder(

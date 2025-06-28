@@ -51,7 +51,7 @@ class AppTheme {
               fontSize: 16.sp,
               textStyle: TextStyle(overflow: TextOverflow.ellipsis)),
           elevation: 2,
-          fixedSize: Size(320.w, 45.h),
+          fixedSize: Size.fromHeight(45.h),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.r),
               side: BorderSide(color: ColorsManager.blue, width: 1.2.w))),

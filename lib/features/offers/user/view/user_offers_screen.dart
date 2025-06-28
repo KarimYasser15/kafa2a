@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/offers/user/view/widgets/offer_item_widget.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class UserOffersScreen extends StatelessWidget {
   const UserOffersScreen({super.key});
@@ -11,7 +11,7 @@ class UserOffersScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            StringsManager.offers,
+            AppLocalizations.of(context).offers,
           ),
         ),
         floatingActionButton: ElevatedButton(
@@ -22,7 +22,7 @@ class UserOffersScreen extends StatelessWidget {
                   side: BorderSide(color: Colors.red, width: 1.2.w))),
           onPressed: () {},
           child: Text(
-            StringsManager.cancelRequest,
+            AppLocalizations.of(context).cancelRequest,
             style: TextStyle(color: Colors.white),
           ),
         ),

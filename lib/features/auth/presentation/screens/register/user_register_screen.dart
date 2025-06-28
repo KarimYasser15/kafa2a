@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/default_text_form_field.dart';
@@ -15,6 +13,7 @@ import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/password_form_field.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class UserRegisterScreen extends StatelessWidget {
   UserRegisterScreen({super.key});
@@ -64,7 +63,7 @@ class UserRegisterScreen extends StatelessWidget {
                           ),
                           Center(
                             child: Text(
-                              StringsManager.register,
+                              AppLocalizations.of(context).register,
                               style: AppStyles.onBoarding.copyWith(
                                 fontSize: 32.sp,
                                 fontWeight: FontWeight.normal,
@@ -75,24 +74,25 @@ class UserRegisterScreen extends StatelessWidget {
                             height: 10.h,
                           ),
                           Text(
-                            StringsManager.name,
+                            AppLocalizations.of(context).name,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           DefaultTextFormField(
                             controller: nameController,
-                            hintText: StringsManager.enterYourName,
+                            hintText:
+                                AppLocalizations.of(context).enterYourName,
                             validator: (name) => Validators.validateNull(
                               name,
-                              Messages.nameRequired,
+                              AppLocalizations.of(context).nameRequired,
                             ),
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           Text(
-                            StringsManager.email,
+                            AppLocalizations.of(context).email,
                           ),
                           SizedBox(
                             height: 10.h,
@@ -104,7 +104,7 @@ class UserRegisterScreen extends StatelessWidget {
                             height: 10.h,
                           ),
                           Text(
-                            StringsManager.password,
+                            AppLocalizations.of(context).password,
                           ),
                           SizedBox(
                             height: 10.h,
@@ -112,13 +112,13 @@ class UserRegisterScreen extends StatelessWidget {
                           PasswordFormField(
                             controller: passwordController,
                             validator: (password) =>
-                                Validators.validatePassword(password),
+                                Validators.validatePassword(password, context),
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           Text(
-                            StringsManager.confirmPassword,
+                            AppLocalizations.of(context).confirmPassword,
                           ),
                           SizedBox(
                             height: 10.h,
@@ -127,24 +127,27 @@ class UserRegisterScreen extends StatelessWidget {
                             controller: confirmPasswordController,
                             validator: (confirmPassword) =>
                                 Validators.validateConfirmationPasswords(
-                              passwordController.text,
-                              confirmPassword,
-                            ),
+                                    passwordController.text,
+                                    confirmPassword,
+                                    context),
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           Text(
-                            StringsManager.phoneNumber,
+                            AppLocalizations.of(context).phoneNumber,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
                           DefaultTextFormField(
                             controller: phoneNumberController,
-                            hintText: StringsManager.enterYourPhoneNumber,
+                            hintText: AppLocalizations.of(context)
+                                .enterYourPhoneNumber,
                             validator: (phoneNumber) => Validators.validateNull(
-                                phoneNumber, Messages.phoneNumberRequired),
+                                phoneNumber,
+                                AppLocalizations.of(context)
+                                    .phoneNumberRequired),
                           ),
                           SizedBox(
                             height: 20.h,
@@ -180,7 +183,7 @@ class UserRegisterScreen extends StatelessWidget {
                                         );
                                   }
                                 },
-                                label: StringsManager.register,
+                                label: AppLocalizations.of(context).register,
                               ),
                             ),
                           )
@@ -193,12 +196,12 @@ class UserRegisterScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      StringsManager.alreadyHaveAnAccount,
+                      AppLocalizations.of(context).alreadyHaveAnAccount,
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(
-                        StringsManager.login,
+                        AppLocalizations.of(context).login,
                       ),
                     ),
                   ],

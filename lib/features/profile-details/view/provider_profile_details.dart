@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kafa2a/config/assets_manager.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/profile-details/view/widgets/review_item_widget.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class ProviderProfileDetails extends StatelessWidget {
   const ProviderProfileDetails({super.key});
@@ -13,7 +13,7 @@ class ProviderProfileDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(StringsManager.providerPetails),
+        title: Text(AppLocalizations.of(context).providerPetails),
       ),
       body: Column(
         children: [
@@ -101,7 +101,7 @@ class ProviderProfileDetails extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.r),
                     side: BorderSide(color: Colors.green, width: 1.2.w))),
             child: Text(
-              StringsManager.acceptOffer,
+              AppLocalizations.of(context).acceptOffer,
               style: TextStyle(color: Colors.white),
             ),
           )

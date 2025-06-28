@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/accepted_requests/view/widgets/accepted_request_item_widget.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class AcceptedRequestsScreen extends StatelessWidget {
   const AcceptedRequestsScreen({super.key});
@@ -10,7 +10,7 @@ class AcceptedRequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(StringsManager.acceptedRequests),
+          title: Text(AppLocalizations.of(context).acceptedRequests),
           centerTitle: true,
         ),
         body: Padding(

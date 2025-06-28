@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/utils/validators.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class EmailFormField extends StatelessWidget {
   const EmailFormField({super.key, required this.controller});
@@ -13,10 +13,10 @@ class EmailFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      validator: (value) => Validators.validateEmail(value),
+      validator: (value) => Validators.validateEmail(value, context),
       style: TextStyle(fontSize: 14.sp),
       decoration: InputDecoration(
-          hintText: StringsManager.enterYourEmail,
+          hintText: AppLocalizations.of(context).enterYourEmail,
           hintStyle: TextStyle(fontSize: 14.sp),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
           enabledBorder: OutlineInputBorder(

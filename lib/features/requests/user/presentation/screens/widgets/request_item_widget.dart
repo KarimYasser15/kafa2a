@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class RequestItemWidget extends StatelessWidget {
   const RequestItemWidget({super.key, required this.pendingRequests});
@@ -45,7 +45,7 @@ class RequestItemWidget extends StatelessWidget {
                           color: ColorsManager.blue,
                         ),
                         Text(
-                          StringsManager.service,
+                          AppLocalizations.of(context).service,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -63,7 +63,7 @@ class RequestItemWidget extends StatelessWidget {
                       children: [
                         Icon(Icons.description, color: ColorsManager.blue),
                         Text(
-                          StringsManager.description,
+                          AppLocalizations.of(context).description,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -84,7 +84,7 @@ class RequestItemWidget extends StatelessWidget {
                           color: Colors.red,
                         ),
                         Text(
-                          StringsManager.location,
+                          AppLocalizations.of(context).location,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -103,7 +103,7 @@ class RequestItemWidget extends StatelessWidget {
                         Icon(Icons.access_time_rounded,
                             color: ColorsManager.blue),
                         Text(
-                          StringsManager.time,
+                          AppLocalizations.of(context).time,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],

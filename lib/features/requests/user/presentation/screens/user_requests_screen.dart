@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart';
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_states.dart';
 import 'package:kafa2a/features/requests/user/presentation/screens/widgets/request_item_widget.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class UserRequestsScreen extends StatelessWidget {
   const UserRequestsScreen({super.key});
@@ -18,7 +18,7 @@ class UserRequestsScreen extends StatelessWidget {
       create: (context) => getIt.get<UserRequestsCubit>(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(StringsManager.myRequests),
+          title: Text(AppLocalizations.of(context).myRequests),
           actionsPadding: EdgeInsets.only(right: 20.w),
           actions: [
             PopupMenuButton(
@@ -29,25 +29,25 @@ class UserRequestsScreen extends StatelessWidget {
               itemBuilder: (context) => [
                 PopupMenuItem(
                   child: Row(
-                    children: [Text(StringsManager.open)],
+                    children: [Text(AppLocalizations.of(context).open)],
                   ),
                   onTap: () {},
                 ),
                 PopupMenuItem(
                   child: Row(
-                    children: [Text(StringsManager.accepted)],
+                    children: [Text(AppLocalizations.of(context).accepted)],
                   ),
                   onTap: () {},
                 ),
                 PopupMenuItem(
                   child: Row(
-                    children: [Text(StringsManager.completed)],
+                    children: [Text(AppLocalizations.of(context).completed)],
                   ),
                   onTap: () {},
                 ),
                 PopupMenuItem(
                   child: Row(
-                    children: [Text(StringsManager.cancelled)],
+                    children: [Text(AppLocalizations.of(context).cancelled)],
                   ),
                   onTap: () {},
                 )
@@ -58,7 +58,7 @@ class UserRequestsScreen extends StatelessWidget {
                     Icons.filter_alt_rounded,
                     color: Colors.black,
                   ),
-                  Text(StringsManager.filter)
+                  Text(AppLocalizations.of(context).filter)
                 ],
               ),
             )
