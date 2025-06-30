@@ -9,20 +9,22 @@ import 'package:kafa2a/features/home/user/data/models/get_categories_response.da
 import 'package:kafa2a/features/home/user/data/models/request_service_request.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_response.dart';
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(as: RequestServiceRemoteDataSource)
 class RequestServiceApiDataSource extends RequestServiceRemoteDataSource {
-  RequestServiceApiDataSource(this._dio);
+  RequestServiceApiDataSource(this._dio, this._sharedPref);
+  final SharedPreferences _sharedPref;
 
   final Dio _dio;
 
   @override
-  Future<List<Category>> getAllCategories(String token) async {
+  Future<List<Category>> getAllCategories() async {
     try {
       final Response response = await _dio.get(ApiConstants.getCategories,
-          options: Options(
-            headers: {'Authorization': 'Bearer $token'},
-          ));
+          options: Options(headers: {
+            'Accept-Language': _sharedPref.get(CacheConstants.language),
+          }));
       List<GetCategoriesResponse> categories = (response.data as List)
           .map((category) => GetCategoriesResponse.fromJson(category))
           .toList();

@@ -114,12 +114,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i652.UserRequestsApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
         () => _i0.ProviderOffersApiDataSource(gh<_i361.Dio>()));
-    gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
-        () => _i195.RequestServiceApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i796.ProfileLocalDataSource>(() =>
         _i50.ProfileSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i819.LocalDataSource>(
         () => _i90.SharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i519.RequestServiceRemoteDataSource>(
+        () => _i195.RequestServiceApiDataSource(
+              gh<_i361.Dio>(),
+              gh<_i460.SharedPreferences>(),
+            ));
     gh.singleton<_i819.AuthLocalDataSource>(() =>
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i766.AccessLocation>(

@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String baseUrl = 'http://10.0.2.2:8000/api/';
+  static const String baseUrl = 'http://192.168.1.15:8000/api/';
   static const String logOutEndPoint = 'logout';
   static const String loginProviderEndPoint = 'token';
   static const String loginUserEndPoint = 'token';

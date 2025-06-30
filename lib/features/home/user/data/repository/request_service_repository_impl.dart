@@ -22,9 +22,8 @@ class RequestServiceRepositoryImpl implements RequestServiceRepository {
   @override
   Future<Either<List<Category>, Failure>> getAllCategories() async {
     try {
-      final String token = _authLocalDataSource.getToken();
       final List<Category> response =
-          await _requestServiceRemoteDataSource.getAllCategories(token);
+          await _requestServiceRemoteDataSource.getAllCategories();
       return Left(response);
     } on AppException catch (exception) {
       return Right(Failure(
