@@ -13,6 +13,7 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:kafa2a/core/di/register_module.dart' as _i213;
+import 'package:kafa2a/core/utils/access_location.dart' as _i766;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i819;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_shared_pref_local_data_source.dart'
@@ -61,8 +62,10 @@ import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.da
     as _i86;
 import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart'
     as _i574;
-import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart'
-    as _i378;
+import 'package:kafa2a/features/home/user/presentation/cubit/map/map_cubit.dart'
+    as _i918;
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart'
+    as _i420;
 import 'package:kafa2a/features/my_profile/data/data_sources/local/profile_local_data_source.dart'
     as _i796;
 import 'package:kafa2a/features/my_profile/data/data_sources/local/profile_shared_pref_local_data_source.dart'
@@ -102,6 +105,9 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.singleton<_i361.Dio>(() => registerModule.dio);
+    gh.lazySingleton<_i766.AccessLocation>(() => _i766.AccessLocation());
+    gh.factory<_i918.MapCubit>(
+        () => _i918.MapCubit(gh<_i766.AccessLocation>()));
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i444.UserRequestsRemoteDataSource>(
@@ -171,7 +177,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i619.RegisterProvider>(),
           gh<_i23.LogOut>(),
         ));
-    gh.factory<_i378.RequestServiceCubit>(() => _i378.RequestServiceCubit(
+    gh.factory<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
           gh<_i86.GetAllCategories>(),
           gh<_i574.RequestService>(),
         ));

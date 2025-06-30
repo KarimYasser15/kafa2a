@@ -37,7 +37,7 @@ class Kafa2aApp extends StatelessWidget {
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               locale: Locale(context.read<ProfileCubit>().getLanguage()),
-              initialRoute: RoutesManager.onBoarding,
+              initialRoute: RoutesManager.homeUser,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: RoutesManager.router,
               theme: AppTheme.lightTheme,

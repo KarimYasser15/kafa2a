@@ -7,7 +7,7 @@ import 'package:kafa2a/features/home/user/data/models/request_service_response.d
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.dart';
 import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart';
-import 'package:kafa2a/features/home/user/presentation/cubit/request_service_states.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_states.dart';
 
 @injectable
 class RequestServiceCubit extends Cubit<RequestServiceStates> {

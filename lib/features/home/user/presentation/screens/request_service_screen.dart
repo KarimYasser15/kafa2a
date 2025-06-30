@@ -15,10 +15,11 @@ import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_request.dart';
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
-import 'package:kafa2a/features/home/user/presentation/cubit/request_service_cubit.dart';
-import 'package:kafa2a/features/home/user/presentation/cubit/request_service_states.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_states.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/widgets/categories_drop_down_widget.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/widgets/services_drop_down_widget.dart';
+import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class RequestServiceScreen extends StatefulWidget {
@@ -47,8 +48,12 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
   }
 
   String formatDate(DateTime date) {
-    String dateTime = DateFormat('dd-MM-yyyy').format(date);
-    String time = DateFormat('hh:mm a').format(date);
+    String dateTime =
+        DateFormat('dd-MM-yyyy', context.read<ProfileCubit>().getLanguage())
+            .format(date);
+    String time =
+        DateFormat('hh:mm a', context.read<ProfileCubit>().getLanguage())
+            .format(date);
     return "$dateTime  $time";
   }
 
@@ -63,7 +68,9 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
       },
       minTime: DateTime.now(),
       currentTime: selectedTimePicker ?? DateTime.now(),
-      locale: LocaleType.en,
+      locale: context.read<ProfileCubit>().getLanguage() == 'ar'
+          ? LocaleType.ar
+          : LocaleType.en,
     );
   }
 
