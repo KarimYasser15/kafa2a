@@ -22,7 +22,7 @@ class OnboardingScreen extends StatelessWidget {
           children: [
             Image.asset(AssetsManager.appLogo),
             Text(
-              "${AppLocalizations.of(context).welcome},",
+              AppLocalizations.of(context).welcome,
               style: AppStyles.onBoarding,
             ),
             Text(

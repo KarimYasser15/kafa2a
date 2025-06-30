@@ -16,6 +16,8 @@ class ApiConstants {
 class CacheConstants {
   static const String token = "token";
   static const String language = "language";
+  static const String latitude = 'lat';
+  static const String longitude = 'lng';
 }
 
 class UserType {

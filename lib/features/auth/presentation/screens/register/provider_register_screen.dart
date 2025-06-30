@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/utils/validators.dart';
@@ -14,6 +13,8 @@ import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/password_form_field.dart';
+import 'package:kafa2a/features/auth/presentation/screens/widgets/label_text_form_widget.dart';
+import 'package:kafa2a/features/auth/presentation/screens/widgets/title_widget.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class ProviderRegisterScreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
   final TextEditingController nationalIdController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  String? userLocationName;
 
   @override
   Widget build(BuildContext context) {
@@ -66,29 +68,10 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 10.h,
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              AppLocalizations.of(context).register,
-                              style: AppStyles.onBoarding.copyWith(
-                                fontSize: 32.sp,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text(
-                            AppLocalizations.of(context).name,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          TitleWidget(
+                              title: AppLocalizations.of(context).register),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).name),
                           DefaultTextFormField(
                             controller: nameController,
                             hintText:
@@ -99,24 +82,16 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).email,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).email),
                           EmailFormField(
                             controller: emailController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).password,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).password),
                           PasswordFormField(
                             controller: passwordController,
                             validator: (password) =>
@@ -125,12 +100,9 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).confirmPassword,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label:
+                                  AppLocalizations.of(context).confirmPassword),
                           PasswordFormField(
                             controller: confirmPasswordController,
                             validator: (confirmPassword) =>
@@ -142,12 +114,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).phoneNumber,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).phoneNumber),
                           DefaultTextFormField(
                             controller: phoneNumberController,
                             hintText: AppLocalizations.of(context)
@@ -160,12 +128,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).nationalId,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).nationalId),
                           DefaultTextFormField(
                             controller: nationalIdController,
                             hintText: AppLocalizations.of(context)
@@ -178,12 +142,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).address,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).address),
                           DefaultTextFormField(
                             controller: addressController,
                             hintText:
@@ -195,13 +155,32 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context)
-                                .policeClearanceCertificate,
+                          BlocBuilder<AuthCubit, AuthStates>(
+                            buildWhen: (previous, current) =>
+                                current is LocationNameSuccessState,
+                            builder: (context, state) {
+                              String locationName =
+                                  AppLocalizations.of(context).pickYourLocation;
+                              if (state is LocationNameSuccessState) {
+                                locationName = state.locationName;
+                              }
+                              return DefaultElevatedButton(
+                                onPressed: () async {
+                                  await context.read<AuthCubit>().getLocation();
+                                  if (context.mounted) {
+                                    userLocationName = await context
+                                        .read<AuthCubit>()
+                                        .getLocationName();
+                                  }
+                                },
+                                label: locationName,
+                              );
+                            },
                           ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          SizedBox(height: 10.h),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context)
+                                  .policeClearanceCertificate),
                           DefaultElevatedButton(
                             onPressed: () {
                               context.read<AuthCubit>().pickImageFromGallery();
@@ -211,17 +190,42 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).uploadSelfie,
+                          BlocBuilder<AuthCubit, AuthStates>(
+                            buildWhen: (previous, current) =>
+                                current is AuthImagePickedState,
+                            builder: (context, state) {
+                              final image = context.read<AuthCubit>().image;
+                              return image != null
+                                  ? Image.file(image)
+                                  : Text(AppLocalizations.of(context)
+                                      .noImageSelected);
+                            },
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).uploadSelfie),
                           DefaultElevatedButton(
                             onPressed: () {
                               context.read<AuthCubit>().pickImageFromCamera();
                             },
                             label: AppLocalizations.of(context).takeSelfie,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          BlocBuilder<AuthCubit, AuthStates>(
+                            buildWhen: (previous, current) =>
+                                current is AuthSelfiePickedState,
+                            builder: (context, state) {
+                              final image =
+                                  context.read<AuthCubit>().cameraImage;
+                              return image != null
+                                  ? Image.file(image)
+                                  : Text(AppLocalizations.of(context)
+                                      .noImageSelected);
+                            },
                           ),
                           SizedBox(
                             height: 20.h,
@@ -244,25 +248,43 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               },
                               child: DefaultSubmitButton(
                                 onPressed: () {
-                                  if (formKey.currentState!.validate()) {
+                                  if (formKey.currentState!.validate() &&
+                                      context.read<AuthCubit>().image != null &&
+                                      context.read<AuthCubit>().cameraImage !=
+                                          null &&
+                                      context
+                                              .read<AuthCubit>()
+                                              .currentLocation !=
+                                          null) {
                                     context.read<AuthCubit>().registerProvider(
                                           RegisterProviderRequest(
-                                            name: nameController.text,
-                                            email: emailController.text,
-                                            password: passwordController.text,
-                                            confirmPassword:
-                                                confirmPasswordController.text,
-                                            phone: phoneNumberController.text,
-                                            nationalId:
-                                                nationalIdController.text,
-                                            address: addressController.text,
-                                            service: 'Cleaning',
-                                            policeCertificate:
-                                                context.read<AuthCubit>().image,
-                                            selfie: context
-                                                .read<AuthCubit>()
-                                                .cameraImage,
-                                          ),
+                                              name: nameController.text,
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                              confirmPassword:
+                                                  confirmPasswordController
+                                                      .text,
+                                              phone: phoneNumberController.text,
+                                              nationalId:
+                                                  nationalIdController.text,
+                                              address: addressController.text,
+                                              service: 'Cleaning',
+                                              policeCertificate: context
+                                                  .read<AuthCubit>()
+                                                  .image!,
+                                              selfie: context
+                                                  .read<AuthCubit>()
+                                                  .cameraImage!,
+                                              lat: context
+                                                  .read<AuthCubit>()
+                                                  .currentLocation!
+                                                  .latitude
+                                                  .toString(),
+                                              lng: context
+                                                  .read<AuthCubit>()
+                                                  .currentLocation!
+                                                  .longitude
+                                                  .toString()),
                                         );
                                   }
                                 },

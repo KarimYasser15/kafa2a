@@ -110,7 +110,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome'**
+  /// **'Welcome,'**
   String get welcome;
 
   /// No description provided for @slogan.
@@ -634,6 +634,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Your Offer'**
   String get enterYourOffer;
+
+  /// No description provided for @pickYourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Press to Get Your Location'**
+  String get pickYourLocation;
+
+  /// No description provided for @noImageSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No Image Selected'**
+  String get noImageSelected;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

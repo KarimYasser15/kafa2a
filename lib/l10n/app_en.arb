@@ -1,7 +1,7 @@
 {
   "user": "User",
   "serviceProvider": "Service Provider",
-  "welcome": "Welcome",
+  "welcome": "Welcome,",
   "slogan": "Skilled Hands, Anytime, Anywhere!",
   "login": "Login",
   "email": "Email",
@@ -88,5 +88,7 @@
   "noPendingRequetsAtTheMoment": "No Pending Requests At The Moment!",
   "noRequestsAtTheMoment": "No Requests At The Moment!",
   "yourOfferDetails": "Your Offer Details",
-  "enterYourOffer" : "Enter Your Offer"
+  "enterYourOffer" : "Enter Your Offer",
+  "pickYourLocation":"Press to Get Your Location",
+  "noImageSelected" : "No Image Selected"
 }

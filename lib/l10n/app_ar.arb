@@ -1,8 +1,8 @@
 {
   "user": "مستخدم",
   "serviceProvider": "مقدم الخدمة",
-  "welcome": "أهلاً وسهلاً",
-  "slogan": "!إيدين ماهرين، في أي وقت وفي أي مكان",
+  "welcome": "أهلاً وسهلاً،",
+  "slogan": "إيدين ماهرين، في أي وقت وفي أي مكان!",
   "login": "تسجيل دخول",
   "email": "الإيميل",
   "password": "كلمة السر",
@@ -88,5 +88,7 @@
   "noRequestsAtTheMoment": "!مفيش طلبات دلوقتي",
   "yourOfferDetails" : "تفاصيل عرضك",
   "enterYourOffer" : "أكتب عرضك",
-  "errorMessage": "فشل في تحميل الفئات"
+  "errorMessage": "فشل في تحميل الفئات",
+  "pickYourLocation":"اضغط علشان نحدد موقعك",
+  "noImageSelected" : "مختارتش صورة"
 }

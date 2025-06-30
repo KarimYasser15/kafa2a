@@ -12,6 +12,8 @@ class UserModel {
     this.nationalId,
     this.gender,
     this.service,
+    this.lat,
+    this.lng,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -29,6 +31,8 @@ class UserModel {
         nationalId: json['national_id'] as String?,
         gender: json['gender'] as String?,
         service: json['service'] as String?,
+        lat: json['lat'] as String?,
+        lng: json['lng'] as String?,
         createdAt: DateTime.parse(json['created_at'] as String),
         updatedAt: DateTime.parse(json['updated_at'] as String),
       );
@@ -47,4 +51,6 @@ class UserModel {
   String? service;
   String type;
   DateTime updatedAt;
+  String? lat;
+  String? lng;
 }

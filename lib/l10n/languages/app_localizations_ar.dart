@@ -15,10 +15,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get serviceProvider => 'مقدم الخدمة';
 
   @override
-  String get welcome => 'أهلاً وسهلاً';
+  String get welcome => 'أهلاً وسهلاً،';
 
   @override
-  String get slogan => '!إيدين ماهرين، في أي وقت وفي أي مكان';
+  String get slogan => 'إيدين ماهرين، في أي وقت وفي أي مكان!';
 
   @override
   String get login => 'تسجيل دخول';
@@ -277,4 +277,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterYourOffer => 'أكتب عرضك';
+
+  @override
+  String get pickYourLocation => 'اضغط علشان نحدد موقعك';
+
+  @override
+  String get noImageSelected => 'مختارتش صورة';
 }

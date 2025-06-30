@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serviceProvider => 'Service Provider';
 
   @override
-  String get welcome => 'Welcome';
+  String get welcome => 'Welcome,';
 
   @override
   String get slogan => 'Skilled Hands, Anytime, Anywhere!';
@@ -277,4 +277,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterYourOffer => 'Enter Your Offer';
+
+  @override
+  String get pickYourLocation => 'Press to Get Your Location';
+
+  @override
+  String get noImageSelected => 'No Image Selected';
 }

@@ -1,14 +1,28 @@
 import 'package:injectable/injectable.dart';
+import 'package:kafa2a/core/local_data_source/local_data_source.dart';
 import 'package:location/location.dart';
 
 @lazySingleton
 class AccessLocation {
   Location location = Location();
+  final LocalDataSource _sharedPref;
+  AccessLocation(this._sharedPref);
 
   Future<LocationData> getLocation() async {
+    LocationData? localLocationData = await _sharedPref.getLocation();
+    if (localLocationData != null) {
+      return localLocationData;
+    }
+    await getPrmission();
+    LocationData locationData;
+    locationData = await location.getLocation();
+    _sharedPref.saveLocation(locationData);
+    return locationData;
+  }
+
+  Future<void> getPrmission() async {
     bool serviceEnabled;
     PermissionStatus permissionGranted;
-    LocationData locationData;
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
@@ -23,7 +37,5 @@ class AccessLocation {
         throw Exception('Location permissions are denied. Please grant them.');
       }
     }
-    locationData = await location.getLocation();
-    return locationData;
   }
 }

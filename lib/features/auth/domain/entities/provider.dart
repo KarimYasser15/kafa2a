@@ -1,25 +1,28 @@
 class Provider {
-  Provider({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.type,
-    required this.phone,
-    required this.address,
-    required this.policeCertificatePath,
-    required this.selfiePath,
-    required this.nationalId,
-    required this.service,
-  });
+  Provider(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.type,
+      required this.phone,
+      required this.address,
+      required this.policeCertificatePath,
+      required this.selfiePath,
+      required this.nationalId,
+      required this.service,
+      required this.lat,
+      required this.lng});
 
-  int id;
-  String address;
-  String email;
-  String name;
-  String nationalId;
-  String phone;
-  String policeCertificatePath;
-  String selfiePath;
-  String service;
-  String type;
+  final int id;
+  final String address;
+  final String email;
+  final String name;
+  final String nationalId;
+  final String phone;
+  final String policeCertificatePath;
+  final String selfiePath;
+  final String service;
+  final String type;
+  final String lat;
+  final String lng;
 }

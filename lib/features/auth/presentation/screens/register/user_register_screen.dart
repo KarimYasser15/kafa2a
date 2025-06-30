@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/utils/validators.dart';
@@ -13,6 +12,8 @@ import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/email_form_field.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/widgets/password_form_field.dart';
+import 'package:kafa2a/features/auth/presentation/screens/widgets/label_text_form_widget.dart';
+import 'package:kafa2a/features/auth/presentation/screens/widgets/title_widget.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class UserRegisterScreen extends StatelessWidget {
@@ -56,29 +57,10 @@ class UserRegisterScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 10.h,
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              AppLocalizations.of(context).register,
-                              style: AppStyles.onBoarding.copyWith(
-                                fontSize: 32.sp,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text(
-                            AppLocalizations.of(context).name,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          TitleWidget(
+                              title: AppLocalizations.of(context).register),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).name),
                           DefaultTextFormField(
                             controller: nameController,
                             hintText:
@@ -91,24 +73,16 @@ class UserRegisterScreen extends StatelessWidget {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).email,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).email),
                           EmailFormField(
                             controller: emailController,
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).password,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).password),
                           PasswordFormField(
                             controller: passwordController,
                             validator: (password) =>
@@ -117,12 +91,9 @@ class UserRegisterScreen extends StatelessWidget {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).confirmPassword,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label:
+                                  AppLocalizations.of(context).confirmPassword),
                           PasswordFormField(
                             controller: confirmPasswordController,
                             validator: (confirmPassword) =>
@@ -134,12 +105,8 @@ class UserRegisterScreen extends StatelessWidget {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text(
-                            AppLocalizations.of(context).phoneNumber,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
+                          LabelTextFormWidget(
+                              label: AppLocalizations.of(context).phoneNumber),
                           DefaultTextFormField(
                             controller: phoneNumberController,
                             hintText: AppLocalizations.of(context)

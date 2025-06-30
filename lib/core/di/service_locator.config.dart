@@ -13,6 +13,9 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:kafa2a/core/di/register_module.dart' as _i213;
+import 'package:kafa2a/core/local_data_source/local_data_source.dart' as _i819;
+import 'package:kafa2a/core/local_data_source/shared_pref_local_data_source.dart'
+    as _i90;
 import 'package:kafa2a/core/utils/access_location.dart' as _i766;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i819;
@@ -105,9 +108,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.singleton<_i361.Dio>(() => registerModule.dio);
-    gh.lazySingleton<_i766.AccessLocation>(() => _i766.AccessLocation());
-    gh.factory<_i918.MapCubit>(
-        () => _i918.MapCubit(gh<_i766.AccessLocation>()));
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i444.UserRequestsRemoteDataSource>(
@@ -118,8 +118,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i195.RequestServiceApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i796.ProfileLocalDataSource>(() =>
         _i50.ProfileSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i819.LocalDataSource>(
+        () => _i90.SharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.singleton<_i819.AuthLocalDataSource>(() =>
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i766.AccessLocation>(
+        () => _i766.AccessLocation(gh<_i819.LocalDataSource>()));
+    gh.factory<_i918.MapCubit>(
+        () => _i918.MapCubit(gh<_i766.AccessLocation>()));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(
         () => _i723.ProviderOffersRepositoryImpl(
               gh<_i633.ProviderOffersRemoteDataSource>(),
@@ -176,6 +182,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i0.RegisterUser>(),
           gh<_i619.RegisterProvider>(),
           gh<_i23.LogOut>(),
+          gh<_i766.AccessLocation>(),
         ));
     gh.factory<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
           gh<_i86.GetAllCategories>(),

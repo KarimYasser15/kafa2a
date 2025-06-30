@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kafa2a/core/error/failure.dart';
+import 'package:kafa2a/core/utils/access_location.dart';
 import 'package:kafa2a/features/auth/data/models/log_out_response.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
 import 'package:kafa2a/features/auth/data/models/register_provider_request.dart';
@@ -16,11 +18,12 @@ import 'package:kafa2a/features/auth/domain/use_cases/login_user.dart';
 import 'package:kafa2a/features/auth/domain/use_cases/register_provider.dart';
 import 'package:kafa2a/features/auth/domain/use_cases/register_user.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
+import 'package:location/location.dart';
 
 @singleton
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit(this._loginUser, this._loginProvider, this._registerUser,
-      this._registerProvider, this._logOut)
+      this._registerProvider, this._logOut, this._accessLocation)
       : super(AuthInitialState());
 
   final LoginUser _loginUser;
@@ -28,9 +31,10 @@ class AuthCubit extends Cubit<AuthStates> {
   final RegisterUser _registerUser;
   final RegisterProvider _registerProvider;
   final LogOut _logOut;
-
-  late File cameraImage;
-  late File image;
+  final AccessLocation _accessLocation;
+  LocationData? currentLocation;
+  File? cameraImage;
+  File? image;
 
   Future<void> loginUser(LoginRequest loginRequest) async {
     emit(
@@ -118,6 +122,7 @@ class AuthCubit extends Cubit<AuthStates> {
       image.path,
     );
     this.image = imageTemp;
+    emit(AuthImagePickedState());
   }
 
   Future pickImageFromCamera() async {
@@ -130,5 +135,25 @@ class AuthCubit extends Cubit<AuthStates> {
       image.path,
     );
     cameraImage = imageTemp;
+    emit(AuthSelfiePickedState());
+  }
+
+  Future<void> getLocation() async {
+    try {
+      LocationData location = await _accessLocation.getLocation();
+      currentLocation = location;
+      emit(AuthLocationSuccessState(location));
+    } catch (e) {
+      emit(AuthErrorState(e.toString()));
+    }
+  }
+
+  Future<String> getLocationName() async {
+    List<Placemark> placeMark = await placemarkFromCoordinates(
+        currentLocation!.latitude!, currentLocation!.longitude!);
+    String locationName =
+        "${placeMark.first.locality}, ${placeMark.first.country}";
+    emit(LocationNameSuccessState(locationName));
+    return locationName;
   }
 }
