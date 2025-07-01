@@ -120,18 +120,22 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                       context.read<ProviderOffersCubit>().getAllRequests();
                     }
                   },
-                  builder: (context, state) => DefaultSubmitButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          context.read<ProviderOffersCubit>().sendOffer(
-                                SendOfferRequest(
-                                  price: int.parse(priceController.text),
-                                  offerId: widget.request.id,
-                                ),
-                              );
-                        }
-                      },
-                      label: AppLocalizations.of(context).sendOffer),
+                  builder: (context, state) => SizedBox(
+                    width: 150.w,
+                    height: 45.h,
+                    child: DefaultSubmitButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<ProviderOffersCubit>().sendOffer(
+                                  SendOfferRequest(
+                                    price: int.parse(priceController.text),
+                                    offerId: widget.request.id,
+                                  ),
+                                );
+                          }
+                        },
+                        label: AppLocalizations.of(context).sendOffer),
+                  ),
                 ),
                 SizedBox(
                   width: 20.w,

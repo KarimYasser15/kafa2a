@@ -53,6 +53,8 @@ import 'package:kafa2a/features/home/provider/domain/use_cases/send_offer.dart'
     as _i616;
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart'
     as _i42;
+import 'package:kafa2a/features/home/provider/presentation/cubit/send_offer_cubit.dart'
+    as _i876;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
     as _i195;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
@@ -142,6 +144,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAllRequests(gh<_i1052.ProviderOffersRepository>()));
     gh.singleton<_i616.SendOffer>(
         () => _i616.SendOffer(gh<_i1052.ProviderOffersRepository>()));
+    gh.factory<_i876.SendOfferCubit>(
+        () => _i876.SendOfferCubit(gh<_i616.SendOffer>()));
     gh.lazySingleton<_i234.RequestServiceRepository>(
         () => _i142.RequestServiceRepositoryImpl(
               gh<_i519.RequestServiceRemoteDataSource>(),
@@ -187,7 +191,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i23.LogOut>(),
           gh<_i766.AccessLocation>(),
         ));
-    gh.factory<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
+    gh.singleton<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
           gh<_i86.GetAllCategories>(),
           gh<_i574.RequestService>(),
         ));
