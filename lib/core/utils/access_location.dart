@@ -9,10 +9,6 @@ class AccessLocation {
   AccessLocation(this._sharedPref);
 
   Future<LocationData> getLocation() async {
-    LocationData? localLocationData = await _sharedPref.getLocation();
-    if (localLocationData != null) {
-      return localLocationData;
-    }
     await getPrmission();
     LocationData locationData;
     locationData = await location.getLocation();

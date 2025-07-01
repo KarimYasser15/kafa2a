@@ -22,14 +22,8 @@ class MapTab extends StatelessWidget {
                 state.location.longitude!,
               );
               return GoogleMap(
-                markers: {
-                  Marker(
-                    markerId: MarkerId('currentLocation'),
-                    position: currentLatLng,
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueAzure),
-                  ),
-                },
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
                 mapType: MapType.normal,
                 zoomControlsEnabled: false,
                 initialCameraPosition: CameraPosition(

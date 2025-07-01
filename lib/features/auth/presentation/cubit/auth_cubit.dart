@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kafa2a/core/error/failure.dart';
@@ -35,6 +36,7 @@ class AuthCubit extends Cubit<AuthStates> {
   LocationData? currentLocation;
   File? cameraImage;
   File? image;
+  LatLng? pickedLocation;
 
   Future<void> loginUser(LoginRequest loginRequest) async {
     emit(
@@ -148,12 +150,18 @@ class AuthCubit extends Cubit<AuthStates> {
     }
   }
 
-  Future<String> getLocationName() async {
-    List<Placemark> placeMark = await placemarkFromCoordinates(
-        currentLocation!.latitude!, currentLocation!.longitude!);
-    String locationName =
-        "${placeMark.first.locality}, ${placeMark.first.country}";
-    emit(LocationNameSuccessState(locationName));
-    return locationName;
+  void setPickedLocation(LatLng latLng) async {
+    pickedLocation = latLng;
+
+    try {
+      final place =
+          (await placemarkFromCoordinates(latLng.latitude, latLng.longitude))
+              .first;
+      final city = place.locality ?? place.administrativeArea ?? '';
+      final country = place.country ?? '';
+      emit(LocationNameSuccessState('$city, $country'));
+    } catch (e) {
+      emit(LocationNameSuccessState('${latLng.latitude}, ${latLng.longitude}'));
+    }
   }
 }

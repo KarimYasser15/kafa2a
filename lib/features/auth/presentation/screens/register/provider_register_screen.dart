@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
+import 'package:kafa2a/core/screens/pick_location_screen.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
@@ -36,6 +38,7 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   String? userLocationName;
+  LatLng? selectedLatLng;
 
   @override
   Widget build(BuildContext context) {
@@ -168,9 +171,19 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                 onPressed: () async {
                                   await context.read<AuthCubit>().getLocation();
                                   if (context.mounted) {
-                                    userLocationName = await context
-                                        .read<AuthCubit>()
-                                        .getLocationName();
+                                    final pickedLatLng =
+                                        await Navigator.push<LatLng>(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PickLocationScreen(),
+                                      ),
+                                    );
+
+                                    if (pickedLatLng != null &&
+                                        context.mounted) {
+                                      selectedLatLng = pickedLatLng;
+                                    }
                                   }
                                 },
                                 label: locationName,
@@ -258,33 +271,27 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                           null) {
                                     context.read<AuthCubit>().registerProvider(
                                           RegisterProviderRequest(
-                                              name: nameController.text,
-                                              email: emailController.text,
-                                              password: passwordController.text,
-                                              confirmPassword:
-                                                  confirmPasswordController
-                                                      .text,
-                                              phone: phoneNumberController.text,
-                                              nationalId:
-                                                  nationalIdController.text,
-                                              address: addressController.text,
-                                              service: 'Cleaning',
-                                              policeCertificate: context
-                                                  .read<AuthCubit>()
-                                                  .image!,
-                                              selfie: context
-                                                  .read<AuthCubit>()
-                                                  .cameraImage!,
-                                              lat: context
-                                                  .read<AuthCubit>()
-                                                  .currentLocation!
-                                                  .latitude
-                                                  .toString(),
-                                              lng: context
-                                                  .read<AuthCubit>()
-                                                  .currentLocation!
-                                                  .longitude
-                                                  .toString()),
+                                            name: nameController.text,
+                                            email: emailController.text,
+                                            password: passwordController.text,
+                                            confirmPassword:
+                                                confirmPasswordController.text,
+                                            phone: phoneNumberController.text,
+                                            nationalId:
+                                                nationalIdController.text,
+                                            address: addressController.text,
+                                            service: 'Cleaning',
+                                            policeCertificate: context
+                                                .read<AuthCubit>()
+                                                .image!,
+                                            selfie: context
+                                                .read<AuthCubit>()
+                                                .cameraImage!,
+                                            lat: selectedLatLng!.latitude
+                                                .toString(),
+                                            lng: selectedLatLng!.longitude
+                                                .toString(),
+                                          ),
                                         );
                                   }
                                 },

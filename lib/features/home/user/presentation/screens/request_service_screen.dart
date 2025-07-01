@@ -1,11 +1,12 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:kafa2a/config/app_styles.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
+import 'package:kafa2a/core/screens/pick_location_screen.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
@@ -13,6 +14,8 @@ import 'package:kafa2a/core/widgets/default_text_form_field.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
+import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
 import 'package:kafa2a/features/home/user/data/models/request_service_request.dart';
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart';
@@ -38,6 +41,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
   int? selectedService;
   DateTime? selectedTimePicker;
   final TextEditingController titleController = TextEditingController();
+  LatLng? selectedLatLng;
 
   @override
   void dispose() {
@@ -148,9 +152,45 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
+                        BlocBuilder<AuthCubit, AuthStates>(
+                          buildWhen: (previous, current) =>
+                              current is LocationNameSuccessState,
+                          builder: (context, state) {
+                            String locationName =
+                                AppLocalizations.of(context).pickYourLocation;
+                            if (state is LocationNameSuccessState) {
+                              locationName = state.locationName;
+                            }
+                            return DefaultElevatedButton(
+                              onPressed: () async {
+                                await context.read<AuthCubit>().getLocation();
+                                if (context.mounted) {
+                                  final pickedLatLng =
+                                      await Navigator.push<LatLng>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PickLocationScreen(),
+                                    ),
+                                  );
+                                  if (pickedLatLng != null && context.mounted) {
+                                    selectedLatLng = pickedLatLng;
+                                  }
+                                }
+                              },
+                              label: locationName,
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Text(
                           AppLocalizations.of(context).preferedTime,
                           style: AppStyles.body,
+                        ),
+                        SizedBox(
+                          height: 10.h,
                         ),
                         SizedBox(
                           height: 10.h,
@@ -198,10 +238,10 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
                                       RequestServiceRequest(
                                         title: titleController.text,
                                         description: descriptionController.text,
-                                        location: jsonEncode({
-                                          "lat": 30.123,
-                                          "lng": 31.456,
-                                        }),
+                                        lat:
+                                            selectedLatLng!.latitude.toString(),
+                                        lng: selectedLatLng!.longitude
+                                            .toString(),
                                         price: int.parse(priceController.text),
                                         scheduledAt: selectedDate!,
                                         serviceId: selectedService!,
@@ -219,7 +259,7 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
             } else if (state is GetCategoriesLoadingState) {
               return LoadingIndicator();
             } else {
-              return Container();
+              return SizedBox();
             }
           },
           listener: (context, state) async {
@@ -230,7 +270,6 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
               UIUtils.showMessage(state.error);
             } else if (state is RequestServiceSuccessState) {
               UIUtils.hideLoading(context);
-              await Future.delayed(const Duration(milliseconds: 300));
               UIUtils.showMessage(
                   AppLocalizations.of(context).serviceRequestedSuccessfully);
               if (context.mounted) {
