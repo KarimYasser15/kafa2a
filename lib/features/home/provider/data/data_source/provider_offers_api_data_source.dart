@@ -5,7 +5,6 @@ import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/home/provider/data/data_source/provider_offers_remote_data_source.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
-import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/get_all_requests_response.dart';
 import 'package:kafa2a/features/home/provider/data/models/send_offer_request.dart';
 import 'package:kafa2a/features/home/provider/data/models/send_offer_response/send_offer_response.dart';
 
@@ -20,14 +19,12 @@ class ProviderOffersApiDataSource extends ProviderOffersRemoteDataSource {
           options: Options(
             headers: {'Authorization': 'Bearer $token'},
           ));
-      GetAllRequestsResponse requests =
-          GetAllRequestsResponse.fromJson(response.data);
-      if (requests.data == null) {
-        throw RemoteException(Messages.noRequestsAtTheMoment);
-      }
-      List<AllProviderRequests> providerRequests = requests.data!;
+      List<AllProviderRequests> providerRequests = (response.data as List)
+          .map((requests) => AllProviderRequests.fromJson(requests))
+          .toList();
       return providerRequests;
     } catch (exception) {
+      print(exception.toString());
       String errorMessage = Messages.failedToGetRequests;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

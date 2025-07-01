@@ -11,7 +11,7 @@ class UserModel {
     this.selfiePath,
     this.nationalId,
     this.gender,
-    this.service,
+    this.serviceId,
     this.lat,
     this.lng,
     required this.createdAt,
@@ -30,7 +30,7 @@ class UserModel {
         selfiePath: json['selfie_path'] as String?,
         nationalId: json['national_id'] as String?,
         gender: json['gender'] as String?,
-        service: json['service'] as String?,
+        serviceId: json['service_id'] as String?,
         lat: json['lat'] as String?,
         lng: json['lng'] as String?,
         createdAt: DateTime.parse(json['created_at'] as String),
@@ -48,7 +48,7 @@ class UserModel {
   String phone;
   String? policeCertificatePath;
   String? selfiePath;
-  String? service;
+  String? serviceId;
   String type;
   DateTime updatedAt;
   String? lat;

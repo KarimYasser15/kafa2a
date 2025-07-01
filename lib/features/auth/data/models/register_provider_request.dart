@@ -10,7 +10,7 @@ class RegisterProviderRequest {
       required this.phone,
       required this.nationalId,
       required this.address,
-      required this.service,
+      required this.serviceId,
       required this.policeCertificate,
       required this.selfie,
       required this.lat,
@@ -25,7 +25,7 @@ class RegisterProviderRequest {
   final String phone;
   final File policeCertificate;
   final File selfie;
-  final String service;
+  final int serviceId;
   final String lat;
   final String lng;
 
@@ -35,7 +35,7 @@ class RegisterProviderRequest {
       'email': email,
       'password': password,
       'password_confirmation': confirmPassword,
-      'service': service,
+      'service_id': serviceId,
       'national_id': nationalId,
       'address': address,
       'phone': phone,

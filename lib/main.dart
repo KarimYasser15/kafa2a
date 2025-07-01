@@ -6,6 +6,7 @@ import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/app_bloc_observer.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_states.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
@@ -28,6 +29,7 @@ class Kafa2aApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt.get<AuthCubit>()),
         BlocProvider(create: (_) => getIt.get<ProfileCubit>()),
+        BlocProvider(create: (_) => getIt.get<RequestServiceCubit>()),
       ],
       child: BlocBuilder<ProfileCubit, ProfileStates>(
         builder: (context, state) {

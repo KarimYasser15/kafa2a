@@ -9,7 +9,7 @@ class Provider {
       required this.policeCertificatePath,
       required this.selfiePath,
       required this.nationalId,
-      required this.service,
+      required this.serviceId,
       required this.lat,
       required this.lng});
 
@@ -21,7 +21,7 @@ class Provider {
   final String phone;
   final String policeCertificatePath;
   final String selfiePath;
-  final String service;
+  final String serviceId;
   final String type;
   final String lat;
   final String lng;

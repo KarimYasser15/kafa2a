@@ -136,7 +136,8 @@ class ProviderProfileScreen extends StatelessWidget {
                                 data: context
                                     .read<AuthCubit>()
                                     .provider!
-                                    .service),
+                                    .serviceId
+                                    .toString()),
                           ],
                         ),
                       ),

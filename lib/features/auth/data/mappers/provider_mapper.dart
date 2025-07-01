@@ -12,7 +12,7 @@ extension ProviderMapper on UserModel {
       policeCertificatePath: policeCertificatePath!,
       selfiePath: selfiePath!,
       nationalId: nationalId!,
-      service: service!,
+      serviceId: serviceId!,
       lat: lat!,
       lng: lng!);
 }
