@@ -33,6 +33,8 @@ class AuthCubit extends Cubit<AuthStates> {
   final RegisterProvider _registerProvider;
   final LogOut _logOut;
   final AccessLocation _accessLocation;
+  User? user;
+  Provider? provider;
   LocationData? currentLocation;
   File? cameraImage;
   File? image;
@@ -43,6 +45,7 @@ class AuthCubit extends Cubit<AuthStates> {
       AuthLoadingState(),
     );
     final Either<User, Failure> response = await _loginUser(loginRequest);
+    user = response.fold((user) => user, (l) => null);
     response.fold(
       (_) => emit(
         AuthSuccessState(),
@@ -59,6 +62,7 @@ class AuthCubit extends Cubit<AuthStates> {
     );
     final Either<Provider, Failure> response =
         await _loginProvider(loginRequest);
+    provider = response.fold((provider) => provider, (l) => null);
     response.fold(
       (_) => emit(
         AuthSuccessState(),

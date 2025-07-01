@@ -14,7 +14,9 @@ class MapCubit extends Cubit<MapStates> {
       final location = await _accessLocation.getLocation();
       emit(MapSuccessState(location));
     } catch (e) {
-      emit(MapErrorState());
+      if (!isClosed) {
+        emit(MapErrorState());
+      }
     }
   }
 }

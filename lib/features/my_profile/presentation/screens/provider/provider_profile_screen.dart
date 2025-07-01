@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:kafa2a/config/app_styles.dart';
-import 'package:kafa2a/config/assets_manager.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
+import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
+import 'package:kafa2a/features/my_profile/presentation/screens/provider/widgets/provider_profile_data_widget.dart';
 import 'package:kafa2a/features/my_profile/presentation/screens/widgets/change_language_drop_down.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
-class MyProfileScreen extends StatelessWidget {
-  const MyProfileScreen({super.key});
+class ProviderProfileScreen extends StatelessWidget {
+  const ProviderProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,32 @@ class MyProfileScreen extends StatelessWidget {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(
-                                      AssetsManager.profileImage,
-                                      width: 100.w,
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(50.r),
+                                      child: Image.network(
+                                        '${ApiConstants.baseImageUrl}${context.read<AuthCubit>().provider!.selfiePath}',
+                                        width: 100.w,
+                                        height: 100.w,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Icon(Icons.person,
+                                              size: 100.w, color: Colors.grey);
+                                        },
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          }
+                                          return SizedBox(
+                                            width: 100.w,
+                                            height: 100.w,
+                                            child: Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                          );
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 10.h,
@@ -91,28 +114,29 @@ class MyProfileScreen extends StatelessWidget {
                                     )
                                   ]),
                             ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Text(
-                              "Name: Saif Ahmed",
-                              style: TextStyle(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              "Email: saif@gmail.com",
-                              style: TextStyle(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(height: 10.h),
-                            Text(
-                              "Phone Number: 01117037134",
-                              style: TextStyle(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w400),
-                            ),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).name,
+                                data: context.read<AuthCubit>().provider!.name),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).email,
+                                data:
+                                    context.read<AuthCubit>().provider!.email),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).phoneNumber,
+                                data:
+                                    context.read<AuthCubit>().provider!.phone),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).address,
+                                data: context
+                                    .read<AuthCubit>()
+                                    .provider!
+                                    .address),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).service,
+                                data: context
+                                    .read<AuthCubit>()
+                                    .provider!
+                                    .service),
                           ],
                         ),
                       ),
