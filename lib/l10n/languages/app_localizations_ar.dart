@@ -18,7 +18,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcome => 'أهلاً وسهلاً،';
 
   @override
-  String get slogan => 'إيدين ماهرين، في أي وقت وفي أي مكان!';
+  String get slogan => 'إيد ماهرين، في أي وقت وفي أي مكان!';
 
   @override
   String get login => 'تسجيل دخول';

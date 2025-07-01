@@ -9,7 +9,7 @@ import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.da
 import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_states.dart';
 
-@Singleton()
+@Injectable()
 class RequestServiceCubit extends Cubit<RequestServiceStates> {
   RequestServiceCubit(this._getAllCategories, this._requestService)
       : super(RequestServiceInitialState()) {

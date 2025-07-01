@@ -1,22 +1,23 @@
-import 'pending_requests.dart';
-import '../../../../../../core/models/link_model.dart';
+import 'package:kafa2a/core/models/link_model.dart';
 
-class GetAllUserPendingRequestsResponse {
+import 'all_requests.dart';
+
+class GetAllRequests {
   int? currentPage;
-  List<PendingRequests>? data;
+  List<AllRequests>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
   String? lastPageUrl;
   List<LinkModel>? links;
-  String? nextPageUrl;
+  dynamic nextPageUrl;
   String? path;
   int? perPage;
-  String? prevPageUrl;
+  dynamic prevPageUrl;
   int? to;
   int? total;
 
-  GetAllUserPendingRequestsResponse({
+  GetAllRequests({
     this.currentPage,
     this.data,
     this.firstPageUrl,
@@ -32,12 +33,11 @@ class GetAllUserPendingRequestsResponse {
     this.total,
   });
 
-  factory GetAllUserPendingRequestsResponse.fromJson(
-      Map<String, dynamic> json) {
-    return GetAllUserPendingRequestsResponse(
+  factory GetAllRequests.fromJson(Map<String, dynamic> json) {
+    return GetAllRequests(
       currentPage: json['current_page'] as int?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => PendingRequests.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AllRequests.fromJson(e as Map<String, dynamic>))
           .toList(),
       firstPageUrl: json['first_page_url'] as String?,
       from: json['from'] as int?,
@@ -46,10 +46,10 @@ class GetAllUserPendingRequestsResponse {
       links: (json['links'] as List<dynamic>?)
           ?.map((e) => LinkModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextPageUrl: json['next_page_url'] as String?,
+      nextPageUrl: json['next_page_url'] as dynamic,
       path: json['path'] as String?,
       perPage: json['per_page'] as int?,
-      prevPageUrl: json['prev_page_url'] as String?,
+      prevPageUrl: json['prev_page_url'] as dynamic,
       to: json['to'] as int?,
       total: json['total'] as int?,
     );

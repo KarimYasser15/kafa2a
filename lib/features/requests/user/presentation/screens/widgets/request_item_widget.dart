@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
+import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RequestItemWidget extends StatelessWidget {
   const RequestItemWidget({super.key, required this.pendingRequests});
-  final PendingRequests pendingRequests;
+  final AllRequests pendingRequests;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,9 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      pendingRequests.service.name,
+                      context.read<ProfileCubit>().getLanguage() == 'ar'
+                          ? pendingRequests.service.nameAr!
+                          : pendingRequests.service.nameEn!,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -93,7 +98,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      pendingRequests.location,
+                      pendingRequests.lat,
                     ),
                     SizedBox(
                       height: 10.h,

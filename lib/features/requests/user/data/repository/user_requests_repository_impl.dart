@@ -4,6 +4,7 @@ import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/error/failure.dart';
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_remote_data_source.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_accepted_offers/get_all_user_accepted_offers.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
 import 'package:kafa2a/features/requests/user/domain/repository/user_requests_repository.dart';
@@ -32,6 +33,17 @@ class UserRequestsRepositoryImpl implements UserRequestsRepository {
     try {
       final List<PendingRequests> response = await _userRequestsRemoteDataSource
           .getAllPendingRequests(_authLocalDataSource.getToken());
+      return Left(response);
+    } on AppException catch (exception) {
+      return Right(Failure(exception.message));
+    }
+  }
+
+  @override
+  Future<Either<List<AllRequests>, Failure>> getAllRequests() async {
+    try {
+      final List<AllRequests> response = await _userRequestsRemoteDataSource
+          .getAllRequests(_authLocalDataSource.getToken());
       return Left(response);
     } on AppException catch (exception) {
       return Right(Failure(exception.message));

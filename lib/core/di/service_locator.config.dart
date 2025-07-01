@@ -53,8 +53,6 @@ import 'package:kafa2a/features/home/provider/domain/use_cases/send_offer.dart'
     as _i616;
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart'
     as _i42;
-import 'package:kafa2a/features/home/provider/presentation/cubit/send_offer_cubit.dart'
-    as _i876;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
     as _i195;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
@@ -87,6 +85,8 @@ import 'package:kafa2a/features/requests/user/domain/repository/user_requests_re
     as _i598;
 import 'package:kafa2a/features/requests/user/domain/use_cases/get_accepted_requests.dart'
     as _i995;
+import 'package:kafa2a/features/requests/user/domain/use_cases/get_all_user_requests.dart'
+    as _i739;
 import 'package:kafa2a/features/requests/user/domain/use_cases/get_pending_requests.dart'
     as _i314;
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart'
@@ -144,8 +144,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAllRequests(gh<_i1052.ProviderOffersRepository>()));
     gh.singleton<_i616.SendOffer>(
         () => _i616.SendOffer(gh<_i1052.ProviderOffersRepository>()));
-    gh.factory<_i876.SendOfferCubit>(
-        () => _i876.SendOfferCubit(gh<_i616.SendOffer>()));
     gh.lazySingleton<_i234.RequestServiceRepository>(
         () => _i142.RequestServiceRepositoryImpl(
               gh<_i519.RequestServiceRemoteDataSource>(),
@@ -175,6 +173,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAcceptedRequests(gh<_i598.UserRequestsRepository>()));
     gh.lazySingleton<_i314.GetPendingRequests>(
         () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
+    gh.lazySingleton<_i739.GetAllUserRequests>(
+        () => _i739.GetAllUserRequests(gh<_i598.UserRequestsRepository>()));
     gh.singleton<_i86.GetAllCategories>(
         () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
     gh.singleton<_i574.RequestService>(
@@ -182,6 +182,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i838.UserRequestsCubit>(() => _i838.UserRequestsCubit(
           gh<_i314.GetPendingRequests>(),
           gh<_i995.GetAcceptedRequests>(),
+          gh<_i739.GetAllUserRequests>(),
         ));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),
@@ -191,7 +192,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i23.LogOut>(),
           gh<_i766.AccessLocation>(),
         ));
-    gh.singleton<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
+    gh.factory<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
           gh<_i86.GetAllCategories>(),
           gh<_i574.RequestService>(),
         ));

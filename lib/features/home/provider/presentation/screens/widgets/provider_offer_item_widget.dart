@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';

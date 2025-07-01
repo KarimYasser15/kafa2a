@@ -4,6 +4,8 @@ import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_remote_data_source.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/get_all_requests.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_accepted_offers/get_all_user_accepted_offers.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/get_all_user_pending_requests_response.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
@@ -40,6 +42,26 @@ class UserRequestsApiDataSource implements UserRequestsRemoteDataSource {
         throw RemoteException(Messages.noPendingRequetsAtTheMoment);
       }
       List<PendingRequests> pendingRequests = pendingResponse.data!;
+      return pendingRequests;
+    } catch (exception) {
+      String errorMessage = Messages.failedToGetPendingRequests;
+      if (exception is DioException) {
+        errorMessage = exception.response?.data['message'] ?? errorMessage;
+      }
+      throw RemoteException(errorMessage);
+    }
+  }
+
+  @override
+  Future<List<AllRequests>> getAllRequests(String token) async {
+    try {
+      final Response response = await _dio.get(ApiConstants.getAllUserRequests,
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+      GetAllRequests allRequests = GetAllRequests.fromJson(response.data);
+      if (allRequests.data == null) {
+        throw RemoteException(Messages.noPendingRequetsAtTheMoment);
+      }
+      List<AllRequests> pendingRequests = allRequests.data!;
       return pendingRequests;
     } catch (exception) {
       String errorMessage = Messages.failedToGetPendingRequests;
