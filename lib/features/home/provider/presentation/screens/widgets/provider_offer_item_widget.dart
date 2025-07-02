@@ -132,6 +132,12 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     request.scheduledAt,
                   ),
                   SizedBox(height: 10.h),
+                  Text(
+                      "${AppLocalizations.of(context).status}: ${request.status.toUpperCase()}",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    height: 10.h,
+                  )
                 ],
               ),
             ),

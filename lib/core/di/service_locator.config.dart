@@ -75,6 +75,22 @@ import 'package:kafa2a/features/my_profile/data/data_sources/local/profile_share
     as _i50;
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart'
     as _i944;
+import 'package:kafa2a/features/offers/user/data/data_sources/offers_user_api_data_source.dart'
+    as _i444;
+import 'package:kafa2a/features/offers/user/data/data_sources/offers_user_remote_data_source.dart'
+    as _i20;
+import 'package:kafa2a/features/offers/user/data/repository/offers_repository_impl.dart'
+    as _i958;
+import 'package:kafa2a/features/offers/user/domain/repository/offers_repository.dart'
+    as _i607;
+import 'package:kafa2a/features/offers/user/domain/use_cases/accept_offer.dart'
+    as _i95;
+import 'package:kafa2a/features/offers/user/domain/use_cases/get_offers.dart'
+    as _i888;
+import 'package:kafa2a/features/offers/user/domain/use_cases/reject_offer.dart'
+    as _i231;
+import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart'
+    as _i1017;
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_api_data_source.dart'
     as _i652;
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_remote_data_source.dart'
@@ -112,6 +128,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.factory<_i20.OffersUserRemoteDataSource>(
+        () => _i444.OffersUserApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i444.UserRequestsRemoteDataSource>(
         () => _i652.UserRequestsApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
@@ -136,6 +154,10 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i633.ProviderOffersRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
+    gh.factory<_i607.OffersRepository>(() => _i958.OffersRepositoryImpl(
+          gh<_i819.AuthLocalDataSource>(),
+          gh<_i20.OffersUserRemoteDataSource>(),
+        ));
     gh.singleton<_i998.AuthRepository>(() => _i887.AuthRepositoryImpl(
           gh<_i755.AuthRemoteDataSource>(),
           gh<_i819.AuthLocalDataSource>(),
@@ -151,6 +173,12 @@ extension GetItInjectableX on _i174.GetIt {
             ));
     gh.singleton<_i944.ProfileCubit>(
         () => _i944.ProfileCubit(gh<_i796.ProfileLocalDataSource>()));
+    gh.singleton<_i231.RejectOffer>(
+        () => _i231.RejectOffer(gh<_i607.OffersRepository>()));
+    gh.lazySingleton<_i888.GetOffers>(
+        () => _i888.GetOffers(gh<_i607.OffersRepository>()));
+    gh.lazySingleton<_i95.AcceptOffer>(
+        () => _i95.AcceptOffer(gh<_i607.OffersRepository>()));
     gh.factory<_i42.ProviderOffersCubit>(() => _i42.ProviderOffersCubit(
           gh<_i995.GetAllRequests>(),
           gh<_i616.SendOffer>(),
@@ -171,10 +199,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i0.RegisterUser(gh<_i998.AuthRepository>()));
     gh.lazySingleton<_i995.GetAcceptedRequests>(
         () => _i995.GetAcceptedRequests(gh<_i598.UserRequestsRepository>()));
-    gh.lazySingleton<_i314.GetPendingRequests>(
-        () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
     gh.lazySingleton<_i739.GetAllUserRequests>(
         () => _i739.GetAllUserRequests(gh<_i598.UserRequestsRepository>()));
+    gh.lazySingleton<_i314.GetPendingRequests>(
+        () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
     gh.singleton<_i86.GetAllCategories>(
         () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
     gh.singleton<_i574.RequestService>(
@@ -183,6 +211,11 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i314.GetPendingRequests>(),
           gh<_i995.GetAcceptedRequests>(),
           gh<_i739.GetAllUserRequests>(),
+        ));
+    gh.factory<_i1017.OffersCubit>(() => _i1017.OffersCubit(
+          gh<_i888.GetOffers>(),
+          gh<_i95.AcceptOffer>(),
+          gh<_i231.RejectOffer>(),
         ));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),

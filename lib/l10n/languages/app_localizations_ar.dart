@@ -283,4 +283,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noImageSelected => 'مختارتش صورة';
+
+  @override
+  String get status => 'حالة الطلب';
+
+  @override
+  String get noOffers => 'لا يوجد عروض';
 }

@@ -90,5 +90,7 @@
   "enterYourOffer" : "أكتب عرضك",
   "errorMessage": "فشل في تحميل الفئات",
   "pickYourLocation":"اضغط علشان نحدد موقعك",
-  "noImageSelected" : "مختارتش صورة"
+  "noImageSelected" : "مختارتش صورة",
+  "status":"حالة الطلب",
+  "noOffers":"لا يوجد عروض"
 }

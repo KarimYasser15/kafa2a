@@ -90,5 +90,7 @@
   "yourOfferDetails": "Your Offer Details",
   "enterYourOffer" : "Enter Your Offer",
   "pickYourLocation":"Press to Get Your Location",
-  "noImageSelected" : "No Image Selected"
+  "noImageSelected" : "No Image Selected",
+  "status":"Status",
+  "noOffers":"No Offers"
 }

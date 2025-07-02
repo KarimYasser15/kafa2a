@@ -1,0 +1,78 @@
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kafa2a/core/constants.dart';
+import 'package:kafa2a/core/error/exceptions.dart';
+import 'package:kafa2a/core/messages.dart';
+import 'package:kafa2a/features/offers/user/data/data_sources/offers_user_remote_data_source.dart';
+import 'package:kafa2a/features/offers/user/data/models/accept_offer_response/accept_offer_response.dart';
+import 'package:kafa2a/features/offers/user/data/models/reject_offer_response/reject_offer_response.dart';
+import 'package:kafa2a/features/offers/user/data/models/user_offers_response/offers.dart';
+import 'package:kafa2a/features/offers/user/data/models/user_offers_response/user_offers_response.dart';
+
+@Injectable(as: OffersUserRemoteDataSource)
+class OffersUserApiDataSource implements OffersUserRemoteDataSource {
+  final Dio _dio;
+  OffersUserApiDataSource(this._dio);
+  @override
+  Future<AcceptOfferResponse> acceptOffer(String token, int offerId) async {
+    try {
+      final Response response =
+          await _dio.post(ApiConstants.acceptOffer(offerId),
+              options: Options(
+                headers: {'Authorization': 'Bearer $token'},
+              ));
+      return AcceptOfferResponse.fromJson(response.data);
+    } catch (exception) {
+      String errorMessage = Messages.somethingWentWrong;
+      if (exception is DioException) {
+        errorMessage = exception.response?.data['message'] ?? errorMessage;
+      }
+      throw (RemoteException(errorMessage));
+    }
+  }
+
+  @override
+  void cancelRequest(String token, int offerId) async {}
+
+  @override
+  Future<List<Offers>> getOffer(String token) async {
+    try {
+      final Response response = await _dio.get(ApiConstants.getOffers,
+          options: Options(
+            headers: {'Authorization': 'Bearer $token'},
+          ));
+      UserOffersResponse userOffersResponse =
+          UserOffersResponse.fromJson(response.data);
+      if (userOffersResponse.data != null) {
+        List<Offers> offers = userOffersResponse.data!;
+        return offers;
+      }
+      throw (RemoteException("Messages.noOffersAtTheMoment"));
+    } catch (exception) {
+      print(exception.toString());
+      String errorMessage = Messages.noOffersAtTheMoment;
+      if (exception is DioException) {
+        errorMessage = exception.response?.data['message'] ?? errorMessage;
+      }
+      throw (RemoteException(errorMessage));
+    }
+  }
+
+  @override
+  Future<RejectOfferResponse> rejectOffer(String token, int offerId) async {
+    try {
+      final Response response =
+          await _dio.post(ApiConstants.rejectOffer(offerId),
+              options: Options(
+                headers: {'Authorization': 'Bearer $token'},
+              ));
+      return RejectOfferResponse.fromJson(response.data);
+    } catch (exception) {
+      String errorMessage = Messages.somethingWentWrong;
+      if (exception is DioException) {
+        errorMessage = exception.response?.data['message'] ?? errorMessage;
+      }
+      throw (RemoteException(errorMessage));
+    }
+  }
+}

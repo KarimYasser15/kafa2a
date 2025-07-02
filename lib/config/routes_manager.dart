@@ -5,7 +5,7 @@ import 'package:kafa2a/features/auth/presentation/screens/register/user_register
 import 'package:kafa2a/features/home/provider/presentation/provider_main_screen.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/request_service_screen.dart';
 import 'package:kafa2a/features/home/user/presentation/screens/user_main_screen.dart';
-import 'package:kafa2a/features/offers/user/view/user_offers_screen.dart';
+import 'package:kafa2a/features/offers/user/presentation/screens/user_offers_screen.dart';
 import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
 import 'package:kafa2a/features/profile-details/view/provider_profile_details.dart';
 

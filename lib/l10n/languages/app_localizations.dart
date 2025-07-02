@@ -646,6 +646,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Image Selected'**
   String get noImageSelected;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @noOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'No Offers'**
+  String get noOffers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

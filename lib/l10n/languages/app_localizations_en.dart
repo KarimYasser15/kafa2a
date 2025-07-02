@@ -283,4 +283,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noImageSelected => 'No Image Selected';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get noOffers => 'No Offers';
 }

@@ -6,7 +6,6 @@ import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RequestItemWidget extends StatelessWidget {
   const RequestItemWidget({super.key, required this.pendingRequests});
@@ -34,9 +33,11 @@ class RequestItemWidget extends StatelessWidget {
                   children: [
                     Center(
                         child: Text(
-                      pendingRequests.price,
+                      "${AppLocalizations.of(context).title} :${pendingRequests.title} ,${AppLocalizations.of(context).price}: ${pendingRequests.price}",
                       style: TextStyle(
-                          fontSize: 17.sp, fontWeight: FontWeight.bold),
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     )),
                     SizedBox(
                       height: 10.h,
@@ -126,7 +127,7 @@ class RequestItemWidget extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 30.h,
-                color: Colors.green,
+                color: getStatusColor(pendingRequests.status.toUpperCase()),
                 child: Center(
                     child: Text(
                   pendingRequests.status.toUpperCase(),
@@ -139,5 +140,16 @@ class RequestItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color getStatusColor(String status) {
+    if (status == 'PENDING') {
+      return Color.fromARGB(255, 149, 149, 50);
+    }
+    if (status == 'ACCEPTED') {
+      return Colors.green;
+    } else {
+      return Colors.red;
+    }
   }
 }
