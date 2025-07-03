@@ -289,4 +289,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noOffers => 'No Offers';
+
+  @override
+  String get notActiveYet => 'Not Active Yet';
 }

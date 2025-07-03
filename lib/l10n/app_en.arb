@@ -92,5 +92,6 @@
   "pickYourLocation":"Press to Get Your Location",
   "noImageSelected" : "No Image Selected",
   "status":"Status",
-  "noOffers":"No Offers"
+  "noOffers":"No Offers",
+  "notActiveYet" : "Not Active Yet"
 }

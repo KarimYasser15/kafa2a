@@ -92,5 +92,6 @@
   "pickYourLocation":"اضغط علشان نحدد موقعك",
   "noImageSelected" : "مختارتش صورة",
   "status":"حالة الطلب",
-  "noOffers":"لا يوجد عروض"
+  "noOffers":"لا يوجد عروض",
+  "notActiveYet": "لم يتم تفعيله بعد"
 }

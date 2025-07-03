@@ -10,6 +10,10 @@ class Provider {
       required this.selfiePath,
       required this.nationalId,
       required this.serviceId,
+      required this.rating,
+      required this.review,
+      required this.status,
+      required this.suspendReason,
       required this.lat,
       required this.lng});
 
@@ -25,4 +29,8 @@ class Provider {
   final String type;
   final String lat;
   final String lng;
+  final String? status;
+  final String? suspendReason;
+  final int? rating;
+  final dynamic review;
 }

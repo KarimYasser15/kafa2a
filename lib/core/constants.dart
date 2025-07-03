@@ -30,3 +30,10 @@ class UserType {
   static const String user = "user";
   static const String provider = "provider";
 }
+
+class ProviderStatus {
+  static const String approved = "approved";
+  static const String pending = "pending";
+  static const String rejected = "rejected";
+  static const String suspended = "suspended";
+}

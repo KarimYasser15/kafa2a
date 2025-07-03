@@ -93,10 +93,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                     (route) => false,
                                   );
                                 } else {
-                                  Navigator.of(context).pushNamedAndRemoveUntil(
-                                    RoutesManager.homeProvider,
-                                    (route) => false,
-                                  );
+                                  if (context
+                                          .read<AuthCubit>()
+                                          .provider!
+                                          .status ==
+                                      ProviderStatus.approved) {
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                      RoutesManager.homeProvider,
+                                      (route) => false,
+                                    );
+                                  } else {
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                      RoutesManager.homeSuspendedProvider,
+                                      (route) => false,
+                                    );
+                                  }
                                 }
                               }
                             },

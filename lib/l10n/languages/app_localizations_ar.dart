@@ -289,4 +289,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noOffers => 'لا يوجد عروض';
+
+  @override
+  String get notActiveYet => 'لم يتم تفعيله بعد';
 }

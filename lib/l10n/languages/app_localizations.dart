@@ -658,6 +658,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Offers'**
   String get noOffers;
+
+  /// No description provided for @notActiveYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Active Yet'**
+  String get notActiveYet;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

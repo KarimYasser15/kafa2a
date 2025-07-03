@@ -14,6 +14,10 @@ class UserModel {
     this.serviceId,
     this.lat,
     this.lng,
+    this.status,
+    this.suspendReason,
+    this.rating,
+    this.review,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -33,6 +37,10 @@ class UserModel {
         serviceId: json['service_id'] as String?,
         lat: json['lat'] as String?,
         lng: json['lng'] as String?,
+        status: json['status'] as String?,
+        suspendReason: json['suspend_reason'] as String?,
+        rating: json['rating'] as int?,
+        review: json['review'] as dynamic,
         createdAt: DateTime.parse(json['created_at'] as String),
         updatedAt: DateTime.parse(json['updated_at'] as String),
       );
@@ -53,4 +61,8 @@ class UserModel {
   DateTime updatedAt;
   String? lat;
   String? lng;
+  String? status;
+  String? suspendReason;
+  int? rating;
+  dynamic review;
 }
