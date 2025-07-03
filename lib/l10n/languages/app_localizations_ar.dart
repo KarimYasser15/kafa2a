@@ -114,7 +114,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestService => 'اطلب خدمة';
 
   @override
-  String get providerPetails => 'بيانات مقدم الخدمة';
+  String get providerProfile => 'بيانات مقدم الخدمة';
 
   @override
   String get acceptOffer => 'اقبل العرض';
@@ -298,4 +298,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get requestCancelled => 'تم إلغاء الطلب';
+
+  @override
+  String get rating => 'تقييم';
 }

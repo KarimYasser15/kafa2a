@@ -34,7 +34,7 @@
   "offer": "Offer",
   "cancelRequest": "Cancel Request",
   "requestService": "Request Service",
-  "providerPetails": "Provider Profile",
+  "providerProfile": "Provider Profile",
   "acceptOffer": "Accept Offer",
   "editProfilePhoto": "Edit Profile Photo",
   "logOut": "Log Out",
@@ -95,5 +95,6 @@
   "noOffers":"No Offers",
   "notActiveYet" : "Not Active Yet",
   "rejected":"Rejected",
-  "requestCancelled": "Request Cancelled!"
+  "requestCancelled": "Request Cancelled!",
+  "rating": "Rating"
 }

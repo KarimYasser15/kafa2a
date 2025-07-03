@@ -17,6 +17,7 @@ class ApiConstants {
   static String getOffers(int id) => "service-requests/$id";
   static acceptOffer(int id) => "offers/$id/accept";
   static rejectOffer(int id) => "offers/$id/reject";
+  static const String getNearbyProviders = "nearby-providers";
 }
 
 class CacheConstants {

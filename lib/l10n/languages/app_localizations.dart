@@ -305,11 +305,11 @@ abstract class AppLocalizations {
   /// **'Request Service'**
   String get requestService;
 
-  /// No description provided for @providerPetails.
+  /// No description provided for @providerProfile.
   ///
   /// In en, this message translates to:
   /// **'Provider Profile'**
-  String get providerPetails;
+  String get providerProfile;
 
   /// No description provided for @acceptOffer.
   ///
@@ -676,6 +676,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Request Cancelled!'**
   String get requestCancelled;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

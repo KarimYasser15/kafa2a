@@ -12,6 +12,7 @@ class AllProviderRequests {
   String price;
   String scheduledAt;
   String status;
+  bool hasOffered;
   DateTime createdAt;
   DateTime updatedAt;
   UserModel user;
@@ -28,6 +29,7 @@ class AllProviderRequests {
     required this.price,
     required this.scheduledAt,
     required this.status,
+    required this.hasOffered,
     required this.createdAt,
     required this.updatedAt,
     required this.user,
@@ -46,6 +48,7 @@ class AllProviderRequests {
       price: json['price'] as String,
       scheduledAt: json['scheduled_at'] as String,
       status: json['status'] as String,
+      hasOffered: json["has_offered"] as bool,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),

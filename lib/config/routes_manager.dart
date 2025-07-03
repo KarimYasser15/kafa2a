@@ -53,10 +53,6 @@ class RoutesManager {
           settings: settings,
           builder: (context) => UserOffersScreen(),
         );
-      case providerProfileDetails:
-        return MaterialPageRoute(
-          builder: (context) => ProviderProfileDetails(),
-        );
       case requestAService:
         return MaterialPageRoute(
           builder: (context) => RequestServiceScreen(),

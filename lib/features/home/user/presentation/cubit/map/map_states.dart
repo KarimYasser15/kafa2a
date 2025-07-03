@@ -12,3 +12,7 @@ class MapSuccessState extends MapStates {
 }
 
 class MapErrorState extends MapStates {}
+
+class NearbyProvidersSuccessState extends MapStates {}
+
+class NearbyProvidersErrorState extends MapStates {}

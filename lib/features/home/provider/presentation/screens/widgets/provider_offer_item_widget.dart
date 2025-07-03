@@ -141,23 +141,24 @@ class ProviderOfferItemWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: DefaultSubmitButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (_) => BlocProvider.value(
-                            value: context.read<ProviderOffersCubit>(),
-                            child: SendOfferBottomSheet(
-                              request: request,
-                            ),
-                          ));
-                },
-                label: AppLocalizations.of(context).offer,
+            if (!request.hasOffered)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: DefaultSubmitButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (_) => BlocProvider.value(
+                              value: context.read<ProviderOffersCubit>(),
+                              child: SendOfferBottomSheet(
+                                request: request,
+                              ),
+                            ));
+                  },
+                  label: AppLocalizations.of(context).offer,
+                ),
               ),
-            ),
             SizedBox(
               height: 10.h,
             )

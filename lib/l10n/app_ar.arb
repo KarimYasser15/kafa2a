@@ -34,7 +34,7 @@
   "offer": "عرض",
   "cancelRequest": "إلغاء الطلب",
   "requestService": "اطلب خدمة",
-  "providerPetails": "بيانات مقدم الخدمة",
+  "providerProfile": "بيانات مقدم الخدمة",
   "acceptOffer": "اقبل العرض",
   "editProfilePhoto": "تغيير صورة الملف",
   "logOut": "تسجيل خروج",
@@ -95,5 +95,6 @@
   "noOffers":"لا يوجد عروض",
   "notActiveYet": "لم يتم تفعيله بعد",
   "rejected":"اترفض",
-  "requestCancelled": "تم إلغاء الطلب"
+  "requestCancelled": "تم إلغاء الطلب",
+  "rating": "تقييم"
 }

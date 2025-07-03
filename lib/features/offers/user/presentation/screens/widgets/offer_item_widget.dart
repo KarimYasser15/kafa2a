@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/features/offers/user/data/models/user_offers_response/offers.dart';
 import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart';
+import 'package:kafa2a/features/profile-details/view/provider_profile_details.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class OfferItemWidget extends StatelessWidget {
@@ -15,8 +15,19 @@ class OfferItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          Navigator.pushNamed(context, RoutesManager.providerProfileDetails),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+              value: context.read<OffersCubit>(),
+              child: ProviderProfileDetails(
+                offer: offer,
+              ),
+            ),
+          ),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
@@ -33,7 +44,7 @@ class OfferItemWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(50.r),
                     child: Image.network(
-                      '${ApiConstants.baseImageUrl}${"offer.provider.selfiePath"}',
+                      '${ApiConstants.baseImageUrl}${offer.provider.selfiePath}',
                       width: 70.w,
                       height: 70.w,
                       fit: BoxFit.cover,
@@ -60,15 +71,20 @@ class OfferItemWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "offer.provider.name",
+                        offer.provider.name,
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.w700),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: List.generate(
-                          3,
-                          (index) => Icon(Icons.star, color: Colors.amber),
+                          5,
+                          (index) => Icon(
+                            index < offer.provider.rating!
+                                ? Icons.star
+                                : Icons.star_border,
+                            color: Colors.amber,
+                            size: 20.sp,
+                          ),
                         ),
                       ),
                     ],

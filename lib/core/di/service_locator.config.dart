@@ -53,16 +53,26 @@ import 'package:kafa2a/features/home/provider/domain/use_cases/send_offer.dart'
     as _i616;
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart'
     as _i42;
+import 'package:kafa2a/features/home/user/data/data_sources/map/map_api_data_source.dart'
+    as _i35;
+import 'package:kafa2a/features/home/user/data/data_sources/map/map_remote_data_source.dart'
+    as _i932;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_api_data_source.dart'
     as _i195;
 import 'package:kafa2a/features/home/user/data/data_sources/request_service_remote_data_source.dart'
     as _i519;
+import 'package:kafa2a/features/home/user/data/repository/map_repository_impl.dart'
+    as _i122;
 import 'package:kafa2a/features/home/user/data/repository/request_service_repository_impl.dart'
     as _i142;
+import 'package:kafa2a/features/home/user/domain/repository/map_repository.dart'
+    as _i608;
 import 'package:kafa2a/features/home/user/domain/repository/request_service_repository.dart'
     as _i234;
 import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.dart'
     as _i86;
+import 'package:kafa2a/features/home/user/domain/use_cases/get_nearby_categories.dart'
+    as _i197;
 import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart'
     as _i574;
 import 'package:kafa2a/features/home/user/presentation/cubit/map/map_cubit.dart'
@@ -130,6 +140,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.factory<_i932.MapRemoteDataSource>(
+        () => _i35.MapApiDataSource(gh<_i361.Dio>()));
     gh.factory<_i20.OffersUserRemoteDataSource>(
         () => _i444.OffersUserApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i444.UserRequestsRemoteDataSource>(
@@ -149,8 +161,6 @@ extension GetItInjectableX on _i174.GetIt {
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i766.AccessLocation>(
         () => _i766.AccessLocation(gh<_i819.LocalDataSource>()));
-    gh.factory<_i918.MapCubit>(
-        () => _i918.MapCubit(gh<_i766.AccessLocation>()));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(
         () => _i723.ProviderOffersRepositoryImpl(
               gh<_i633.ProviderOffersRemoteDataSource>(),
@@ -168,6 +178,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAllRequests(gh<_i1052.ProviderOffersRepository>()));
     gh.singleton<_i616.SendOffer>(
         () => _i616.SendOffer(gh<_i1052.ProviderOffersRepository>()));
+    gh.factory<_i608.MapRepository>(() => _i122.MapRepositoryImpl(
+          gh<_i819.AuthLocalDataSource>(),
+          gh<_i932.MapRemoteDataSource>(),
+        ));
     gh.factory<_i234.RequestServiceRepository>(
         () => _i142.RequestServiceRepositoryImpl(
               gh<_i519.RequestServiceRemoteDataSource>(),
@@ -175,6 +189,12 @@ extension GetItInjectableX on _i174.GetIt {
             ));
     gh.singleton<_i944.ProfileCubit>(
         () => _i944.ProfileCubit(gh<_i796.ProfileLocalDataSource>()));
+    gh.factory<_i197.GetNearbyCategories>(
+        () => _i197.GetNearbyCategories(gh<_i608.MapRepository>()));
+    gh.factory<_i918.MapCubit>(() => _i918.MapCubit(
+          gh<_i766.AccessLocation>(),
+          gh<_i197.GetNearbyCategories>(),
+        ));
     gh.singleton<_i231.RejectOffer>(
         () => _i231.RejectOffer(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i888.GetOffers>(
