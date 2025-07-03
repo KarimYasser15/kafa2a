@@ -9,6 +9,6 @@ class AcceptOffer {
   final OffersRepository _offersRepository;
   AcceptOffer(this._offersRepository);
 
-  Future<Either<AcceptOfferResponse, Failure>> call(int id) =>
-      _offersRepository.acceptOffer(id);
+  Future<Either<AcceptOfferResponse, Failure>> call(int offerId) =>
+      _offersRepository.acceptOffer(offerId);
 }

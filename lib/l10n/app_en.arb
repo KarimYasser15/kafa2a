@@ -94,5 +94,6 @@
   "status":"Status",
   "noOffers":"No Offers",
   "notActiveYet" : "Not Active Yet",
-  "rejected":"Rejected"
+  "rejected":"Rejected",
+  "requestCancelled": "Request Cancelled!"
 }

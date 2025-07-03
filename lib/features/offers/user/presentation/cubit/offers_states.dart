@@ -34,3 +34,5 @@ class ManageOfferErrorState extends OffersStates {
   String error;
   ManageOfferErrorState(this.error);
 }
+
+class CancelRequestSuccessState extends OffersStates {}

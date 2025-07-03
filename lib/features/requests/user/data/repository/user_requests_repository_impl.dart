@@ -9,7 +9,7 @@ import 'package:kafa2a/features/requests/user/data/models/get_all_user_accepted_
 import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
 import 'package:kafa2a/features/requests/user/domain/repository/user_requests_repository.dart';
 
-@LazySingleton(as: UserRequestsRepository)
+@Injectable(as: UserRequestsRepository)
 class UserRequestsRepositoryImpl implements UserRequestsRepository {
   final AuthLocalDataSource _authLocalDataSource;
   final UserRequestsRemoteDataSource _userRequestsRemoteDataSource;

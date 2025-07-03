@@ -79,6 +79,9 @@ class _RequestServiceScreenState extends State<RequestServiceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (context.read<RequestServiceCubit>().categories == null) {
+      context.read<RequestServiceCubit>().getAllCategories();
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).requestService),

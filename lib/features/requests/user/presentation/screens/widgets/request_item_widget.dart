@@ -5,6 +5,7 @@ import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
+import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class RequestItemWidget extends StatelessWidget {
@@ -14,8 +15,19 @@ class RequestItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, RoutesManager.offerUser,
-          arguments: pendingRequests.id),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RoutesManager.offerUser,
+          arguments: pendingRequests.id,
+        ).then((value) {
+          if (value == true) {
+            if (context.mounted) {
+              context.read<UserRequestsCubit>().getAllRequests();
+            }
+          }
+        });
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Container(

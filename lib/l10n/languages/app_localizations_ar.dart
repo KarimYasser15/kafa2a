@@ -295,4 +295,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rejected => 'اترفض';
+
+  @override
+  String get requestCancelled => 'تم إلغاء الطلب';
 }

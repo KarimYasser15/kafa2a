@@ -94,5 +94,6 @@
   "status":"حالة الطلب",
   "noOffers":"لا يوجد عروض",
   "notActiveYet": "لم يتم تفعيله بعد",
-  "rejected":"اترفض"
+  "rejected":"اترفض",
+  "requestCancelled": "تم إلغاء الطلب"
 }

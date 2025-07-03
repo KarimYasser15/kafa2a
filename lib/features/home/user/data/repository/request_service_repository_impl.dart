@@ -9,7 +9,7 @@ import 'package:kafa2a/features/home/user/data/models/request_service_response.d
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 import 'package:kafa2a/features/home/user/domain/repository/request_service_repository.dart';
 
-@LazySingleton(as: RequestServiceRepository)
+@Injectable(as: RequestServiceRepository)
 class RequestServiceRepositoryImpl implements RequestServiceRepository {
   RequestServiceRepositoryImpl(
     this._requestServiceRemoteDataSource,

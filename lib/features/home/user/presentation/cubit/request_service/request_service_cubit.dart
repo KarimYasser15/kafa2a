@@ -41,7 +41,10 @@ class RequestServiceCubit extends Cubit<RequestServiceStates> {
     final Either<RequestServiceResponse, Failure> response =
         await _requestService(requestService);
     response.fold(
-      (_) => emit(RequestServiceSuccessState()),
+      (_) {
+        emit(RequestServiceSuccessState());
+        emit(GetCategoriesSuccessState(categories!));
+      },
       (error) => emit(RequestServiceErrorState(error.message)),
     );
   }

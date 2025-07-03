@@ -85,6 +85,8 @@ import 'package:kafa2a/features/offers/user/domain/repository/offers_repository.
     as _i607;
 import 'package:kafa2a/features/offers/user/domain/use_cases/accept_offer.dart'
     as _i95;
+import 'package:kafa2a/features/offers/user/domain/use_cases/cancel_request.dart'
+    as _i29;
 import 'package:kafa2a/features/offers/user/domain/use_cases/get_offers.dart'
     as _i888;
 import 'package:kafa2a/features/offers/user/domain/use_cases/reject_offer.dart'
@@ -166,7 +168,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAllRequests(gh<_i1052.ProviderOffersRepository>()));
     gh.singleton<_i616.SendOffer>(
         () => _i616.SendOffer(gh<_i1052.ProviderOffersRepository>()));
-    gh.lazySingleton<_i234.RequestServiceRepository>(
+    gh.factory<_i234.RequestServiceRepository>(
         () => _i142.RequestServiceRepositoryImpl(
               gh<_i519.RequestServiceRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
@@ -179,11 +181,13 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i888.GetOffers(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i95.AcceptOffer>(
         () => _i95.AcceptOffer(gh<_i607.OffersRepository>()));
+    gh.lazySingleton<_i29.CancelRequest>(
+        () => _i29.CancelRequest(gh<_i607.OffersRepository>()));
     gh.factory<_i42.ProviderOffersCubit>(() => _i42.ProviderOffersCubit(
           gh<_i995.GetAllRequests>(),
           gh<_i616.SendOffer>(),
         ));
-    gh.lazySingleton<_i598.UserRequestsRepository>(
+    gh.factory<_i598.UserRequestsRepository>(
         () => _i514.UserRequestsRepositoryImpl(
               gh<_i819.AuthLocalDataSource>(),
               gh<_i444.UserRequestsRemoteDataSource>(),
@@ -197,25 +201,26 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i619.RegisterProvider(gh<_i998.AuthRepository>()));
     gh.singleton<_i0.RegisterUser>(
         () => _i0.RegisterUser(gh<_i998.AuthRepository>()));
+    gh.factory<_i739.GetAllUserRequests>(
+        () => _i739.GetAllUserRequests(gh<_i598.UserRequestsRepository>()));
     gh.lazySingleton<_i995.GetAcceptedRequests>(
         () => _i995.GetAcceptedRequests(gh<_i598.UserRequestsRepository>()));
-    gh.lazySingleton<_i739.GetAllUserRequests>(
-        () => _i739.GetAllUserRequests(gh<_i598.UserRequestsRepository>()));
     gh.lazySingleton<_i314.GetPendingRequests>(
         () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
-    gh.singleton<_i86.GetAllCategories>(
-        () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
-    gh.singleton<_i574.RequestService>(
-        () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
-    gh.factory<_i838.UserRequestsCubit>(() => _i838.UserRequestsCubit(
-          gh<_i314.GetPendingRequests>(),
-          gh<_i995.GetAcceptedRequests>(),
-          gh<_i739.GetAllUserRequests>(),
-        ));
     gh.factory<_i1017.OffersCubit>(() => _i1017.OffersCubit(
           gh<_i888.GetOffers>(),
           gh<_i95.AcceptOffer>(),
           gh<_i231.RejectOffer>(),
+          gh<_i29.CancelRequest>(),
+        ));
+    gh.singleton<_i574.RequestService>(
+        () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
+    gh.factory<_i86.GetAllCategories>(
+        () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
+    gh.factory<_i838.UserRequestsCubit>(() => _i838.UserRequestsCubit(
+          gh<_i314.GetPendingRequests>(),
+          gh<_i995.GetAcceptedRequests>(),
+          gh<_i739.GetAllUserRequests>(),
         ));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),

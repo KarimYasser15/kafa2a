@@ -8,6 +8,6 @@ import 'package:kafa2a/features/offers/user/domain/repository/offers_repository.
 class RejectOffer {
   final OffersRepository _offersRepository;
   RejectOffer(this._offersRepository);
-  Future<Either<RejectOfferResponse, Failure>> call(int id) async =>
-      await _offersRepository.rejectOffer(id);
+  Future<Either<RejectOfferResponse, Failure>> call(int offerId) async =>
+      await _offersRepository.rejectOffer(offerId);
 }
