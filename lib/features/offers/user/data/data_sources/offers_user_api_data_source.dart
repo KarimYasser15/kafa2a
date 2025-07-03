@@ -5,6 +5,7 @@ import 'package:kafa2a/core/error/exceptions.dart';
 import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/features/offers/user/data/data_sources/offers_user_remote_data_source.dart';
 import 'package:kafa2a/features/offers/user/data/models/accept_offer_response/accept_offer_response.dart';
+import 'package:kafa2a/features/offers/user/data/models/offers_response/offers_response.dart';
 import 'package:kafa2a/features/offers/user/data/models/reject_offer_response/reject_offer_response.dart';
 import 'package:kafa2a/features/offers/user/data/models/user_offers_response/offers.dart';
 import 'package:kafa2a/features/offers/user/data/models/user_offers_response/user_offers_response.dart';
@@ -35,16 +36,16 @@ class OffersUserApiDataSource implements OffersUserRemoteDataSource {
   void cancelRequest(String token, int offerId) async {}
 
   @override
-  Future<List<Offers>> getOffer(String token) async {
+  Future<List<Offers>> getOffers(String token, int id) async {
     try {
-      final Response response = await _dio.get(ApiConstants.getOffers,
+      final Response response = await _dio.get(ApiConstants.getOffers(id),
           options: Options(
             headers: {'Authorization': 'Bearer $token'},
           ));
-      UserOffersResponse userOffersResponse =
-          UserOffersResponse.fromJson(response.data);
-      if (userOffersResponse.data != null) {
-        List<Offers> offers = userOffersResponse.data!;
+      OffersResponse userOffersResponse =
+          OffersResponse.fromJson(response.data);
+      if (userOffersResponse.offers != null) {
+        List<Offers> offers = userOffersResponse.offers!;
         return offers;
       }
       throw (RemoteException("Messages.noOffersAtTheMoment"));

@@ -14,7 +14,7 @@ class ApiConstants {
   static const String getAcceptedUserOffers = "/accepted-offers";
   static const String getAllPendingUserRequests = "service-requests";
   static const String getAllUserRequests = "all-my-service-requests";
-  static const String getOffers = "my-request-offers";
+  static String getOffers(int id) => "service-requests/$id";
   static acceptOffer(int id) => "offers/$id/accept";
   static rejectOffer(int id) => "offers/$id/reject";
 }

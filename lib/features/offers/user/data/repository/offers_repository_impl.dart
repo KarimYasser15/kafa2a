@@ -16,10 +16,10 @@ class OffersRepositoryImpl implements OffersRepository {
   OffersRepositoryImpl(
       this._authLocalDataSource, this._offersUserRemoteDataSource);
   @override
-  Future<Either<List<Offers>, Failure>> getOffers() async {
+  Future<Either<List<Offers>, Failure>> getOffers(int id) async {
     try {
-      final List<Offers> offers = await _offersUserRemoteDataSource
-          .getOffer(_authLocalDataSource.getToken());
+      final List<Offers> offers = await _offersUserRemoteDataSource.getOffers(
+          _authLocalDataSource.getToken(), id);
       return Left(offers);
     } on AppException catch (exception) {
       return Right(Failure(exception.message));

@@ -21,9 +21,9 @@ class OffersCubit extends Cubit<OffersStates> {
 
   List<Offers> offers = [];
 
-  Future<void> getOffers() async {
+  Future<void> getOffers(int id) async {
     emit(OffersLoadingState());
-    final Either<List<Offers>, Failure> result = await _getOffers();
+    final Either<List<Offers>, Failure> result = await _getOffers(id);
     result.fold(
       (data) {
         offers = data;

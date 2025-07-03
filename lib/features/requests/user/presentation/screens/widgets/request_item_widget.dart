@@ -14,7 +14,8 @@ class RequestItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, RoutesManager.offerUser),
+      onTap: () => Navigator.pushNamed(context, RoutesManager.offerUser,
+          arguments: pendingRequests.id),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Container(

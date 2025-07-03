@@ -10,8 +10,8 @@ class Offers {
   String status;
   DateTime createdAt;
   DateTime updatedAt;
-  UserModel provider;
-  ServiceRequest serviceRequest;
+  // UserModel provider;
+  // ServiceRequest serviceRequest;
 
   Offers({
     required this.id,
@@ -22,8 +22,8 @@ class Offers {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
-    required this.provider,
-    required this.serviceRequest,
+    // required this.provider,
+    // required this.serviceRequest,
   });
 
   factory Offers.fromJson(Map<String, dynamic> json) => Offers(
@@ -35,8 +35,8 @@ class Offers {
         status: json['status'] as String,
         createdAt: DateTime.parse(json['created_at'] as String),
         updatedAt: DateTime.parse(json['updated_at'] as String),
-        provider: UserModel.fromJson(json['provider'] as Map<String, dynamic>),
-        serviceRequest: ServiceRequest.fromJson(
-            json['service_request'] as Map<String, dynamic>),
+        // provider: UserModel.fromJson(json['provider'] as Map<String, dynamic>),
+        // serviceRequest: ServiceRequest.fromJson(
+        //     json['service_request'] as Map<String, dynamic>),
       );
 }

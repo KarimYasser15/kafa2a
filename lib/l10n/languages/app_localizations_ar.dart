@@ -292,4 +292,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notActiveYet => 'لم يتم تفعيله بعد';
+
+  @override
+  String get rejected => 'اترفض';
 }

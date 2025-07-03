@@ -664,6 +664,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not Active Yet'**
   String get notActiveYet;
+
+  /// No description provided for @rejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get rejected;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

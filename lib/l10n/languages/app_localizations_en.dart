@@ -292,4 +292,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notActiveYet => 'Not Active Yet';
+
+  @override
+  String get rejected => 'Rejected';
 }

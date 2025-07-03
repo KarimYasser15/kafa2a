@@ -93,5 +93,6 @@
   "noImageSelected" : "No Image Selected",
   "status":"Status",
   "noOffers":"No Offers",
-  "notActiveYet" : "Not Active Yet"
+  "notActiveYet" : "Not Active Yet",
+  "rejected":"Rejected"
 }

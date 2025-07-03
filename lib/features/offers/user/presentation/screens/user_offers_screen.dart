@@ -14,10 +14,11 @@ class UserOffersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int serviceId = ModalRoute.of(context)!.settings.arguments as int;
     return BlocProvider(
       create: (context) {
         final cubit = getIt.get<OffersCubit>();
-        cubit.getOffers();
+        cubit.getOffers(serviceId);
         return cubit;
       },
       child: Scaffold(
@@ -54,11 +55,11 @@ class UserOffersScreen extends StatelessWidget {
             } else if (state is AcceptOfferSuccessState) {
               UIUtils.hideLoading(context);
               UIUtils.showMessage(state.acceptOfferResponse.message!);
-              context.read<OffersCubit>().getOffers();
+              context.read<OffersCubit>().getOffers(serviceId);
             } else if (state is RejectOfferSuccessState) {
               UIUtils.hideLoading(context);
-              UIUtils.showMessage("Rejected");
-              context.read<OffersCubit>().getOffers();
+              UIUtils.showMessage(AppLocalizations.of(context).rejected);
+              context.read<OffersCubit>().getOffers(serviceId);
             }
           },
           child: BlocBuilder<OffersCubit, OffersStates>(

@@ -9,5 +9,6 @@ class GetOffers {
   final OffersRepository _offersRepository;
   GetOffers(this._offersRepository);
 
-  Future<Either<List<Offers>, Failure>> call() => _offersRepository.getOffers();
+  Future<Either<List<Offers>, Failure>> call(int id) =>
+      _offersRepository.getOffers(id);
 }

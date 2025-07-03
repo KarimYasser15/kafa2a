@@ -93,5 +93,6 @@
   "noImageSelected" : "مختارتش صورة",
   "status":"حالة الطلب",
   "noOffers":"لا يوجد عروض",
-  "notActiveYet": "لم يتم تفعيله بعد"
+  "notActiveYet": "لم يتم تفعيله بعد",
+  "rejected":"اترفض"
 }

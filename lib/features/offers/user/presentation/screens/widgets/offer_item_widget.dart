@@ -33,7 +33,7 @@ class OfferItemWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(50.r),
                     child: Image.network(
-                      '${ApiConstants.baseImageUrl}${offer.provider.selfiePath}',
+                      '${ApiConstants.baseImageUrl}${"offer.provider.selfiePath"}',
                       width: 70.w,
                       height: 70.w,
                       fit: BoxFit.cover,
@@ -60,7 +60,7 @@ class OfferItemWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        offer.provider.name,
+                        "offer.provider.name",
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.w700),
                       ),

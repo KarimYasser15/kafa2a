@@ -50,6 +50,7 @@ class RoutesManager {
         );
       case offerUser:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => UserOffersScreen(),
         );
       case providerProfileDetails:
