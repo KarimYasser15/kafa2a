@@ -96,6 +96,7 @@ class AuthCubit extends Cubit<AuthStates> {
     );
     final Either<Provider, Failure> response =
         await _registerProvider(registerProviderRequest);
+    provider = response.fold((provider) => provider, (l) => null);
     response.fold(
       (_) => emit(
         AuthSuccessState(),

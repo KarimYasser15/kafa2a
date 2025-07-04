@@ -319,7 +319,7 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                         UIUtils.hideLoading(context);
                                         Navigator.of(context)
                                             .pushNamedAndRemoveUntil(
-                                          RoutesManager.homeProvider,
+                                          RoutesManager.homeSuspendedProvider,
                                           (route) => false,
                                         );
                                       }
@@ -338,36 +338,41 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                                     .currentLocation !=
                                                 null &&
                                             selectedService != null) {
-                                          context
-                                              .read<AuthCubit>()
-                                              .registerProvider(
-                                                RegisterProviderRequest(
-                                                  name: nameController.text,
-                                                  email: emailController.text,
-                                                  password:
-                                                      passwordController.text,
-                                                  confirmPassword:
-                                                      confirmPasswordController
-                                                          .text,
-                                                  phone: phoneNumberController
-                                                      .text,
-                                                  nationalId:
-                                                      nationalIdController.text,
-                                                  address:
-                                                      addressController.text,
-                                                  serviceId: selectedService!,
-                                                  policeCertificate: context
-                                                      .read<AuthCubit>()
-                                                      .image!,
-                                                  selfie: context
-                                                      .read<AuthCubit>()
-                                                      .cameraImage!,
-                                                  lat: selectedLatLng!.latitude
-                                                      .toString(),
-                                                  lng: selectedLatLng!.longitude
-                                                      .toString(),
-                                                ),
-                                              );
+                                          try {
+                                            context
+                                                .read<AuthCubit>()
+                                                .registerProvider(
+                                                  RegisterProviderRequest(
+                                                    name: nameController.text,
+                                                    email: emailController.text,
+                                                    password:
+                                                        passwordController.text,
+                                                    confirmPassword:
+                                                        confirmPasswordController
+                                                            .text,
+                                                    phone: phoneNumberController
+                                                        .text,
+                                                    nationalId:
+                                                        nationalIdController
+                                                            .text,
+                                                    address:
+                                                        addressController.text,
+                                                    serviceId: selectedService!,
+                                                    policeCertificate: context
+                                                        .read<AuthCubit>()
+                                                        .image!,
+                                                    selfie: context
+                                                        .read<AuthCubit>()
+                                                        .cameraImage!,
+                                                    lat: selectedLatLng!
+                                                        .latitude,
+                                                    lng: selectedLatLng!
+                                                        .longitude,
+                                                  ),
+                                                );
+                                          } catch (e) {
+                                            print(e.toString());
+                                          }
                                         }
                                       },
                                       label:

@@ -26,8 +26,8 @@ class RegisterProviderRequest {
   final File policeCertificate;
   final File selfie;
   final int serviceId;
-  final String lat;
-  final String lng;
+  final double lat;
+  final double lng;
 
   Future<FormData> toFormData() async {
     return FormData.fromMap({
