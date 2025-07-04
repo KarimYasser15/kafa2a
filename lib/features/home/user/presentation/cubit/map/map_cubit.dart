@@ -18,6 +18,7 @@ class MapCubit extends Cubit<MapStates> {
   final GetNearbyCategories _getNearbyCategories;
   Set<Marker> markers = {};
   LocationData? currentLocation;
+  bool hasFetchedProviders = false;
   Future<void> getLocation() async {
     emit(MapLoadingState());
     try {
@@ -33,6 +34,7 @@ class MapCubit extends Cubit<MapStates> {
 
   Future<void> getNearbyProviders(GetNearbyProvidersRequest request) async {
     emit(MapLoadingState());
+    hasFetchedProviders = true;
     Either<List<GetNearbyProvidersResponse>, Failure> response =
         await _getNearbyCategories(request);
     response.fold(

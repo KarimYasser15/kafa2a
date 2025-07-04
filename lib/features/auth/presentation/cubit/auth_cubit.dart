@@ -5,8 +5,10 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/error/failure.dart';
 import 'package:kafa2a/core/utils/access_location.dart';
+import 'package:kafa2a/core/utils/pusher_notification.dart';
 import 'package:kafa2a/features/auth/data/models/log_out_response.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
 import 'package:kafa2a/features/auth/data/models/register_provider_request.dart';
@@ -39,6 +41,7 @@ class AuthCubit extends Cubit<AuthStates> {
   File? cameraImage;
   File? image;
   LatLng? pickedLocation;
+  final pusherService = getIt<PusherService>();
 
   Future<void> loginUser(LoginRequest loginRequest) async {
     emit(
@@ -47,9 +50,12 @@ class AuthCubit extends Cubit<AuthStates> {
     final Either<User, Failure> response = await _loginUser(loginRequest);
     user = response.fold((user) => user, (l) => null);
     response.fold(
-      (_) => emit(
-        AuthSuccessState(),
-      ),
+      (userSuccess) async {
+        await pusherService.init(userId: userSuccess.id);
+        emit(
+          AuthSuccessState(),
+        );
+      },
       (failure) => emit(
         AuthErrorState(failure.message),
       ),
@@ -80,9 +86,12 @@ class AuthCubit extends Cubit<AuthStates> {
     final Either<User, Failure> response =
         await _registerUser(registerUserRequest);
     response.fold(
-      (_) => emit(
-        AuthSuccessState(),
-      ),
+      (userSuccess) async {
+        await pusherService.init(userId: userSuccess.id);
+        emit(
+          AuthSuccessState(),
+        );
+      },
       (failure) => emit(
         AuthErrorState(failure.message),
       ),

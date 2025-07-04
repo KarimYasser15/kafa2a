@@ -117,14 +117,15 @@ class _MapTabState extends State<MapTab> {
                 cubit.currentLocation!.latitude!,
                 cubit.currentLocation!.longitude!,
               );
-
-              if (cubit.markers.isEmpty) {
-                cubit.getNearbyProviders(GetNearbyProvidersRequest(
-                  lat: cubit.currentLocation!.latitude!,
-                  lng: cubit.currentLocation!.longitude!,
-                ));
-              }
               return GoogleMap(
+                onMapCreated: (GoogleMapController controller) {
+                  if (!cubit.hasFetchedProviders) {
+                    cubit.getNearbyProviders(GetNearbyProvidersRequest(
+                      lat: currentLatLng.latitude,
+                      lng: currentLatLng.longitude,
+                    ));
+                  }
+                },
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
                 mapType: MapType.normal,

@@ -17,6 +17,7 @@ import 'package:kafa2a/core/local_data_source/local_data_source.dart' as _i819;
 import 'package:kafa2a/core/local_data_source/shared_pref_local_data_source.dart'
     as _i90;
 import 'package:kafa2a/core/utils/access_location.dart' as _i766;
+import 'package:kafa2a/core/utils/pusher_notification.dart' as _i599;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i819;
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_shared_pref_local_data_source.dart'
@@ -171,6 +172,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i818.AuthSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i766.AccessLocation>(
         () => _i766.AccessLocation(gh<_i819.LocalDataSource>()));
+    gh.factory<_i599.PusherService>(() => _i599.PusherService(
+          gh<_i361.Dio>(),
+          gh<_i819.AuthLocalDataSource>(),
+        ));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(
         () => _i723.ProviderOffersRepositoryImpl(
               gh<_i633.ProviderOffersRemoteDataSource>(),
