@@ -20,7 +20,7 @@ class _UserHomeTabState extends State<UserHomeTab> {
       children: [
         MapTab(),
         Padding(
-          padding: EdgeInsets.only(bottom: 100.h, left: 20.w, right: 20.w),
+          padding: EdgeInsets.only(bottom: 120.h, left: 20.w, right: 20.w),
           child: DefaultElevatedButton(
             label: AppLocalizations.of(context).requestService,
             onPressed: () => Navigator.pushNamed(

@@ -683,17 +683,65 @@ abstract class AppLocalizations {
   /// **'Rating'**
   String get rating;
 
+  /// No description provided for @waitingForOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for Offer'**
+  String get waitingForOffer;
+
+  /// No description provided for @providerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider Name'**
+  String get providerName;
+
+  /// No description provided for @chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chat;
+
+  /// No description provided for @requestDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Details'**
+  String get requestDetails;
+
+  /// No description provided for @offerDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer Details'**
+  String get offerDetails;
+
+  /// No description provided for @noOffersYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No offers yet'**
+  String get noOffersYet;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// No description provided for @viewAllOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'View All Offers'**
+  String get viewAllOffers;
+
   /// No description provided for @pending.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get pending;
 
-  /// No description provided for @allRequests.
+  /// No description provided for @paid.
   ///
   /// In en, this message translates to:
-  /// **'All Requests'**
-  String get allRequests;
+  /// **'Paid'**
+  String get paid;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

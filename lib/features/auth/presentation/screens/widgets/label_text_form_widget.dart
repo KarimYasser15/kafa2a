@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LabelTextFormWidget extends StatelessWidget {
-  const LabelTextFormWidget({super.key, required this.label});
+  const LabelTextFormWidget({
+    super.key,
+    required this.label,
+    this.fontSize,
+  });
   final String label;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          label,
-        ),
-        SizedBox(
-          height: 10.h,
-        ),
-      ],
+    return Text(
+      label,
+      style: TextStyle(
+        fontSize: fontSize ?? 16.sp,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }

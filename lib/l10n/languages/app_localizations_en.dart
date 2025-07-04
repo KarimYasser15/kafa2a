@@ -303,8 +303,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rating => 'Rating';
 
   @override
+  String get waitingForOffer => 'Waiting for Offer';
+
+  @override
+  String get providerName => 'Provider Name';
+
+  @override
+  String get chat => 'Chat';
+
+  @override
+  String get requestDetails => 'Request Details';
+
+  @override
+  String get offerDetails => 'Offer Details';
+
+  @override
+  String get noOffersYet => 'No offers yet';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get viewAllOffers => 'View All Offers';
+
+  @override
   String get pending => 'Pending';
 
   @override
-  String get allRequests => 'All Requests';
+  String get paid => 'Paid';
 }

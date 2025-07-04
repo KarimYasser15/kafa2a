@@ -97,6 +97,14 @@
   "rejected":"اترفض",
   "requestCancelled": "تم إلغاء الطلب",
   "rating": "تقييم",
-  "pending":"منتظر",
-  "allRequests":"جميع الطلبات"
+  "waitingForOffer": "في انتظار العرض",
+  "providerName": "اسم مقدم الخدمة",
+  "chat": "محادثة",
+  "requestDetails": "تفاصيل الطلب",
+  "offerDetails": "تفاصيل العرض",
+  "noOffersYet": "لا توجد عروض بعد",
+  "viewDetails": "عرض التفاصيل",
+  "viewAllOffers": "عرض كل العروض",
+  "pending": "قيد الانتظار",
+  "paid": "تم الدفع"
 }

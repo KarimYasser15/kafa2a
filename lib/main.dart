@@ -9,6 +9,7 @@ import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_states.dart';
+import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 

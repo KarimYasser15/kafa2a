@@ -8,6 +8,8 @@ import 'package:kafa2a/features/home/user/presentation/screens/user_main_screen.
 import 'package:kafa2a/features/offers/user/presentation/screens/user_offers_screen.dart';
 import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
 import 'package:kafa2a/features/suspension/provider_suspension_main_screen.dart';
+import 'package:kafa2a/features/requests/user/presentation/screens/request_details_screen.dart';
+import 'package:kafa2a/features/requests/user/presentation/screens/all_offers_screen.dart';
 
 class RoutesManager {
   static const String onBoarding = '/onboarding';
@@ -20,6 +22,9 @@ class RoutesManager {
   static const String offerUser = "/offerUser";
   static const String providerProfileDetails = "/providerProfileDetails";
   static const String requestAService = "/requestAService";
+  static const String requestDetails = "/requestDetails";
+  static const String allOffers = "/allOffers";
+
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
       case onBoarding:
@@ -59,6 +64,16 @@ class RoutesManager {
       case homeSuspendedProvider:
         return MaterialPageRoute(
           builder: (context) => ProviderSuspensionMainScreen(),
+        );
+      case requestDetails:
+        final int requestId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder: (context) => RequestDetailsScreen(requestId: requestId),
+        );
+      case allOffers:
+        final int requestId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder: (context) => AllOffersScreen(requestId: requestId),
         );
     }
     return null;
