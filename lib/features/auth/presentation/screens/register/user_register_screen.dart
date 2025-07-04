@@ -19,9 +19,7 @@ import 'package:kafa2a/l10n/languages/app_localizations.dart';
 class UserRegisterScreen extends StatelessWidget {
   UserRegisterScreen({super.key});
 
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-
+  final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
@@ -31,150 +29,140 @@ class UserRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 350.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
-                      color: ColorsManager.blue,
-                      width: 1.2.w,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(
-                      14.0,
-                    ),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TitleWidget(
-                              title: AppLocalizations.of(context).register),
-                          LabelTextFormWidget(
-                              label: AppLocalizations.of(context).name),
-                          DefaultTextFormField(
-                            controller: nameController,
-                            hintText:
-                                AppLocalizations.of(context).enterYourName,
-                            validator: (name) => Validators.validateNull(
-                              name,
-                              AppLocalizations.of(context).nameRequired,
-                            ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Card(
+                elevation: 12,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                shadowColor: ColorsManager.blue.withAlpha((0.25 * 255).toInt()), // Fix deprecation
+                child: Padding(
+                  padding: EdgeInsets.all(24.0),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleWidget(title: AppLocalizations.of(context).register),
+                        SizedBox(height: 10.h),
+                        LabelTextFormWidget(
+                          label: AppLocalizations.of(context).name,
+                          fontSize: 14.sp,
+                        ),
+                        DefaultTextFormField(
+                          controller: nameController,
+                          hintText: AppLocalizations.of(context).enterYourName,
+                          validator: (name) => Validators.validateNull(
+                            name,
+                            AppLocalizations.of(context).nameRequired,
                           ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          LabelTextFormWidget(
-                              label: AppLocalizations.of(context).email),
-                          EmailFormField(
-                            controller: emailController,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          LabelTextFormWidget(
-                              label: AppLocalizations.of(context).password),
-                          PasswordFormField(
-                            controller: passwordController,
-                            validator: (password) =>
-                                Validators.validatePassword(password, context),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          LabelTextFormWidget(
-                              label:
-                                  AppLocalizations.of(context).confirmPassword),
-                          PasswordFormField(
-                            controller: confirmPasswordController,
-                            validator: (confirmPassword) =>
-                                Validators.validateConfirmationPasswords(
-                                    passwordController.text,
-                                    confirmPassword,
-                                    context),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          LabelTextFormWidget(
-                              label: AppLocalizations.of(context).phoneNumber),
-                          DefaultTextFormField(
-                            controller: phoneNumberController,
-                            hintText: AppLocalizations.of(context)
-                                .enterYourPhoneNumber,
-                            validator: (phoneNumber) => Validators.validateNull(
-                                phoneNumber,
-                                AppLocalizations.of(context)
-                                    .phoneNumberRequired),
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Center(
-                            child: BlocListener<AuthCubit, AuthStates>(
-                              listener: (context, state) {
-                                if (state is AuthLoadingState) {
-                                  UIUtils.showLoading(context);
-                                } else if (state is AuthErrorState) {
-                                  UIUtils.hideLoading(context);
-                                  UIUtils.showMessage(state.error);
-                                } else if (state is AuthSuccessState) {
-                                  UIUtils.hideLoading(context);
-                                  Navigator.of(context).pushNamedAndRemoveUntil(
-                                    RoutesManager.homeUser,
-                                    (route) => false,
-                                  );
+                        ),
+                        SizedBox(height: 10.h),
+                        LabelTextFormWidget(
+                          label: AppLocalizations.of(context).email,
+                          fontSize: 14.sp,
+                        ),
+                        EmailFormField(
+                          controller: emailController,
+                          fontSize: 14.sp,
+                        ),
+                        SizedBox(height: 10.h),
+                        LabelTextFormWidget(
+                          label: AppLocalizations.of(context).password,
+                          fontSize: 14.sp,
+                        ),
+                        PasswordFormField(
+                          controller: passwordController,
+                          validator: (password) =>
+                              Validators.validatePassword(password, context),
+                          fontSize: 14.sp,
+                        ),
+                        SizedBox(height: 10.h),
+                        LabelTextFormWidget(
+                          label: AppLocalizations.of(context).confirmPassword,
+                          fontSize: 14.sp,
+                        ),
+                        PasswordFormField(
+                          controller: confirmPasswordController,
+                          validator: (confirmPassword) =>
+                              Validators.validateConfirmationPasswords(
+                                  passwordController.text,
+                                  confirmPassword,
+                                  context),
+                          fontSize: 14.sp,
+                        ),
+                        SizedBox(height: 10.h),
+                        LabelTextFormWidget(
+                          label: AppLocalizations.of(context).phoneNumber,
+                          fontSize: 14.sp,
+                        ),
+                        DefaultTextFormField(
+                          controller: phoneNumberController,
+                          hintText: AppLocalizations.of(context).enterYourPhoneNumber,
+                          validator: (phoneNumber) => Validators.validateNull(
+                              phoneNumber,
+                              AppLocalizations.of(context).phoneNumberRequired),
+                        ),
+                        SizedBox(height: 20.h),
+                        Center(
+                          child: BlocListener<AuthCubit, AuthStates>(
+                            listener: (context, state) {
+                              if (state is AuthLoadingState) {
+                                UIUtils.showLoading(context);
+                              } else if (state is AuthErrorState) {
+                                UIUtils.hideLoading(context);
+                                UIUtils.showMessage(state.error);
+                              } else if (state is AuthSuccessState) {
+                                UIUtils.hideLoading(context);
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  RoutesManager.homeUser,
+                                  (route) => false,
+                                );
+                              }
+                            },
+                            child: DefaultSubmitButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  context.read<AuthCubit>().registerUser(
+                                        RegisterUserRequest(
+                                          email: emailController.text,
+                                          name: nameController.text,
+                                          password: passwordController.text,
+                                          confirmPassword: confirmPasswordController.text,
+                                          phone: phoneNumberController.text,
+                                        ),
+                                      );
                                 }
                               },
-                              child: DefaultSubmitButton(
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    context.read<AuthCubit>().registerUser(
-                                          RegisterUserRequest(
-                                            email: emailController.text,
-                                            name: nameController.text,
-                                            password: passwordController.text,
-                                            confirmPassword:
-                                                confirmPasswordController.text,
-                                            phone: phoneNumberController.text,
-                                          ),
-                                        );
-                                  }
-                                },
-                                label: AppLocalizations.of(context).register,
-                              ),
+                              label: AppLocalizations.of(context).register,
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).alreadyHaveAnAccount,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).alreadyHaveAnAccount,
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      AppLocalizations.of(context).login,
                     ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text(
-                        AppLocalizations.of(context).login,
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),

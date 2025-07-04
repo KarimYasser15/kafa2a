@@ -301,4 +301,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rating => 'تقييم';
+
+  @override
+  String get waitingForOffer => 'في انتظار العرض';
+
+  @override
+  String get providerName => 'اسم مقدم الخدمة';
+
+  @override
+  String get chat => 'محادثة';
+
+  @override
+  String get requestDetails => 'تفاصيل الطلب';
+
+  @override
+  String get offerDetails => 'تفاصيل العرض';
+
+  @override
+  String get noOffersYet => 'لا توجد عروض بعد';
+
+  @override
+  String get viewDetails => 'عرض التفاصيل';
+
+  @override
+  String get viewAllOffers => 'عرض كل العروض';
+
+  @override
+  String get pending => 'قيد الانتظار';
+
+  @override
+  String get paid => 'تم الدفع';
 }

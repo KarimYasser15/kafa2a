@@ -96,5 +96,15 @@
   "notActiveYet" : "Not Active Yet",
   "rejected":"Rejected",
   "requestCancelled": "Request Cancelled!",
-  "rating": "Rating"
+  "rating": "Rating",
+  "waitingForOffer": "Waiting for Offer",
+  "providerName": "Provider Name",
+  "chat": "Chat",
+  "requestDetails": "Request Details",
+  "offerDetails": "Offer Details",
+  "noOffersYet": "No offers yet",
+  "viewDetails": "View Details",
+  "viewAllOffers": "View All Offers",
+  "pending": "Pending",
+  "paid": "Paid"
 }

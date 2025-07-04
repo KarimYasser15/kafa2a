@@ -33,4 +33,19 @@ class SharedPrefLocalDataSource implements LocalDataSource {
     }
     return null;
   }
+
+  @override
+  Future<void> saveToken(String token) async {
+    await _sharedPref.setString(CacheConstants.token, token);
+  }
+
+  @override
+  Future<String?> getToken() async {
+    return _sharedPref.getString(CacheConstants.token);
+  }
+
+  @override
+  Future<void> removeToken() async {
+    await _sharedPref.remove(CacheConstants.token);
+  }
 }

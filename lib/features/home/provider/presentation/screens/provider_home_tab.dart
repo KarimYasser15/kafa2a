@@ -32,7 +32,7 @@ class ProviderHomeTab extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.w, right: 10.w),
                   child: ListView.builder(
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(bottom: 70.h),
+                    padding: EdgeInsets.only(bottom: 100.h),
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: ProviderOfferItemWidget(

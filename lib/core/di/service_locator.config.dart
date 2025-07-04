@@ -103,20 +103,32 @@ import 'package:kafa2a/features/offers/user/domain/use_cases/reject_offer.dart'
     as _i231;
 import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart'
     as _i1017;
+import 'package:kafa2a/features/requests/user/data/data_sources/remote/service_requests_remote_data_source.dart'
+    as _i277;
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_api_data_source.dart'
     as _i652;
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_remote_data_source.dart'
     as _i444;
+import 'package:kafa2a/features/requests/user/data/repository/service_requests_repository_impl.dart'
+    as _i659;
 import 'package:kafa2a/features/requests/user/data/repository/user_requests_repository_impl.dart'
     as _i514;
+import 'package:kafa2a/features/requests/user/domain/repository/service_requests_repository.dart'
+    as _i974;
 import 'package:kafa2a/features/requests/user/domain/repository/user_requests_repository.dart'
     as _i598;
 import 'package:kafa2a/features/requests/user/domain/use_cases/get_accepted_requests.dart'
     as _i995;
+import 'package:kafa2a/features/requests/user/domain/use_cases/get_all_service_requests.dart'
+    as _i960;
 import 'package:kafa2a/features/requests/user/domain/use_cases/get_all_user_requests.dart'
     as _i739;
 import 'package:kafa2a/features/requests/user/domain/use_cases/get_pending_requests.dart'
     as _i314;
+import 'package:kafa2a/features/requests/user/domain/use_cases/get_service_request_by_id.dart'
+    as _i157;
+import 'package:kafa2a/features/requests/user/presentation/cubit/service_requests_cubit.dart'
+    as _i897;
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart'
     as _i838;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -187,26 +199,38 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i519.RequestServiceRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
+    gh.factory<_i277.ServiceRequestsRemoteDataSource>(
+        () => _i277.ServiceRequestsRemoteDataSourceImpl(
+              gh<_i361.Dio>(),
+              gh<_i819.LocalDataSource>(),
+            ));
     gh.singleton<_i944.ProfileCubit>(
         () => _i944.ProfileCubit(gh<_i796.ProfileLocalDataSource>()));
     gh.factory<_i197.GetNearbyCategories>(
         () => _i197.GetNearbyCategories(gh<_i608.MapRepository>()));
+    gh.factory<_i974.ServiceRequestsRepository>(() =>
+        _i659.ServiceRequestsRepositoryImpl(
+            gh<_i277.ServiceRequestsRemoteDataSource>()));
     gh.factory<_i918.MapCubit>(() => _i918.MapCubit(
           gh<_i766.AccessLocation>(),
           gh<_i197.GetNearbyCategories>(),
         ));
     gh.singleton<_i231.RejectOffer>(
         () => _i231.RejectOffer(gh<_i607.OffersRepository>()));
-    gh.lazySingleton<_i888.GetOffers>(
-        () => _i888.GetOffers(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i95.AcceptOffer>(
         () => _i95.AcceptOffer(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i29.CancelRequest>(
         () => _i29.CancelRequest(gh<_i607.OffersRepository>()));
+    gh.lazySingleton<_i888.GetOffers>(
+        () => _i888.GetOffers(gh<_i607.OffersRepository>()));
     gh.factory<_i42.ProviderOffersCubit>(() => _i42.ProviderOffersCubit(
           gh<_i995.GetAllRequests>(),
           gh<_i616.SendOffer>(),
         ));
+    gh.factory<_i960.GetAllServiceRequests>(() =>
+        _i960.GetAllServiceRequests(gh<_i974.ServiceRequestsRepository>()));
+    gh.factory<_i157.GetServiceRequestById>(() =>
+        _i157.GetServiceRequestById(gh<_i974.ServiceRequestsRepository>()));
     gh.factory<_i598.UserRequestsRepository>(
         () => _i514.UserRequestsRepositoryImpl(
               gh<_i819.AuthLocalDataSource>(),
@@ -241,6 +265,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i314.GetPendingRequests>(),
           gh<_i995.GetAcceptedRequests>(),
           gh<_i739.GetAllUserRequests>(),
+        ));
+    gh.factory<_i897.ServiceRequestsCubit>(() => _i897.ServiceRequestsCubit(
+          gh<_i960.GetAllServiceRequests>(),
+          gh<_i157.GetServiceRequestById>(),
         ));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),

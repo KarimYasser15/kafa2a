@@ -6,67 +6,50 @@ import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/features/my_profile/data/models/language.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
 
-class ChangeLanguageDropDown extends StatelessWidget {
+class ChangeLanguageDropDown extends StatefulWidget {
   const ChangeLanguageDropDown({super.key});
 
   @override
+  State<ChangeLanguageDropDown> createState() => _ChangeLanguageDropDownState();
+}
+
+class _ChangeLanguageDropDownState extends State<ChangeLanguageDropDown> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: ColorsManager.blue,
+    final cubit = context.watch<ProfileCubit>();
+    final currentLangCode = cubit.selectedLanguageCode;
+    final nextLangCode = currentLangCode == 'ar' ? 'en' : 'ar';
+    final nextLangLabel = currentLangCode == 'ar' ? 'ENG' : 'عربي';
+
+    return InkWell(
+      onTap: () {
+        final nextLang =
+            languages.firstWhere((lang) => lang.code == nextLangCode);
+        cubit.changeLanguage(nextLang); // This is your existing logic!
+      },
+      borderRadius: BorderRadius.circular(12.r),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          border: Border.all(color: ColorsManager.blue),
+          borderRadius: BorderRadius.circular(12.r),
         ),
-        borderRadius: BorderRadius.circular(
-          12.r,
-        ),
-      ),
-      child: DropdownButton(
-        underline: Container(
-          color: Colors.transparent,
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        borderRadius: BorderRadius.circular(12.r),
-        style: GoogleFonts.inter(
-            color: Colors.black,
-            locale: Locale(context.read<ProfileCubit>().getLanguage()),
-            fontSize: 16.sp,
-            textStyle: TextStyle(
-              overflow: TextOverflow.ellipsis,
-            )),
-        value: null,
-        isExpanded: true,
-        items: languages.map((language) {
-          return DropdownMenuItem<Language>(
-            value: language,
-            child: Text(language.name),
-          );
-        }).toList(),
-        onChanged: (value) {
-          if (value != null) {
-            context.read<ProfileCubit>().changeLanguage(value);
-          }
-        },
-        hint: Row(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Spacer(),
             Text(
-                languages
-                    .firstWhere(
-                      (lang) =>
-                          lang.code ==
-                          context.read<ProfileCubit>().getLanguage(),
-                    )
-                    .name,
-                style: GoogleFonts.inter(
-                    color: Colors.black,
-                    fontSize: 16.sp,
-                    textStyle: TextStyle(overflow: TextOverflow.ellipsis))),
-            Spacer(),
+              nextLangLabel,
+              style: GoogleFonts.inter(
+                fontSize: 16.sp,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(width: 8.w),
             Icon(
               Icons.language,
-              color: ColorsManager.blue,
               size: 20,
-              weight: 30,
+              color: ColorsManager.blue,
             ),
           ],
         ),

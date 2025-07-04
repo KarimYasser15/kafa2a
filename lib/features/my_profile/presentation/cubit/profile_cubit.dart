@@ -17,4 +17,6 @@ class ProfileCubit extends Cubit<ProfileStates> {
   String getLanguage() {
     return _profileLocalDataSource.getLanguage();
   }
+
+  String get selectedLanguageCode => getLanguage();
 }
