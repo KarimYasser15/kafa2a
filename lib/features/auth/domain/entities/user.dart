@@ -7,9 +7,9 @@ class User {
     required this.phone,
   });
 
-  int id;
-  String email;
-  String name;
-  String phone;
-  String type;
+  final int id;
+  final String email;
+  final String name;
+  final String phone;
+  final String type;
 }

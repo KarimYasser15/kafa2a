@@ -2,18 +2,19 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class RegisterProviderRequest {
-  RegisterProviderRequest({
-    required this.email,
-    required this.name,
-    required this.password,
-    required this.confirmPassword,
-    required this.phone,
-    required this.nationalId,
-    required this.address,
-    required this.service,
-    required this.policeCertificate,
-    required this.selfie,
-  });
+  RegisterProviderRequest(
+      {required this.email,
+      required this.name,
+      required this.password,
+      required this.confirmPassword,
+      required this.phone,
+      required this.nationalId,
+      required this.address,
+      required this.serviceId,
+      required this.policeCertificate,
+      required this.selfie,
+      required this.lat,
+      required this.lng});
 
   final String address;
   final String confirmPassword;
@@ -24,7 +25,9 @@ class RegisterProviderRequest {
   final String phone;
   final File policeCertificate;
   final File selfie;
-  final String service;
+  final int serviceId;
+  final double lat;
+  final double lng;
 
   Future<FormData> toFormData() async {
     return FormData.fromMap({
@@ -32,7 +35,7 @@ class RegisterProviderRequest {
       'email': email,
       'password': password,
       'password_confirmation': confirmPassword,
-      'service': service,
+      'service_id': serviceId,
       'national_id': nationalId,
       'address': address,
       'phone': phone,
@@ -42,6 +45,8 @@ class RegisterProviderRequest {
       'selfie': await MultipartFile.fromFile(
         selfie.path,
       ),
+      'lat': lat,
+      'lng': lng
     });
   }
 }

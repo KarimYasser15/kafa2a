@@ -6,11 +6,18 @@ import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/app_bloc_observer.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart';
+import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
+import 'package:kafa2a/features/my_profile/presentation/cubit/profile_states.dart';
+import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
   await configureDependencies();
+  await FlutterLocalization.instance.ensureInitialized();
   runApp(const Kafa2aApp());
 }
 
@@ -19,16 +26,27 @@ class Kafa2aApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt.get<AuthCubit>(),
-      child: ScreenUtilInit(
-        designSize: Size(375, 812),
-        builder: (context, child) => MaterialApp(
-          initialRoute: RoutesManager.onBoarding,
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: RoutesManager.router,
-          theme: AppTheme.lightTheme,
-        ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt.get<AuthCubit>()),
+        BlocProvider(create: (_) => getIt.get<ProfileCubit>()),
+        BlocProvider(create: (_) => getIt.get<RequestServiceCubit>()),
+      ],
+      child: BlocBuilder<ProfileCubit, ProfileStates>(
+        builder: (context, state) {
+          return ScreenUtilInit(
+            designSize: Size(375, 812),
+            builder: (context, child) => MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(context.read<ProfileCubit>().getLanguage()),
+              initialRoute: RoutesManager.onBoarding,
+              debugShowCheckedModeBanner: false,
+              onGenerateRoute: RoutesManager.router,
+              theme: AppTheme.lightTheme,
+            ),
+          );
+        },
       ),
     );
   }

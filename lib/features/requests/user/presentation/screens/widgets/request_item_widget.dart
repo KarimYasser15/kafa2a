@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_requests_response/pending_requests.dart';
+import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
+import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class RequestItemWidget extends StatelessWidget {
   const RequestItemWidget({super.key, required this.pendingRequests});
-  final PendingRequests pendingRequests;
+  final AllRequests pendingRequests;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, RoutesManager.offerUser),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RoutesManager.offerUser,
+          arguments: pendingRequests.id,
+        ).then((value) {
+          if (value == true) {
+            if (context.mounted) {
+              context.read<UserRequestsCubit>().getAllRequests();
+            }
+          }
+        });
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Container(
@@ -31,9 +46,11 @@ class RequestItemWidget extends StatelessWidget {
                   children: [
                     Center(
                         child: Text(
-                      pendingRequests.price,
+                      "${AppLocalizations.of(context).title} :${pendingRequests.title} ,${AppLocalizations.of(context).price}: ${pendingRequests.price}",
                       style: TextStyle(
-                          fontSize: 17.sp, fontWeight: FontWeight.bold),
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     )),
                     SizedBox(
                       height: 10.h,
@@ -45,7 +62,7 @@ class RequestItemWidget extends StatelessWidget {
                           color: ColorsManager.blue,
                         ),
                         Text(
-                          StringsManager.service,
+                          AppLocalizations.of(context).service,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -54,7 +71,9 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      pendingRequests.service.name,
+                      context.read<ProfileCubit>().getLanguage() == 'ar'
+                          ? pendingRequests.service.nameAr!
+                          : pendingRequests.service.nameEn!,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -63,7 +82,7 @@ class RequestItemWidget extends StatelessWidget {
                       children: [
                         Icon(Icons.description, color: ColorsManager.blue),
                         Text(
-                          StringsManager.description,
+                          AppLocalizations.of(context).description,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -84,7 +103,7 @@ class RequestItemWidget extends StatelessWidget {
                           color: Colors.red,
                         ),
                         Text(
-                          StringsManager.location,
+                          AppLocalizations.of(context).location,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -93,7 +112,7 @@ class RequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      pendingRequests.location,
+                      pendingRequests.lat,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -103,7 +122,7 @@ class RequestItemWidget extends StatelessWidget {
                         Icon(Icons.access_time_rounded,
                             color: ColorsManager.blue),
                         Text(
-                          StringsManager.time,
+                          AppLocalizations.of(context).time,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -121,7 +140,7 @@ class RequestItemWidget extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 30.h,
-                color: Colors.green,
+                color: getStatusColor(pendingRequests.status.toUpperCase()),
                 child: Center(
                     child: Text(
                   pendingRequests.status.toUpperCase(),
@@ -134,5 +153,16 @@ class RequestItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color getStatusColor(String status) {
+    if (status == 'PENDING') {
+      return Color.fromARGB(255, 149, 149, 50);
+    }
+    if (status == 'ACCEPTED') {
+      return Colors.green;
+    } else {
+      return Colors.red;
+    }
   }
 }

@@ -1,45 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kafa2a/config/app_styles.dart';
-import 'package:kafa2a/config/assets_manager.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
+import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_states.dart';
-import 'package:kafa2a/features/my_profile/data/models/language.dart';
+import 'package:kafa2a/features/my_profile/presentation/screens/provider/widgets/provider_profile_data_widget.dart';
+import 'package:kafa2a/features/my_profile/presentation/screens/widgets/change_language_drop_down.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
-class MyProfileScreen extends StatelessWidget {
-  const MyProfileScreen({super.key});
+class ProviderProfileScreen extends StatelessWidget {
+  const ProviderProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Language> languages = [
-      Language(name: "English", code: "en"),
-      Language(name: "العربية", code: "ar")
-    ];
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context).myProfile,
+          style: AppStyles.title,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(top: 40.h, left: 10.w, right: 10.w),
+            padding: const EdgeInsets.all(20),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    StringsManager.myProfile,
-                    style: AppStyles.title,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
                   Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.only(top: 15.0),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
@@ -57,9 +50,32 @@ class MyProfileScreen extends StatelessWidget {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(
-                                      AssetsManager.profileImage,
-                                      width: 100.w,
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(50.r),
+                                      child: Image.network(
+                                        '${ApiConstants.baseImageUrl}${context.read<AuthCubit>().provider!.selfiePath}',
+                                        width: 100.w,
+                                        height: 100.w,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Icon(Icons.person,
+                                              size: 100.w, color: Colors.grey);
+                                        },
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          }
+                                          return SizedBox(
+                                            width: 100.w,
+                                            height: 100.w,
+                                            child: Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                          );
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 10.h,
@@ -86,7 +102,8 @@ class MyProfileScreen extends StatelessWidget {
                                           Radius.circular(8.r)),
                                       onTap: () {},
                                       child: Text(
-                                        StringsManager.editProfilePhoto,
+                                        AppLocalizations.of(context)
+                                            .editProfilePhoto,
                                         style: TextStyle(
                                             color: ColorsManager.blue,
                                             fontSize: 20.sp,
@@ -97,77 +114,39 @@ class MyProfileScreen extends StatelessWidget {
                                     )
                                   ]),
                             ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Text(
-                              "Name: Saif Ahmed",
-                              style: TextStyle(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              "Email: saif@gmail.com",
-                              style: TextStyle(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(height: 10.h),
-                            Text(
-                              "Phone Number: 01117037134",
-                              style: TextStyle(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w400),
-                            ),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).name,
+                                data: context.read<AuthCubit>().provider!.name),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).email,
+                                data:
+                                    context.read<AuthCubit>().provider!.email),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).phoneNumber,
+                                data:
+                                    context.read<AuthCubit>().provider!.phone),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).address,
+                                data: context
+                                    .read<AuthCubit>()
+                                    .provider!
+                                    .address),
+                            ProviderProfileDataWidget(
+                                label: AppLocalizations.of(context).service,
+                                data: context
+                                    .read<AuthCubit>()
+                                    .provider!
+                                    .serviceId
+                                    .toString()),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: ColorsManager.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(12.r)),
-                    width: 320.w,
-                    child: DropdownButton(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      borderRadius: BorderRadius.circular(12.r),
-                      style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: 16.sp,
-                          textStyle:
-                              TextStyle(overflow: TextOverflow.ellipsis)),
-                      value: null,
-                      isExpanded: true,
-                      items: languages.map((language) {
-                        return DropdownMenuItem<Language>(
-                          value: language,
-                          child: Text(language.name),
-                        );
-                      }).toList(),
-                      onChanged: (value) {},
-                      hint: Row(
-                        children: [
-                          Spacer(),
-                          Text(StringsManager.changeLanguage,
-                              style: GoogleFonts.inter(
-                                  color: Colors.black,
-                                  fontSize: 16.sp,
-                                  textStyle: TextStyle(
-                                      overflow: TextOverflow.ellipsis))),
-                          Spacer(),
-                          Icon(
-                            Icons.language,
-                            color: ColorsManager.blue,
-                            size: 20,
-                            weight: 30,
-                          ),
-                        ],
-                      ),
-                    ),
+                  SizedBox(
+                    height: 20.h,
                   ),
+                  ChangeLanguageDropDown(),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -196,7 +175,7 @@ class MyProfileScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Spacer(),
-                          Text(StringsManager.logOut),
+                          Text(AppLocalizations.of(context).logOut),
                           Spacer(),
                           Icon(
                             Icons.logout,

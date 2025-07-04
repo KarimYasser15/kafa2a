@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_states.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/widgets/provider_offer_item_widget.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class ProviderHomeTab extends StatelessWidget {
   const ProviderHomeTab({super.key});
@@ -17,7 +17,7 @@ class ProviderHomeTab extends StatelessWidget {
       create: (context) => getIt.get<ProviderOffersCubit>(),
       child: Scaffold(
           appBar: AppBar(
-            title: Text(StringsManager.home),
+            title: Text(AppLocalizations.of(context).home),
           ),
           body: BlocBuilder<ProviderOffersCubit, ProviderOffersStates>(
             builder: (context, state) {
@@ -32,7 +32,7 @@ class ProviderHomeTab extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.w, right: 10.w),
                   child: ListView.builder(
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(bottom: 70.h),
+                    padding: EdgeInsets.only(bottom: 100.h),
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: ProviderOfferItemWidget(

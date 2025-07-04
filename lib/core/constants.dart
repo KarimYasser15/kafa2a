@@ -1,5 +1,7 @@
 class ApiConstants {
+  // 192.168.1.15
   static const String baseUrl = 'http://10.0.2.2:8000/api/';
+  static const String baseImageUrl = "http://10.0.2.2:8000/storage/";
   static const String logOutEndPoint = 'logout';
   static const String loginProviderEndPoint = 'token';
   static const String loginUserEndPoint = 'token';
@@ -11,13 +13,35 @@ class ApiConstants {
   static sendOffer(int id) => 'request/$id/offer';
   static const String getAcceptedUserOffers = "/accepted-offers";
   static const String getAllPendingUserRequests = "service-requests";
+  static const String getAllUserRequests = "all-my-service-requests";
+  static String getOffers(int id) => "service-requests/$id";
+  static acceptOffer(int id) => "offers/$id/accept";
+  static rejectOffer(int id) => "offers/$id/reject";
+  static const String getNearbyProviders = "nearby-providers";
 }
 
 class CacheConstants {
   static const String token = "token";
+  static const String language = "language";
+  static const String latitude = 'lat';
+  static const String longitude = 'lng';
 }
 
 class UserType {
   static const String user = "user";
   static const String provider = "provider";
+}
+
+class ProviderStatus {
+  static const String approved = "approved";
+  static const String pending = "pending";
+  static const String rejected = "rejected";
+  static const String suspended = "suspended";
+}
+
+class FilterRequestsStatus {
+  static const String pending = "pending";
+  static const String accepted = "accepted";
+  static const String cancelled = "canceled";
+  static const String paid = "paid";
 }

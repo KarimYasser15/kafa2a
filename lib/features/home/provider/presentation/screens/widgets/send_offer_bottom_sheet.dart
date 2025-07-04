@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/core/messages.dart';
 import 'package:kafa2a/core/utils/validators.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/core/widgets/offer_text_form_field.dart';
@@ -11,6 +9,7 @@ import 'package:kafa2a/features/home/provider/data/models/get_all_requests_respo
 import 'package:kafa2a/features/home/provider/data/models/send_offer_request.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_states.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class SendOfferBottomSheet extends StatefulWidget {
   const SendOfferBottomSheet({super.key, required this.request});
@@ -50,14 +49,14 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
               height: 5.h,
             ),
             Text(
-              "Service: ${widget.request.serviceId}",
+              "${AppLocalizations.of(context).service}: ${widget.request.serviceId}",
               style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 5.h,
             ),
             Text(
-              "Description:",
+              "${AppLocalizations.of(context).description}:",
               style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -73,7 +72,7 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
               height: 5.h,
             ),
             Text(
-              "Location: ElDokki Street, Giza",
+              "${AppLocalizations.of(context).location}: ElDokki Street, Giza",
               style: TextStyle(
                 fontSize: 20.sp,
               ),
@@ -82,23 +81,23 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
               height: 10.h,
             ),
             Text(
-              "Time:  ${widget.request.scheduledAt}",
+              "${AppLocalizations.of(context).time}:  ${widget.request.scheduledAt}",
               style: TextStyle(fontSize: 25.sp),
             ),
             SizedBox(
               height: 5.h,
             ),
             Center(
-                child: Text("Your Offer Details",
+                child: Text(AppLocalizations.of(context).yourOfferDetails,
                     style: TextStyle(
                         fontSize: 25.sp, fontWeight: FontWeight.bold))),
             Form(
               key: formKey,
               child: OfferTextFormField(
                   controller: priceController,
-                  validator: (offer) =>
-                      Validators.validateNull(offer, Messages.priceRequired),
-                  hintText: "Enter Your Offer"),
+                  validator: (offer) => Validators.validateNull(
+                      offer, AppLocalizations.of(context).priceRequired),
+                  hintText: AppLocalizations.of(context).enterYourOffer),
             ),
             SizedBox(
               height: 15.h,
@@ -121,18 +120,22 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                       context.read<ProviderOffersCubit>().getAllRequests();
                     }
                   },
-                  builder: (context, state) => DefaultSubmitButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          context.read<ProviderOffersCubit>().sendOffer(
-                                SendOfferRequest(
-                                  price: int.parse(priceController.text),
-                                  offerId: widget.request.id,
-                                ),
-                              );
-                        }
-                      },
-                      label: StringsManager.sendOffer),
+                  builder: (context, state) => SizedBox(
+                    width: 150.w,
+                    height: 45.h,
+                    child: DefaultSubmitButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<ProviderOffersCubit>().sendOffer(
+                                  SendOfferRequest(
+                                    price: int.parse(priceController.text),
+                                    offerId: widget.request.id,
+                                  ),
+                                );
+                          }
+                        },
+                        label: AppLocalizations.of(context).sendOffer),
+                  ),
                 ),
                 SizedBox(
                   width: 20.w,
@@ -141,7 +144,7 @@ class _SendOfferBottomSheetState extends State<SendOfferBottomSheet> {
                     onPressed: () => Navigator.of(context).pop(),
                     style:
                         ElevatedButton.styleFrom(fixedSize: Size(150.w, 45.h)),
-                    child: Text(StringsManager.close))
+                    child: Text(AppLocalizations.of(context).close))
               ],
             )
           ],

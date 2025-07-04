@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/widgets/default_submit_button.dart';
 import 'package:kafa2a/features/home/provider/data/models/get_all_requests_response/all_provider_requests.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/widgets/send_offer_bottom_sheet.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class ProviderOfferItemWidget extends StatelessWidget {
   const ProviderOfferItemWidget({super.key, required this.request});
@@ -38,7 +38,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                         color: ColorsManager.blue,
                       ),
                       Text(
-                        request.user.name,
+                        "${request.user.name} - ${request.title}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20.sp),
                       ),
@@ -48,7 +48,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     height: 10.h,
                   ),
                   Text(
-                    "${StringsManager.price}: ${request.price}",
+                    "${AppLocalizations.of(context).price}: ${request.price}",
                     style:
                         TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
@@ -62,7 +62,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                         color: ColorsManager.blue,
                       ),
                       Text(
-                        StringsManager.service,
+                        AppLocalizations.of(context).service,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -80,7 +80,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     children: [
                       Icon(Icons.description, color: ColorsManager.blue),
                       Text(
-                        StringsManager.description,
+                        AppLocalizations.of(context).description,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -101,7 +101,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                         color: Colors.red,
                       ),
                       Text(
-                        StringsManager.location,
+                        AppLocalizations.of(context).location,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -110,7 +110,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     height: 5.h,
                   ),
                   Text(
-                    "ElDokki Street, Giza",
+                    request.address ?? "",
                   ),
                   SizedBox(
                     height: 10.h,
@@ -120,7 +120,7 @@ class ProviderOfferItemWidget extends StatelessWidget {
                       Icon(Icons.access_time_rounded,
                           color: ColorsManager.blue),
                       Text(
-                        StringsManager.time,
+                        AppLocalizations.of(context).time,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -132,21 +132,33 @@ class ProviderOfferItemWidget extends StatelessWidget {
                     request.scheduledAt,
                   ),
                   SizedBox(height: 10.h),
+                  Text(
+                      "${AppLocalizations.of(context).status}: ${request.status.toUpperCase()}",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    height: 10.h,
+                  )
                 ],
               ),
             ),
-            DefaultSubmitButton(
-              onPressed: () => showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (_) => BlocProvider.value(
-                        value: context.read<ProviderOffersCubit>(),
-                        child: SendOfferBottomSheet(
-                          request: request,
-                        ),
-                      )),
-              label: StringsManager.offer,
-            ),
+            if (!request.hasOffered)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: DefaultSubmitButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (_) => BlocProvider.value(
+                              value: context.read<ProviderOffersCubit>(),
+                              child: SendOfferBottomSheet(
+                                request: request,
+                              ),
+                            ));
+                  },
+                  label: AppLocalizations.of(context).offer,
+                ),
+              ),
             SizedBox(
               height: 10.h,
             )

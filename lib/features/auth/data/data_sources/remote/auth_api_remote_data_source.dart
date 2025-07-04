@@ -79,7 +79,6 @@ class AuthApiRemoteDataSource extends AuthRemoteDataSource {
       );
       return AuthResponse.fromJson(response.data);
     } catch (exception) {
-      print(exception.toString());
       String errorMessage = Messages.failedToRegister;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

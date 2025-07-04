@@ -11,7 +11,13 @@ class UserModel {
     this.selfiePath,
     this.nationalId,
     this.gender,
-    this.service,
+    this.serviceId,
+    this.lat,
+    this.lng,
+    this.status,
+    this.suspendReason,
+    this.rating,
+    this.review,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -28,7 +34,13 @@ class UserModel {
         selfiePath: json['selfie_path'] as String?,
         nationalId: json['national_id'] as String?,
         gender: json['gender'] as String?,
-        service: json['service'] as String?,
+        serviceId: json['service_id'] as String?,
+        lat: json['lat'] as double?,
+        lng: json['lng'] as double?,
+        status: json['status'] as String?,
+        suspendReason: json['suspend_reason'] as String?,
+        rating: json['rating'] as int?,
+        review: json['review'] as dynamic,
         createdAt: DateTime.parse(json['created_at'] as String),
         updatedAt: DateTime.parse(json['updated_at'] as String),
       );
@@ -44,7 +56,13 @@ class UserModel {
   String phone;
   String? policeCertificatePath;
   String? selfiePath;
-  String? service;
+  String? serviceId;
   String type;
   DateTime updatedAt;
+  double? lat;
+  double? lng;
+  String? status;
+  String? suspendReason;
+  int? rating;
+  dynamic review;
 }

@@ -7,9 +7,9 @@ import 'package:kafa2a/features/home/user/data/models/request_service_response.d
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 import 'package:kafa2a/features/home/user/domain/use_cases/get_all_categories.dart';
 import 'package:kafa2a/features/home/user/domain/use_cases/request_service.dart';
-import 'package:kafa2a/features/home/user/presentation/cubit/request_service_states.dart';
+import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_states.dart';
 
-@injectable
+@Injectable()
 class RequestServiceCubit extends Cubit<RequestServiceStates> {
   RequestServiceCubit(this._getAllCategories, this._requestService)
       : super(RequestServiceInitialState()) {
@@ -18,14 +18,22 @@ class RequestServiceCubit extends Cubit<RequestServiceStates> {
 
   final GetAllCategories _getAllCategories;
   final RequestService _requestService;
+  List<Category>? categories;
 
   Future<void> getAllCategories() async {
-    emit(GetCategoriesLoadingState());
-    Either<List<Category>, Failure> response = await _getAllCategories();
-    response.fold(
-      (categories) => emit(GetCategoriesSuccessState(categories)),
-      (error) => emit(GetCategoriesErrorState(error.message)),
-    );
+    if (categories != null) {
+      emit(GetCategoriesSuccessState(categories!));
+    } else {
+      emit(GetCategoriesLoadingState());
+      Either<List<Category>, Failure> response = await _getAllCategories();
+      response.fold(
+        (categoriesSuccess) {
+          categories = categoriesSuccess;
+          emit(GetCategoriesSuccessState(categoriesSuccess));
+        },
+        (error) => emit(GetCategoriesErrorState(error.message)),
+      );
+    }
   }
 
   Future<void> requestService(RequestServiceRequest requestService) async {
@@ -33,7 +41,10 @@ class RequestServiceCubit extends Cubit<RequestServiceStates> {
     final Either<RequestServiceResponse, Failure> response =
         await _requestService(requestService);
     response.fold(
-      (_) => emit(RequestServiceSuccessState()),
+      (_) {
+        emit(RequestServiceSuccessState());
+        emit(GetCategoriesSuccessState(categories!));
+      },
       (error) => emit(RequestServiceErrorState(error.message)),
     );
   }

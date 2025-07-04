@@ -4,7 +4,7 @@ import 'package:kafa2a/core/error/failure.dart';
 import 'package:kafa2a/features/home/user/domain/entities/category.dart';
 import 'package:kafa2a/features/home/user/domain/repository/request_service_repository.dart';
 
-@singleton
+@injectable
 class GetAllCategories {
   final RequestServiceRepository _requestRepository;
   GetAllCategories(this._requestRepository);

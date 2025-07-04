@@ -9,7 +9,7 @@ class GetAllUserPendingRequestsResponse {
   int? lastPage;
   String? lastPageUrl;
   List<LinkModel>? links;
-  dynamic nextPageUrl;
+  String? nextPageUrl;
   String? path;
   int? perPage;
   String? prevPageUrl;
@@ -46,7 +46,7 @@ class GetAllUserPendingRequestsResponse {
       links: (json['links'] as List<dynamic>?)
           ?.map((e) => LinkModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextPageUrl: json['next_page_url'] as dynamic,
+      nextPageUrl: json['next_page_url'] as String?,
       path: json['path'] as String?,
       perPage: json['per_page'] as int?,
       prevPageUrl: json['prev_page_url'] as String?,

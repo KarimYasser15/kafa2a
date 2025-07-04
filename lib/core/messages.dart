@@ -31,4 +31,8 @@ class Messages {
   static const String noPendingRequetsAtTheMoment =
       "No Pending Requests At The Moment!";
   static const String noRequestsAtTheMoment = "No Requests At The Moment!";
+  static const String noOffersAtTheMoment = "No Offers At The Moment!";
+  static const String somethingWentWrong = "Something went wrong";
+  static const String failedToGetNearbyProviders =
+      "Failed To Get Nearby Providers";
 }
