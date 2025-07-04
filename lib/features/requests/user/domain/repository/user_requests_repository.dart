@@ -7,5 +7,6 @@ import 'package:kafa2a/features/requests/user/data/models/get_all_user_pending_r
 abstract class UserRequestsRepository {
   Future<Either<List<PendingRequests>, Failure>> getAllPendingRequests();
   Future<Either<GetAllUserAcceptedOffers, Failure>> getAllAcceptedOffers();
-  Future<Either<List<AllRequests>, Failure>> getAllRequests();
+  Future<Either<List<AllRequests>, Failure>> getAllRequests(
+      {String status = ""});
 }

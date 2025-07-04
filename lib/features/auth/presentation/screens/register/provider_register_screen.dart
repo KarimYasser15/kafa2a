@@ -34,7 +34,8 @@ class ProviderRegisterScreen extends StatefulWidget {
 
 class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
@@ -71,7 +72,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r),
                 ),
-                shadowColor: ColorsManager.blue.withAlpha((0.25 * 255).toInt()), // Fix deprecation
+                shadowColor: ColorsManager.blue
+                    .withAlpha((0.25 * 255).toInt()), // Fix deprecation
                 child: Padding(
                   padding: EdgeInsets.all(24.0),
                   child: BlocBuilder<RequestServiceCubit, RequestServiceStates>(
@@ -93,7 +95,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               ),
                               DefaultTextFormField(
                                 controller: nameController,
-                                hintText: AppLocalizations.of(context).enterYourName,
+                                hintText:
+                                    AppLocalizations.of(context).enterYourName,
                                 validator: (name) => Validators.validateNull(
                                   name,
                                   AppLocalizations.of(context).nameRequired,
@@ -116,12 +119,14 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               PasswordFormField(
                                 controller: passwordController,
                                 validator: (password) =>
-                                    Validators.validatePassword(password, context),
+                                    Validators.validatePassword(
+                                        password, context),
                                 fontSize: 14.sp,
                               ),
                               SizedBox(height: 10.h),
                               LabelTextFormWidget(
-                                label: AppLocalizations.of(context).confirmPassword,
+                                label: AppLocalizations.of(context)
+                                    .confirmPassword,
                                 fontSize: 14.sp,
                               ),
                               PasswordFormField(
@@ -140,10 +145,13 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               ),
                               DefaultTextFormField(
                                 controller: phoneNumberController,
-                                hintText: AppLocalizations.of(context).enterYourPhoneNumber,
-                                validator: (phoneNumber) => Validators.validateNull(
-                                    phoneNumber,
-                                    AppLocalizations.of(context).phoneNumberRequired),
+                                hintText: AppLocalizations.of(context)
+                                    .enterYourPhoneNumber,
+                                validator: (phoneNumber) =>
+                                    Validators.validateNull(
+                                        phoneNumber,
+                                        AppLocalizations.of(context)
+                                            .phoneNumberRequired),
                               ),
                               SizedBox(height: 10.h),
                               LabelTextFormWidget(
@@ -152,15 +160,19 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               ),
                               DefaultTextFormField(
                                 controller: nationalIdController,
-                                hintText: AppLocalizations.of(context).enterYourNationalId,
-                                validator: (nationalId) => Validators.validateNull(
-                                    nationalId,
-                                    AppLocalizations.of(context).nationalIdRequired),
+                                hintText: AppLocalizations.of(context)
+                                    .enterYourNationalId,
+                                validator: (nationalId) =>
+                                    Validators.validateNull(
+                                        nationalId,
+                                        AppLocalizations.of(context)
+                                            .nationalIdRequired),
                               ),
                               SizedBox(height: 10.h),
                               CategoriesDropDownWidget(
                                 label: AppLocalizations.of(context).category,
-                                hint: AppLocalizations.of(context).selectCategory,
+                                hint:
+                                    AppLocalizations.of(context).selectCategory,
                                 categories: state.categories,
                                 onChanged: (value) {
                                   selectedCategory = value;
@@ -169,7 +181,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               ),
                               ServicesDropDownWidget(
                                 label: AppLocalizations.of(context).services,
-                                hint: AppLocalizations.of(context).selectService,
+                                hint:
+                                    AppLocalizations.of(context).selectService,
                                 services: selectedCategory?.services,
                                 onChanged: (value) {
                                   selectedService = value.id;
@@ -182,10 +195,12 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               ),
                               DefaultTextFormField(
                                 controller: addressController,
-                                hintText: AppLocalizations.of(context).enterYourAddress,
+                                hintText: AppLocalizations.of(context)
+                                    .enterYourAddress,
                                 validator: (address) => Validators.validateNull(
                                     address,
-                                    AppLocalizations.of(context).addressRequired),
+                                    AppLocalizations.of(context)
+                                        .addressRequired),
                               ),
                               SizedBox(height: 10.h),
                               BlocBuilder<AuthCubit, AuthStates>(
@@ -193,13 +208,16 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                     current is LocationNameSuccessState,
                                 builder: (context, state) {
                                   String locationName =
-                                      AppLocalizations.of(context).pickYourLocation;
+                                      AppLocalizations.of(context)
+                                          .pickYourLocation;
                                   if (state is LocationNameSuccessState) {
                                     locationName = state.locationName;
                                   }
                                   return DefaultElevatedButton(
                                     onPressed: () async {
-                                      await context.read<AuthCubit>().getLocation();
+                                      await context
+                                          .read<AuthCubit>()
+                                          .getLocation();
                                       if (context.mounted) {
                                         final pickedLatLng =
                                             await Navigator.push<LatLng>(
@@ -209,7 +227,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                                 const PickLocationScreen(),
                                           ),
                                         );
-                                        if (pickedLatLng != null && context.mounted) {
+                                        if (pickedLatLng != null &&
+                                            context.mounted) {
                                           selectedLatLng = pickedLatLng;
                                         }
                                       }
@@ -220,12 +239,15 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                               ),
                               SizedBox(height: 10.h),
                               LabelTextFormWidget(
-                                label: AppLocalizations.of(context).policeClearanceCertificate,
+                                label: AppLocalizations.of(context)
+                                    .policeClearanceCertificate,
                                 fontSize: 14.sp,
                               ),
                               DefaultElevatedButton(
                                 onPressed: () {
-                                  context.read<AuthCubit>().pickImageFromGallery();
+                                  context
+                                      .read<AuthCubit>()
+                                      .pickImageFromGallery();
                                 },
                                 label: AppLocalizations.of(context).pickImage,
                               ),
@@ -237,17 +259,21 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                   final image = context.read<AuthCubit>().image;
                                   return image != null
                                       ? Image.file(image)
-                                      : Text(AppLocalizations.of(context).noImageSelected);
+                                      : Text(AppLocalizations.of(context)
+                                          .noImageSelected);
                                 },
                               ),
                               SizedBox(height: 10.h),
                               LabelTextFormWidget(
-                                label: AppLocalizations.of(context).uploadSelfie,
+                                label:
+                                    AppLocalizations.of(context).uploadSelfie,
                                 fontSize: 14.sp,
                               ),
                               DefaultElevatedButton(
                                 onPressed: () {
-                                  context.read<AuthCubit>().pickImageFromCamera();
+                                  context
+                                      .read<AuthCubit>()
+                                      .pickImageFromCamera();
                                 },
                                 label: AppLocalizations.of(context).takeSelfie,
                               ),
@@ -256,10 +282,12 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                 buildWhen: (previous, current) =>
                                     current is AuthSelfiePickedState,
                                 builder: (context, state) {
-                                  final image = context.read<AuthCubit>().cameraImage;
+                                  final image =
+                                      context.read<AuthCubit>().cameraImage;
                                   return image != null
                                       ? Image.file(image)
-                                      : Text(AppLocalizations.of(context).noImageSelected);
+                                      : Text(AppLocalizations.of(context)
+                                          .noImageSelected);
                                 },
                               ),
                               SizedBox(height: 20.h),
@@ -273,7 +301,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                       UIUtils.showMessage(state.error);
                                     } else if (state is AuthSuccessState) {
                                       UIUtils.hideLoading(context);
-                                      Navigator.of(context).pushNamedAndRemoveUntil(
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil(
                                         RoutesManager.homeProvider,
                                         (route) => false,
                                       );
@@ -282,29 +311,50 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                   child: DefaultSubmitButton(
                                     onPressed: () {
                                       if (formKey.currentState!.validate() &&
-                                          context.read<AuthCubit>().image != null &&
-                                          context.read<AuthCubit>().cameraImage != null &&
-                                          context.read<AuthCubit>().currentLocation != null &&
+                                          context.read<AuthCubit>().image !=
+                                              null &&
+                                          context
+                                                  .read<AuthCubit>()
+                                                  .cameraImage !=
+                                              null &&
+                                          context
+                                                  .read<AuthCubit>()
+                                                  .currentLocation !=
+                                              null &&
                                           selectedService != null) {
-                                        context.read<AuthCubit>().registerProvider(
+                                        context
+                                            .read<AuthCubit>()
+                                            .registerProvider(
                                               RegisterProviderRequest(
                                                 name: nameController.text,
                                                 email: emailController.text,
-                                                password: passwordController.text,
-                                                confirmPassword: confirmPasswordController.text,
-                                                phone: phoneNumberController.text,
-                                                nationalId: nationalIdController.text,
+                                                password:
+                                                    passwordController.text,
+                                                confirmPassword:
+                                                    confirmPasswordController
+                                                        .text,
+                                                phone:
+                                                    phoneNumberController.text,
+                                                nationalId:
+                                                    nationalIdController.text,
                                                 address: addressController.text,
                                                 serviceId: selectedService!,
-                                                policeCertificate: context.read<AuthCubit>().image!,
-                                                selfie: context.read<AuthCubit>().cameraImage!,
-                                                lat: selectedLatLng!.latitude.toString(),
-                                                lng: selectedLatLng!.longitude.toString(),
+                                                policeCertificate: context
+                                                    .read<AuthCubit>()
+                                                    .image!,
+                                                selfie: context
+                                                    .read<AuthCubit>()
+                                                    .cameraImage!,
+                                                lat: selectedLatLng!.latitude
+                                                    .toString(),
+                                                lng: selectedLatLng!.longitude
+                                                    .toString(),
                                               ),
                                             );
                                       }
                                     },
-                                    label: AppLocalizations.of(context).register,
+                                    label:
+                                        AppLocalizations.of(context).register,
                                   ),
                                 ),
                               ),

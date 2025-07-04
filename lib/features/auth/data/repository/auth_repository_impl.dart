@@ -44,7 +44,9 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final AuthResponse response =
           await _authRemoteDataSource.registerProvider(registerProviderRequest);
+      print("HELLLOOO");
       _authLocalDataSource.saveToken(response.token!);
+      print("Token");
       return Left(response.user!.toProviderEntity);
     } on AppException catch (exception) {
       return Right(Failure(exception.message));
