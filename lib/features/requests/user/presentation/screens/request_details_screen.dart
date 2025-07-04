@@ -81,14 +81,7 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                               child: FadeInAnimation(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        ColorsManager.blue.withOpacity(0.08),
-                                        Colors.white,
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                    ),
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(24.r),
                                     boxShadow: [
                                       BoxShadow(
