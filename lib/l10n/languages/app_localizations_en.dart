@@ -267,8 +267,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failedToGetAcceptedOffers => 'Failed to Get Accepted Offers';
 
   @override
-  String get noPendingRequetsAtTheMoment =>
-      'No Pending Requests At The Moment!';
+  String get noPendingRequetsAtTheMoment => 'No Pending Requests At The Moment!';
 
   @override
   String get noRequestsAtTheMoment => 'No Requests At The Moment!';
