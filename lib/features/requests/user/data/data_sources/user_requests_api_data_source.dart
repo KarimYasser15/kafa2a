@@ -53,9 +53,13 @@ class UserRequestsApiDataSource implements UserRequestsRemoteDataSource {
   }
 
   @override
-  Future<List<AllRequests>> getAllRequests(String token) async {
+  Future<List<AllRequests>> getAllRequests(String token,
+      {String status = ""}) async {
     try {
       final Response response = await _dio.get(ApiConstants.getAllUserRequests,
+          queryParameters: {
+            if (status.isNotEmpty) 'status': status,
+          },
           options: Options(headers: {"Authorization": "Bearer $token"}));
       GetAllRequests allRequests = GetAllRequests.fromJson(response.data);
       if (allRequests.data == null) {

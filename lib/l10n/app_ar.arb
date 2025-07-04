@@ -96,5 +96,7 @@
   "notActiveYet": "لم يتم تفعيله بعد",
   "rejected":"اترفض",
   "requestCancelled": "تم إلغاء الطلب",
-  "rating": "تقييم"
+  "rating": "تقييم",
+  "pending":"منتظر",
+  "allRequests":"جميع الطلبات"
 }

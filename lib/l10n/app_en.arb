@@ -96,5 +96,7 @@
   "notActiveYet" : "Not Active Yet",
   "rejected":"Rejected",
   "requestCancelled": "Request Cancelled!",
-  "rating": "Rating"
+  "rating": "Rating",
+  "pending":"Pending",
+  "allRequests":"All Requests"
 }

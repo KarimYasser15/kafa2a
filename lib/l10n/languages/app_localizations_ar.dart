@@ -301,4 +301,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rating => 'تقييم';
+
+  @override
+  String get pending => 'منتظر';
+
+  @override
+  String get allRequests => 'جميع الطلبات';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
+import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart';
@@ -29,27 +30,42 @@ class UserRequestsScreen extends StatelessWidget {
               itemBuilder: (context) => [
                 PopupMenuItem(
                   child: Row(
-                    children: [Text(AppLocalizations.of(context).open)],
+                    children: [Text(AppLocalizations.of(context).allRequests)],
                   ),
-                  onTap: () {},
+                  onTap: () =>
+                      context.read<UserRequestsCubit>().getAllRequests(),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [Text(AppLocalizations.of(context).pending)],
+                  ),
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.pending),
                 ),
                 PopupMenuItem(
                   child: Row(
                     children: [Text(AppLocalizations.of(context).accepted)],
                   ),
-                  onTap: () {},
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.accepted),
                 ),
                 PopupMenuItem(
                   child: Row(
                     children: [Text(AppLocalizations.of(context).completed)],
                   ),
-                  onTap: () {},
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.paid),
                 ),
                 PopupMenuItem(
                   child: Row(
                     children: [Text(AppLocalizations.of(context).cancelled)],
                   ),
-                  onTap: () {},
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.cancelled),
                 )
               ],
               child: Row(

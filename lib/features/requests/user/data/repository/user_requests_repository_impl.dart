@@ -40,10 +40,11 @@ class UserRequestsRepositoryImpl implements UserRequestsRepository {
   }
 
   @override
-  Future<Either<List<AllRequests>, Failure>> getAllRequests() async {
+  Future<Either<List<AllRequests>, Failure>> getAllRequests(
+      {String status = ""}) async {
     try {
       final List<AllRequests> response = await _userRequestsRemoteDataSource
-          .getAllRequests(_authLocalDataSource.getToken());
+          .getAllRequests(_authLocalDataSource.getToken(), status: status);
       return Left(response);
     } on AppException catch (exception) {
       return Right(Failure(exception.message));

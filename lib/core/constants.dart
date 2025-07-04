@@ -38,3 +38,10 @@ class ProviderStatus {
   static const String rejected = "rejected";
   static const String suspended = "suspended";
 }
+
+class FilterRequestsStatus {
+  static const String pending = "pending";
+  static const String accepted = "accepted";
+  static const String cancelled = "canceled";
+  static const String paid = "paid";
+}

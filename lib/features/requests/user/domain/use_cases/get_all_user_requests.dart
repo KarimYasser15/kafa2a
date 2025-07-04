@@ -8,6 +8,6 @@ import 'package:kafa2a/features/requests/user/domain/repository/user_requests_re
 class GetAllUserRequests {
   final UserRequestsRepository _userRequestsRepository;
   GetAllUserRequests(this._userRequestsRepository);
-  Future<Either<List<AllRequests>, Failure>> call() =>
-      _userRequestsRepository.getAllRequests();
+  Future<Either<List<AllRequests>, Failure>> call({String status = ""}) =>
+      _userRequestsRepository.getAllRequests(status: status);
 }

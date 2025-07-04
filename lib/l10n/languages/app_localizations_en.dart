@@ -301,4 +301,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rating => 'Rating';
+
+  @override
+  String get pending => 'Pending';
+
+  @override
+  String get allRequests => 'All Requests';
 }
