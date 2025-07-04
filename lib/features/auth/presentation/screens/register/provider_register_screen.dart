@@ -345,10 +345,8 @@ class _ProviderRegisterScreenState extends State<ProviderRegisterScreen> {
                                                 selfie: context
                                                     .read<AuthCubit>()
                                                     .cameraImage!,
-                                                lat: selectedLatLng!.latitude
-                                                    .toString(),
-                                                lng: selectedLatLng!.longitude
-                                                    .toString(),
+                                                lat: selectedLatLng!.latitude,
+                                                lng: selectedLatLng!.longitude,
                                               ),
                                             );
                                       }

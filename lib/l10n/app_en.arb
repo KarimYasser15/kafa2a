@@ -106,5 +106,6 @@
   "viewDetails": "View Details",
   "viewAllOffers": "View All Offers",
   "pending": "Pending",
-  "paid": "Paid"
+  "paid": "Paid",
+  "allRequests":"All Requests"
 }

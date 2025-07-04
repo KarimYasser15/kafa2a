@@ -331,4 +331,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get paid => 'تم الدفع';
+
+  @override
+  String get allRequests => 'كل الطلبات';
 }

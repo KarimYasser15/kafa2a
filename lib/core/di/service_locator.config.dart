@@ -127,8 +127,6 @@ import 'package:kafa2a/features/requests/user/domain/use_cases/get_pending_reque
     as _i314;
 import 'package:kafa2a/features/requests/user/domain/use_cases/get_service_request_by_id.dart'
     as _i157;
-import 'package:kafa2a/features/requests/user/presentation/cubit/service_requests_cubit.dart'
-    as _i897;
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart'
     as _i838;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -262,13 +260,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i86.GetAllCategories>(
         () => _i86.GetAllCategories(gh<_i234.RequestServiceRepository>()));
     gh.factory<_i838.UserRequestsCubit>(() => _i838.UserRequestsCubit(
-          gh<_i314.GetPendingRequests>(),
           gh<_i995.GetAcceptedRequests>(),
           gh<_i739.GetAllUserRequests>(),
-        ));
-    gh.factory<_i897.ServiceRequestsCubit>(() => _i897.ServiceRequestsCubit(
-          gh<_i960.GetAllServiceRequests>(),
-          gh<_i157.GetServiceRequestById>(),
         ));
     gh.singleton<_i290.AuthCubit>(() => _i290.AuthCubit(
           gh<_i684.LoginUser>(),

@@ -742,6 +742,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Paid'**
   String get paid;
+
+  /// No description provided for @allRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'All Requests'**
+  String get allRequests;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

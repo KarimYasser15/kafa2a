@@ -106,5 +106,6 @@
   "viewDetails": "عرض التفاصيل",
   "viewAllOffers": "عرض كل العروض",
   "pending": "قيد الانتظار",
-  "paid": "تم الدفع"
+  "paid": "تم الدفع",
+  "allRequests":"كل الطلبات"
 }

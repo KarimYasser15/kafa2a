@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/features/offers/user/data/models/user_offers_response/offers.dart';
 import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart';
@@ -29,14 +28,20 @@ class OfferItemWidget extends StatelessWidget {
         );
       },
       child: Container(
+        margin: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(
-            color: ColorsManager.blue,
-          ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(16.w),
           child: Column(
             children: [
               Row(
@@ -100,22 +105,27 @@ class OfferItemWidget extends StatelessWidget {
                         TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
                   ),
                   Spacer(),
-                  IconButton(
-                    onPressed: () =>
-                        context.read<OffersCubit>().acceptOffer(offer.id),
-                    icon: Icon(Icons.check_circle_outline),
-                    iconSize: 40,
-                    color: Colors.green,
+                  CircleAvatar(
+                    radius: 18.r,
+                    backgroundColor: Colors.green.withOpacity(0.15),
+                    child: IconButton(
+                      icon: Icon(Icons.check, color: Colors.green),
+                      onPressed: () =>
+                          context.read<OffersCubit>().acceptOffer(offer.id),
+                    ),
                   ),
-                  IconButton(
-                    onPressed: () =>
-                        context.read<OffersCubit>().rejectOffer(offer.id),
-                    icon: Icon(Icons.close),
-                    iconSize: 40,
-                    color: Colors.red,
+                  SizedBox(width: 12.w),
+                  CircleAvatar(
+                    radius: 18.r,
+                    backgroundColor: Colors.red.withOpacity(0.15),
+                    child: IconButton(
+                      icon: Icon(Icons.close, color: Colors.red),
+                      onPressed: () =>
+                          context.read<OffersCubit>().rejectOffer(offer.id),
+                    ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

@@ -1,81 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/widgets/loading_indicator.dart';
-import 'package:kafa2a/features/requests/user/presentation/cubit/service_requests_cubit.dart';
-import 'package:kafa2a/features/requests/user/presentation/cubit/service_requests_states.dart';
-import 'package:kafa2a/features/requests/user/presentation/screens/widgets/service_request_card.dart';
+import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart';
+import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_states.dart';
+import 'package:kafa2a/features/requests/user/presentation/screens/widgets/request_item_widget.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
-import 'package:kafa2a/config/routes_manager.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class UserRequestsScreen extends StatefulWidget {
+class UserRequestsScreen extends StatelessWidget {
   const UserRequestsScreen({super.key});
-
-  @override
-  State<UserRequestsScreen> createState() => _UserRequestsScreenState();
-}
-
-class _UserRequestsScreenState extends State<UserRequestsScreen> {
-  String? selectedStatus;
-
-  List<Map<String, String>> getStatusOptions(BuildContext context) => [
-        {'key': 'pending', 'label': AppLocalizations.of(context).pending},
-        {'key': 'accepted', 'label': AppLocalizations.of(context).accepted},
-        {'key': 'cancelled', 'label': AppLocalizations.of(context).cancelled},
-        {'key': 'completed', 'label': AppLocalizations.of(context).completed},
-        {'key': 'paid', 'label': AppLocalizations.of(context).paid},
-      ];
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt.get<ServiceRequestsCubit>()..getAllServiceRequests(),
+      create: (context) => getIt.get<UserRequestsCubit>(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context).myRequests,
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          title: Text(AppLocalizations.of(context).myRequests),
           actionsPadding: EdgeInsets.only(right: 20.w),
           actions: [
-            PopupMenuButton<String?>(
+            PopupMenuButton(
               color: Colors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   side: BorderSide(color: ColorsManager.blue)),
-              onSelected: (value) {
-                setState(() {
-                  selectedStatus = value;
-                });
-              },
               itemBuilder: (context) => [
-                PopupMenuItem<String?>(
-                  value: null,
-                  child: Text(AppLocalizations.of(context).filter),
+                PopupMenuItem(
+                  child: Row(
+                    children: [Text(AppLocalizations.of(context).allRequests)],
+                  ),
+                  onTap: () =>
+                      context.read<UserRequestsCubit>().getAllRequests(),
                 ),
-                ...getStatusOptions(context)
-                    .map((status) => PopupMenuItem<String?>(
-                          value: status['key'],
-                          child: Text(status['label']!),
-                        )),
+                PopupMenuItem(
+                  child: Row(
+                    children: [Text(AppLocalizations.of(context).pending)],
+                  ),
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.pending),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [Text(AppLocalizations.of(context).accepted)],
+                  ),
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.accepted),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [Text(AppLocalizations.of(context).completed)],
+                  ),
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.paid),
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [Text(AppLocalizations.of(context).cancelled)],
+                  ),
+                  onTap: () => context
+                      .read<UserRequestsCubit>()
+                      .getAllRequests(status: FilterRequestsStatus.cancelled),
+                )
               ],
-              icon: Icon(Icons.filter_alt_rounded, color: Colors.black),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.filter_alt_rounded,
+                    color: Colors.black,
+                  ),
+                  Text(AppLocalizations.of(context).filter)
+                ],
+              ),
             )
           ],
         ),
-        body: BlocBuilder<ServiceRequestsCubit, ServiceRequestsStates>(
+        body: BlocBuilder<UserRequestsCubit, UserRequestsStates>(
           builder: (context, state) {
-            if (state is ServiceRequestsLoadingState) {
+            if (state is UserPendingRequestsLoading) {
               return LoadingIndicator();
-            } else if (state is ServiceRequestsErrorState) {
+            } else if (state is UserPendingRequestsError) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,12 +107,8 @@ class _UserRequestsScreenState extends State<UserRequestsScreen> {
                   ],
                 ),
               );
-            } else if (state is ServiceRequestsSuccessState) {
-              var requests = state.response.data;
-              if (selectedStatus != null) {
-                requests =
-                    requests.where((r) => r.status == selectedStatus).toList();
-              }
+            } else if (state is UserPendingRequestsSuccess) {
+              var requests = state.pendingRequests;
               if (requests.isEmpty) {
                 return Center(
                   child: Column(
@@ -139,22 +145,8 @@ class _UserRequestsScreenState extends State<UserRequestsScreen> {
                       child: SlideAnimation(
                         verticalOffset: 40.0,
                         child: FadeInAnimation(
-                          child: ServiceRequestCard(
-                            request: request,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                RoutesManager.requestDetails,
-                                arguments: request.id,
-                              );
-                            },
-                            onViewOffers: () {
-                              Navigator.pushNamed(
-                                context,
-                                RoutesManager.allOffers,
-                                arguments: request.id,
-                              );
-                            },
+                          child: RequestItemWidget(
+                            pendingRequests: request,
                           ),
                         ),
                       ),
