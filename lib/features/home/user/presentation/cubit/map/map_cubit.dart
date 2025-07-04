@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kafa2a/core/error/failure.dart';
 import 'package:kafa2a/core/utils/access_location.dart';
 import 'package:kafa2a/features/home/user/data/models/get_nearby_providers_request.dart';
+import 'package:kafa2a/features/home/user/data/models/get_nearby_providers_response.dart';
 import 'package:kafa2a/features/home/user/domain/use_cases/get_nearby_categories.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/map/map_states.dart';
 import 'package:location/location.dart';
@@ -32,16 +33,21 @@ class MapCubit extends Cubit<MapStates> {
 
   Future<void> getNearbyProviders(GetNearbyProvidersRequest request) async {
     emit(MapLoadingState());
-    Either<void, Failure> response = await _getNearbyCategories(request);
+    Either<List<GetNearbyProvidersResponse>, Failure> response =
+        await _getNearbyCategories(request);
     response.fold(
-      (_) {
-        //    markers = providersList.map((provider) {
-        //   return Marker(
-        //     markerId: MarkerId(provider.id.toString()),
-        //     position: LatLng(provider.lat, provider.lng),
-        //     infoWindow: InfoWindow(title: provider.name),
-        //   );
-        // }).toSet();
+      (providerList) {
+        markers = providerList.map((provider) {
+          return Marker(
+            markerId: MarkerId(provider.id.toString()),
+            position: LatLng(provider.lat!, provider.lng!),
+            infoWindow: InfoWindow(title: provider.name),
+            icon: BitmapDescriptor.defaultMarker,
+            onTap: () {
+              emit(ProviderMarkerTappedState(provider)); // New state
+            },
+          );
+        }).toSet();
         emit(NearbyProvidersSuccessState());
       },
       (failure) => emit(NearbyProvidersErrorState()),

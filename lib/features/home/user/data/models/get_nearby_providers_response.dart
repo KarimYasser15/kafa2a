@@ -1,4 +1,4 @@
-class GetNearbyProvidersRespons {
+class GetNearbyProvidersResponse {
   int? id;
   String? name;
   String? email;
@@ -21,7 +21,7 @@ class GetNearbyProvidersRespons {
   DateTime? updatedAt;
   double? distance;
 
-  GetNearbyProvidersRespons({
+  GetNearbyProvidersResponse({
     this.id,
     this.name,
     this.email,
@@ -45,8 +45,8 @@ class GetNearbyProvidersRespons {
     this.distance,
   });
 
-  factory GetNearbyProvidersRespons.fromJson(Map<String, dynamic> json) {
-    return GetNearbyProvidersRespons(
+  factory GetNearbyProvidersResponse.fromJson(Map<String, dynamic> json) {
+    return GetNearbyProvidersResponse(
       id: json['id'] as int?,
       name: json['name'] as String?,
       email: json['email'] as String?,
