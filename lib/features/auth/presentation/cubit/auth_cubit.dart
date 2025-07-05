@@ -85,6 +85,8 @@ class AuthCubit extends Cubit<AuthStates> {
     );
     final Either<User, Failure> response =
         await _registerUser(registerUserRequest);
+    user = response.fold((user) => user, (l) => null);
+
     response.fold(
       (userSuccess) async {
         await pusherService.init(userId: userSuccess.id);
