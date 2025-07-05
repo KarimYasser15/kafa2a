@@ -19,6 +19,7 @@ class ApiConstants {
   static rejectOffer(int id) => "offers/$id/reject";
   static const String getNearbyProviders = "nearby-providers";
   static const String notificationEndPoint = "broadcasting/auth";
+  static const String paymentEndPoint = "payments";
 }
 
 class CacheConstants {

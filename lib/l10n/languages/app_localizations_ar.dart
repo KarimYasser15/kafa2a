@@ -334,4 +334,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get allRequests => 'كل الطلبات';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get cash => 'نقدي';
+
+  @override
+  String get credit => 'بطاقة ائتمان';
+
+  @override
+  String get enterAmount => 'ادخل القيمة';
+
+  @override
+  String get pay => 'ادفع';
 }

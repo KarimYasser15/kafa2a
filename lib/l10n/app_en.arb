@@ -107,5 +107,10 @@
   "viewAllOffers": "View All Offers",
   "pending": "Pending",
   "paid": "Paid",
-  "allRequests":"All Requests"
+  "allRequests":"All Requests",
+  "payment":"Payment",
+  "cash":"Cash",
+  "credit":"Credit",
+  "enterAmount":"Enter Amount",
+  "pay":"Pay"
 }

@@ -104,6 +104,18 @@ import 'package:kafa2a/features/offers/user/domain/use_cases/reject_offer.dart'
     as _i231;
 import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart'
     as _i1017;
+import 'package:kafa2a/features/payment_reviews/data/data_sources/payment_api_data_source.dart'
+    as _i861;
+import 'package:kafa2a/features/payment_reviews/data/data_sources/payment_remote_data_source.dart'
+    as _i1047;
+import 'package:kafa2a/features/payment_reviews/data/repository/payment_repository_impl.dart'
+    as _i767;
+import 'package:kafa2a/features/payment_reviews/domain/repository/payment_repository.dart'
+    as _i433;
+import 'package:kafa2a/features/payment_reviews/domain/use_cases/pay_provider.dart'
+    as _i820;
+import 'package:kafa2a/features/payment_reviews/presentation/cubit/payment_cubit.dart'
+    as _i628;
 import 'package:kafa2a/features/requests/user/data/data_sources/remote/service_requests_remote_data_source.dart'
     as _i277;
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_api_data_source.dart'
@@ -151,6 +163,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.factory<_i1047.PaymentRemoteDataSource>(
+        () => _i861.PaymentApiDataSource(gh<_i361.Dio>()));
     gh.factory<_i932.MapRemoteDataSource>(
         () => _i35.MapApiDataSource(gh<_i361.Dio>()));
     gh.factory<_i20.OffersUserRemoteDataSource>(
@@ -174,6 +188,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i766.AccessLocation(gh<_i819.LocalDataSource>()));
     gh.factory<_i599.PusherService>(() => _i599.PusherService(
           gh<_i361.Dio>(),
+          gh<_i819.AuthLocalDataSource>(),
+        ));
+    gh.factory<_i433.PaymentRepository>(() => _i767.PaymentRepositoryImpl(
+          gh<_i1047.PaymentRemoteDataSource>(),
           gh<_i819.AuthLocalDataSource>(),
         ));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(
@@ -254,12 +272,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAcceptedRequests(gh<_i598.UserRequestsRepository>()));
     gh.lazySingleton<_i314.GetPendingRequests>(
         () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
+    gh.factory<_i820.PayProvider>(
+        () => _i820.PayProvider(gh<_i433.PaymentRepository>()));
     gh.factory<_i1017.OffersCubit>(() => _i1017.OffersCubit(
           gh<_i888.GetOffers>(),
           gh<_i95.AcceptOffer>(),
           gh<_i231.RejectOffer>(),
           gh<_i29.CancelRequest>(),
         ));
+    gh.factory<_i628.PaymentCubit>(
+        () => _i628.PaymentCubit(gh<_i820.PayProvider>()));
     gh.singleton<_i574.RequestService>(
         () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
     gh.factory<_i86.GetAllCategories>(

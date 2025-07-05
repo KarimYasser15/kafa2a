@@ -58,8 +58,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               visibilityIcon = isVisible
                   ? Icon(Icons.visibility_off_outlined,
                       color: ColorsManager.blue)
-                  : Icon(Icons.visibility_outlined,
-                      color: ColorsManager.blue);
+                  : Icon(Icons.visibility_outlined, color: ColorsManager.blue);
             });
           },
           icon: visibilityIcon,

@@ -107,5 +107,10 @@
   "viewAllOffers": "عرض كل العروض",
   "pending": "قيد الانتظار",
   "paid": "تم الدفع",
-  "allRequests":"كل الطلبات"
+  "allRequests":"كل الطلبات",
+  "payment":"الدفع",
+  "cash": "نقدي",
+  "credit":"بطاقة ائتمان",
+  "enterAmount":"ادخل القيمة",
+  "pay":"ادفع"
 }

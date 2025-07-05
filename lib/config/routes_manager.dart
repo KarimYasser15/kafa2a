@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/features/auth/presentation/screens/login/login_screen.dart';
 import 'package:kafa2a/features/auth/presentation/screens/register/provider_register_screen.dart';
 import 'package:kafa2a/features/auth/presentation/screens/register/user_register_screen.dart';
@@ -7,6 +9,8 @@ import 'package:kafa2a/features/home/user/presentation/screens/request_service_s
 import 'package:kafa2a/features/home/user/presentation/screens/user_main_screen.dart';
 import 'package:kafa2a/features/offers/user/presentation/screens/user_offers_screen.dart';
 import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
+import 'package:kafa2a/features/payment_reviews/presentation/cubit/payment_cubit.dart';
+import 'package:kafa2a/features/payment_reviews/presentation/screens/payment_screen.dart';
 import 'package:kafa2a/features/suspension/provider_suspension_main_screen.dart';
 
 class RoutesManager {
@@ -22,6 +26,7 @@ class RoutesManager {
   static const String requestAService = "/requestAService";
   static const String requestDetails = "/requestDetails";
   static const String allOffers = "/allOffers";
+  static const String payment = "/payment";
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
@@ -62,6 +67,14 @@ class RoutesManager {
       case homeSuspendedProvider:
         return MaterialPageRoute(
           builder: (context) => ProviderSuspensionMainScreen(),
+        );
+      case payment:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<PaymentCubit>(),
+            child: PaymentScreen(),
+          ),
         );
     }
     return null;

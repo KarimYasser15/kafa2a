@@ -19,7 +19,8 @@ import 'package:kafa2a/l10n/languages/app_localizations.dart';
 class UserRegisterScreen extends StatelessWidget {
   UserRegisterScreen({super.key});
 
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
@@ -39,7 +40,8 @@ class UserRegisterScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r),
                 ),
-                shadowColor: ColorsManager.blue.withAlpha((0.25 * 255).toInt()), // Fix deprecation
+                shadowColor: ColorsManager.blue
+                    .withAlpha((0.25 * 255).toInt()), // Fix deprecation
                 child: Padding(
                   padding: EdgeInsets.all(24.0),
                   child: Form(
@@ -48,7 +50,8 @@ class UserRegisterScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleWidget(title: AppLocalizations.of(context).register),
+                        TitleWidget(
+                            title: AppLocalizations.of(context).register),
                         SizedBox(height: 10.h),
                         LabelTextFormWidget(
                           label: AppLocalizations.of(context).name,
@@ -103,7 +106,8 @@ class UserRegisterScreen extends StatelessWidget {
                         ),
                         DefaultTextFormField(
                           controller: phoneNumberController,
-                          hintText: AppLocalizations.of(context).enterYourPhoneNumber,
+                          hintText:
+                              AppLocalizations.of(context).enterYourPhoneNumber,
                           validator: (phoneNumber) => Validators.validateNull(
                               phoneNumber,
                               AppLocalizations.of(context).phoneNumberRequired),
@@ -133,7 +137,8 @@ class UserRegisterScreen extends StatelessWidget {
                                           email: emailController.text,
                                           name: nameController.text,
                                           password: passwordController.text,
-                                          confirmPassword: confirmPasswordController.text,
+                                          confirmPassword:
+                                              confirmPasswordController.text,
                                           phone: phoneNumberController.text,
                                         ),
                                       );

@@ -334,4 +334,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get allRequests => 'All Requests';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get credit => 'Credit';
+
+  @override
+  String get enterAmount => 'Enter Amount';
+
+  @override
+  String get pay => 'Pay';
 }
