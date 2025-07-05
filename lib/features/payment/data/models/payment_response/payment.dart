@@ -1,6 +1,6 @@
 class Payment {
-  String? userId;
-  String? providerId;
+  int? userId;
+  int? providerId;
   String? serviceRequestId;
   String? amount;
   String? gateway;
@@ -26,8 +26,8 @@ class Payment {
   });
 
   factory Payment.fromJson(Map<String, dynamic> json) => Payment(
-        userId: json['user_id'] as String?,
-        providerId: json['provider_id'] as String?,
+        userId: json['user_id'] as int?,
+        providerId: json['provider_id'] as int?,
         serviceRequestId: json['service_request_id'] as String?,
         amount: json['amount'] as String?,
         gateway: json['gateway'] as String?,
@@ -44,18 +44,4 @@ class Payment {
             : DateTime.parse(json['created_at'] as String),
         id: json['id'] as int?,
       );
-
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'provider_id': providerId,
-        'service_request_id': serviceRequestId,
-        'amount': amount,
-        'gateway': gateway,
-        'status': status,
-        'transaction_id': transactionId,
-        'paid_at': paidAt?.toIso8601String(),
-        'updated_at': updatedAt?.toIso8601String(),
-        'created_at': createdAt?.toIso8601String(),
-        'id': id,
-      };
 }

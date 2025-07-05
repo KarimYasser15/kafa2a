@@ -61,12 +61,14 @@ class OffersUserApiDataSource implements OffersUserRemoteDataSource {
               ));
       OffersResponse userOffersResponse =
           OffersResponse.fromJson(response.data);
+      print(response.data);
       if (userOffersResponse.offers != null) {
         List<Offers> offers = userOffersResponse.offers!;
         return offers;
       }
       throw (RemoteException("Messages.noOffersAtTheMoment"));
     } catch (exception) {
+      print(exception);
       String errorMessage = Messages.noOffersAtTheMoment;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

@@ -26,6 +26,7 @@ class PaymentApiDataSource implements PaymentRemoteDataSource {
 
       return PaymentResponse.fromJson(response.data);
     } catch (exception) {
+      print(exception);
       String errorMessage = Messages.somethingWentWrong;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

@@ -5,6 +5,7 @@ import 'package:kafa2a/core/error/failure.dart';
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:kafa2a/features/reviews/data/data_source/review_provider_remote_data_source.dart';
 import 'package:kafa2a/features/reviews/data/models/review_provider_request.dart';
+import 'package:kafa2a/features/reviews/data/models/review_provider_response.dart';
 import 'package:kafa2a/features/reviews/domain/repository/review_provider_repository.dart';
 
 @Injectable(as: ReviewProviderRepository)
@@ -15,7 +16,7 @@ class ReviewProviderRepostioryImpl implements ReviewProviderRepository {
   ReviewProviderRepostioryImpl(
       this._reviewProviderRemoteDataSource, this._authLocalDataSource);
   @override
-  Future<Either<void, Failure>> reviewProvider(
+  Future<Either<ReviewProviderResponse, Failure>> reviewProvider(
       ReviewProviderRequest reviewProvider) async {
     try {
       final response = await _reviewProviderRemoteDataSource.reviewProvider(

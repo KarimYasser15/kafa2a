@@ -6,6 +6,7 @@ import 'package:kafa2a/features/payment/data/models/payment_request.dart';
 import 'package:kafa2a/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:kafa2a/features/payment/presentation/cubit/payment_states.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
+import 'package:kafa2a/features/reviews/presentation/screens/review_provider_screen.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -85,8 +86,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 } else if (state is PaymentSuccessState) {
                   UIUtils.hideLoading(context);
                   UIUtils.showMessage("Success");
-                  Navigator.pushReplacementNamed(
-                      context, RoutesManager.reviewProvider);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => ReviewProviderScreen(requests: request),
+                  //   ),
+                  // );
                 }
               },
               child: ElevatedButton.icon(
@@ -99,7 +104,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             PaymentRequest(
                               serviceRequestId: request.id,
                               userId: request.userId,
-                              providerId: request.user.id,
                               amount: int.parse(_amountController.text),
                               gateway: 'cash',
                             ),
