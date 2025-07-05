@@ -14,9 +14,4 @@ class PaymentResponse {
           : Payment.fromJson(json['payment'] as Map<String, dynamic>),
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        'message': message,
-        'payment': payment?.toJson(),
-      };
 }

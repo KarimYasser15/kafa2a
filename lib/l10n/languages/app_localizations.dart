@@ -847,6 +847,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pay'**
   String get pay;
+
+  /// No description provided for @rateProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Provider'**
+  String get rateProvider;
+
+  /// No description provided for @writeAReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a Review'**
+  String get writeAReview;
+
+  /// No description provided for @howWasYourExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'How was your experience?'**
+  String get howWasYourExperience;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
 }
 
 class _AppLocalizationsDelegate

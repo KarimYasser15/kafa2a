@@ -9,8 +9,8 @@ import 'package:kafa2a/features/home/user/presentation/screens/request_service_s
 import 'package:kafa2a/features/home/user/presentation/screens/user_main_screen.dart';
 import 'package:kafa2a/features/offers/user/presentation/screens/user_offers_screen.dart';
 import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
-import 'package:kafa2a/features/payment_reviews/presentation/cubit/payment_cubit.dart';
-import 'package:kafa2a/features/payment_reviews/presentation/screens/payment_screen.dart';
+import 'package:kafa2a/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:kafa2a/features/payment/presentation/screens/payment_screen.dart';
 import 'package:kafa2a/features/suspension/provider_suspension_main_screen.dart';
 
 class RoutesManager {
@@ -27,6 +27,7 @@ class RoutesManager {
   static const String requestDetails = "/requestDetails";
   static const String allOffers = "/allOffers";
   static const String payment = "/payment";
+  static const String reviewProvider = "/reviewProvider";
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {

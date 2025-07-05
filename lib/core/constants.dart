@@ -20,6 +20,7 @@ class ApiConstants {
   static const String getNearbyProviders = "nearby-providers";
   static const String notificationEndPoint = "broadcasting/auth";
   static const String paymentEndPoint = "payments";
+  static const String reviewProviderEndPoint = "ratings";
 }
 
 class CacheConstants {
@@ -46,4 +47,5 @@ class FilterRequestsStatus {
   static const String accepted = "accepted";
   static const String cancelled = "canceled";
   static const String paid = "paid";
+  static const String completed = "completed";
 }

@@ -27,8 +27,8 @@ class Provider {
   final String selfiePath;
   final String serviceId;
   final String type;
-  final String lat;
-  final String lng;
+  final double lat;
+  final double lng;
   final String? status;
   final String? suspendReason;
   final int? rating;

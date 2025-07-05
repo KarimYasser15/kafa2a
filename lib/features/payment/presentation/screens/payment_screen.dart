@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/widgets/ui_utils.dart';
-import 'package:kafa2a/features/payment_reviews/data/models/payment_request.dart';
-import 'package:kafa2a/features/payment_reviews/presentation/cubit/payment_cubit.dart';
-import 'package:kafa2a/features/payment_reviews/presentation/cubit/payment_states.dart';
+import 'package:kafa2a/features/payment/data/models/payment_request.dart';
+import 'package:kafa2a/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:kafa2a/features/payment/presentation/cubit/payment_states.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
+import 'package:kafa2a/features/reviews/presentation/screens/review_provider_screen.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -25,6 +28,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AllRequests request =
+        ModalRoute.of(context)!.settings.arguments as AllRequests;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).payment),
@@ -80,18 +86,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 } else if (state is PaymentSuccessState) {
                   UIUtils.hideLoading(context);
                   UIUtils.showMessage("Success");
+                  Navigator.pushReplacementNamed(
+                      context, RoutesManager.homeUser);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => ReviewProviderScreen(requests: request),
+                  //   ),
+                  // );
                 }
               },
               child: ElevatedButton.icon(
-                onPressed: () => context.read<PaymentCubit>().payProvider(
-                      PaymentRequest(
-                        serviceId: 1,
-                        userId: 1,
-                        providerId: 1,
-                        amount: int.parse(_amountController.text),
-                        gateway: 'cash',
-                      ),
-                    ),
+                onPressed: () {
+                  final text = _amountController.text.trim();
+                  if (text.isNotEmpty) {
+                    final amount = int.tryParse(text);
+                    if (amount != null) {
+                      context.read<PaymentCubit>().payProvider(
+                            PaymentRequest(
+                              serviceRequestId: request.id,
+                              userId: request.userId,
+                              amount: int.parse(_amountController.text),
+                              gateway: 'cash',
+                            ),
+                          );
+                    }
+                  }
+                },
                 icon: const Icon(Icons.payment),
                 label: Text(AppLocalizations.of(context).pay),
                 style: ElevatedButton.styleFrom(

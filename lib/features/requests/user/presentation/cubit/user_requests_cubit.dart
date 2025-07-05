@@ -18,11 +18,20 @@ class UserRequestsCubit extends Cubit<UserRequestsStates> {
   final GetAcceptedRequests _getAcceptedRequests;
 
   Future<void> getAllRequests({String status = ""}) async {
-    emit(UserPendingRequestsLoading());
+    if (!isClosed) {
+      emit(UserPendingRequestsLoading());
+    }
     final Either<List<AllRequests>, Failure> result =
         await _getAllUserRequests(status: status);
-    result.fold((success) => emit(UserPendingRequestsSuccess(success)),
-        (error) => emit(UserPendingRequestsError(error.message)));
+    result.fold((success) {
+      if (!isClosed) {
+        emit(UserPendingRequestsSuccess(success));
+      }
+    }, (error) {
+      if (!isClosed) {
+        emit(UserPendingRequestsError(error.message));
+      }
+    });
   }
 
   Future<void> getAcceptedRequests() async {
