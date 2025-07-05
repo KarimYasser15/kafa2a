@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kafa2a/core/widgets/custom_navigation_bar.dart';
 import 'package:kafa2a/features/my_profile/presentation/screens/provider/provider_profile_screen.dart';
 import 'package:kafa2a/features/suspension/provider_suspension_home_tab.dart';
+import 'package:kafa2a/features/suspension/update_document_screen.dart';
 
 class ProviderSuspensionMainScreen extends StatefulWidget {
   const ProviderSuspensionMainScreen({super.key});
@@ -16,6 +17,7 @@ class _ProviderSuspensionMainScreenState
   int selectedTab = 0;
   List<Widget> tabs = [
     ProviderSuspensionHomeTab(),
+    UpdateDocumentScreen(),
     ProviderProfileScreen(),
   ];
 

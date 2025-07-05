@@ -45,36 +45,57 @@ class CustomNavigationBar extends StatelessWidget {
   }
 
   List<Widget> _buildMainItems(BuildContext context) {
-    return [
-      _buildNavItem(
-        context,
-        index: 0,
-        icon: Icons.home_rounded,
-        label: AppLocalizations.of(context).home,
-        isSelected: selectedIndex == 0,
-      ),
-      _buildNavItem(
-        context,
-        index: 1,
-        icon: Icons.assignment_rounded,
-        label: AppLocalizations.of(context).myRequests,
-        isSelected: selectedIndex == 1,
-      ),
-      _buildNavItem(
-        context,
-        index: 2,
-        icon: Icons.handshake_rounded,
-        label: AppLocalizations.of(context).accepted,
-        isSelected: selectedIndex == 2,
-      ),
-      _buildNavItem(
-        context,
-        index: 3,
-        icon: Icons.person_rounded,
-        label: AppLocalizations.of(context).myProfile,
-        isSelected: selectedIndex == 3,
-      ),
-    ];
+    if (isProvider) {
+      // Provider: Home, Scheduled Jobs, My Profile
+      return [
+        _buildNavItem(
+          context,
+          index: 0,
+          icon: Icons.home_rounded,
+          label: AppLocalizations.of(context).home,
+          isSelected: selectedIndex == 0,
+        ),
+        _buildNavItem(
+          context,
+          index: 1,
+          icon: Icons.schedule_rounded,
+          label: AppLocalizations.of(context).scheduledJobs,
+          isSelected: selectedIndex == 1,
+        ),
+        _buildNavItem(
+          context,
+          index: 2,
+          icon: Icons.person_rounded,
+          label: AppLocalizations.of(context).myProfile,
+          isSelected: selectedIndex == 2,
+        ),
+      ];
+    } else {
+      // User: Home, My Requests, My Profile
+      return [
+        _buildNavItem(
+          context,
+          index: 0,
+          icon: Icons.home_rounded,
+          label: AppLocalizations.of(context).home,
+          isSelected: selectedIndex == 0,
+        ),
+        _buildNavItem(
+          context,
+          index: 1,
+          icon: Icons.assignment_rounded,
+          label: AppLocalizations.of(context).myRequests,
+          isSelected: selectedIndex == 1,
+        ),
+        _buildNavItem(
+          context,
+          index: 2,
+          icon: Icons.person_rounded,
+          label: AppLocalizations.of(context).myProfile,
+          isSelected: selectedIndex == 2,
+        ),
+      ];
+    }
   }
 
   List<Widget> _buildSuspensionItems(BuildContext context) {
@@ -89,9 +110,16 @@ class CustomNavigationBar extends StatelessWidget {
       _buildNavItem(
         context,
         index: 1,
+        icon: Icons.document_scanner_rounded,
+        label: AppLocalizations.of(context).updateDocument,
+        isSelected: selectedIndex == 1,
+      ),
+      _buildNavItem(
+        context,
+        index: 2,
         icon: Icons.person_rounded,
         label: AppLocalizations.of(context).myProfile,
-        isSelected: selectedIndex == 1,
+        isSelected: selectedIndex == 2,
       ),
     ];
   }

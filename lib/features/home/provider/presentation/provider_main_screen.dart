@@ -4,6 +4,7 @@ import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.
 import 'package:kafa2a/features/home/provider/presentation/screens/provider_home_tab.dart';
 import 'package:kafa2a/features/my_profile/presentation/screens/provider/provider_profile_screen.dart';
 import 'package:kafa2a/features/requests/user/presentation/screens/user_requests_screen.dart';
+import 'package:kafa2a/features/home/provider/presentation/screens/scheduled_jobs_screen.dart';
 
 class ProviderMainScreen extends StatefulWidget {
   const ProviderMainScreen({super.key});
@@ -14,26 +15,52 @@ class ProviderMainScreen extends StatefulWidget {
 
 class _ProviderMainScreenState extends State<ProviderMainScreen> {
   int selectedTab = 0;
-  List<Widget> tabs = [
+
+  final List<Widget> tabs = [
     ProviderHomeTab(),
-    UserRequestsScreen(),
-    AcceptedRequestsScreen(),
-    ProviderProfileScreen()
+    ScheduledJobsScreen(),
+    ProviderProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       extendBody: true,
-      body: tabs[selectedTab],
-      bottomNavigationBar: CustomNavigationBar(
-        selectedIndex: selectedTab,
-        onTap: (index) {
-          setState(() {
-            selectedTab = index;
-          });
-        },
-        isProvider: true,
+      body: SafeArea(
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+          child: Container(
+            key: ValueKey<int>(selectedTab),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: tabs[selectedTab],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -1),
+            ),
+          ],
+        ),
+        child: CustomNavigationBar(
+          selectedIndex: selectedTab,
+          onTap: (index) {
+            setState(() {
+              selectedTab = index;
+            });
+          },
+          isProvider: true,
+        ),
       ),
     );
   }

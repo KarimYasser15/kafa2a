@@ -17,7 +17,6 @@ class _UserMainScreenState extends State<UserMainScreen> {
   List<Widget> tabs = [
     UserHomeTab(),
     UserRequestsScreen(),
-    AcceptedRequestsScreen(),
     UserProfileScreen()
   ];
 

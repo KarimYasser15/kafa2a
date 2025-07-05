@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,7 +84,8 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -749,6 +752,72 @@ abstract class AppLocalizations {
   /// **'All Requests'**
   String get allRequests;
 
+  /// No description provided for @scheduledJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled Jobs'**
+  String get scheduledJobs;
+
+  /// No description provided for @yourAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Appointments'**
+  String get yourAppointments;
+
+  /// No description provided for @appointmentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'make sure to press done when complete your service ! GOOD LUCK'**
+  String get appointmentsSubtitle;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @waitingToGetPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'waiting to get paid !!'**
+  String get waitingToGetPaid;
+
+  /// No description provided for @paidSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'paid successfully !! Well Done Osta !!'**
+  String get paidSuccessfully;
+
+  /// No description provided for @appointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointments'**
+  String get appointments;
+
+  /// No description provided for @customerWantsToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'The customer wants to pay this amount :) '**
+  String get customerWantsToPay;
+
+  /// No description provided for @whatIsYourOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your offer for him !'**
+  String get whatIsYourOffer;
+
+  /// No description provided for @suspendReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend Reason'**
+  String get suspendReason;
+
+  /// No description provided for @updateDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Document'**
+  String get updateDocument;
+
   /// No description provided for @payment.
   ///
   /// In en, this message translates to:
@@ -780,7 +849,8 @@ abstract class AppLocalizations {
   String get pay;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -789,25 +859,25 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

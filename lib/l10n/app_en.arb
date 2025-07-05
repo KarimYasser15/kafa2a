@@ -113,4 +113,15 @@
   "credit":"Credit",
   "enterAmount":"Enter Amount",
   "pay":"Pay"
+  "scheduledJobs": "Scheduled Jobs",
+  "yourAppointments": "Your Appointments",
+  "appointmentsSubtitle": "make sure to press done when complete your service ! GOOD LUCK",
+  "done": "Done",
+  "waitingToGetPaid": "waiting to get paid !!",
+  "paidSuccessfully": "paid successfully !! Well Done Osta !!",
+  "appointments": "Appointments",
+  "customerWantsToPay": "The customer wants to pay this amount :) ",
+  "whatIsYourOffer": "What is your offer for him !",
+  "suspendReason": "Suspend Reason",
+  "updateDocument": "Update Document"
 }

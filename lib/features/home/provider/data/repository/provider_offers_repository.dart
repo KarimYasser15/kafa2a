@@ -42,4 +42,17 @@ class ProviderOffersRepositoryImpl implements ProviderOffersRepository {
       );
     }
   }
+
+  @override
+  Future<Either<void, Failure>> completeRequest(int requestId) async {
+    try {
+      await _providerOffersRemoteDataSource.completeRequest(
+        _authLocalDataSource.getToken(),
+        requestId,
+      );
+      return const Left(null);
+    } on AppException catch (exception) {
+      return Right(Failure(exception.message));
+    }
+  }
 }

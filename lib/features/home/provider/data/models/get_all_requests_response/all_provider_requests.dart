@@ -1,4 +1,5 @@
 import 'package:kafa2a/core/models/user_model.dart';
+import 'package:kafa2a/features/requests/user/data/models/service_model.dart';
 
 class AllProviderRequests {
   int id;
@@ -16,6 +17,7 @@ class AllProviderRequests {
   DateTime createdAt;
   DateTime updatedAt;
   UserModel user;
+  ServiceModel? service;
 
   AllProviderRequests({
     required this.id,
@@ -33,6 +35,7 @@ class AllProviderRequests {
     required this.createdAt,
     required this.updatedAt,
     required this.user,
+    this.service,
   });
 
   factory AllProviderRequests.fromJson(Map<String, dynamic> json) {
@@ -52,6 +55,9 @@ class AllProviderRequests {
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      service: json['service'] != null
+          ? ServiceModel.fromJson(json['service'])
+          : null,
     );
   }
 }

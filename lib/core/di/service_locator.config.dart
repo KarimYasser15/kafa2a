@@ -244,10 +244,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i29.CancelRequest(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i888.GetOffers>(
         () => _i888.GetOffers(gh<_i607.OffersRepository>()));
-    gh.factory<_i42.ProviderOffersCubit>(() => _i42.ProviderOffersCubit(
-          gh<_i995.GetAllRequests>(),
-          gh<_i616.SendOffer>(),
-        ));
     gh.factory<_i960.GetAllServiceRequests>(() =>
         _i960.GetAllServiceRequests(gh<_i974.ServiceRequestsRepository>()));
     gh.factory<_i157.GetServiceRequestById>(() =>
@@ -272,6 +268,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i995.GetAcceptedRequests(gh<_i598.UserRequestsRepository>()));
     gh.lazySingleton<_i314.GetPendingRequests>(
         () => _i314.GetPendingRequests(gh<_i598.UserRequestsRepository>()));
+    gh.factory<_i42.ProviderOffersCubit>(() => _i42.ProviderOffersCubit(
+          gh<_i995.GetAllRequests>(),
+          gh<_i616.SendOffer>(),
+          gh<_i1052.ProviderOffersRepository>(),
+        ));
     gh.factory<_i820.PayProvider>(
         () => _i820.PayProvider(gh<_i433.PaymentRepository>()));
     gh.factory<_i1017.OffersCubit>(() => _i1017.OffersCubit(
