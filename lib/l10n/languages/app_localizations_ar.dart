@@ -349,4 +349,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pay => 'ادفع';
+
+  @override
+  String get rateProvider => 'قيم مقدم الخدمة';
+
+  @override
+  String get writeAReview => 'اكتب تقييم';
+
+  @override
+  String get howWasYourExperience => 'كيف كانت الخدمة';
+
+  @override
+  String get submit => 'إرسال';
 }

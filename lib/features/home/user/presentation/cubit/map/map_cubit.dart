@@ -33,26 +33,31 @@ class MapCubit extends Cubit<MapStates> {
   }
 
   Future<void> getNearbyProviders(GetNearbyProvidersRequest request) async {
-    emit(MapLoadingState());
+    if (!isClosed) {
+      emit(MapLoadingState());
+    }
     hasFetchedProviders = true;
     Either<List<GetNearbyProvidersResponse>, Failure> response =
         await _getNearbyCategories(request);
-    response.fold(
-      (providerList) {
-        markers = providerList.map((provider) {
-          return Marker(
-            markerId: MarkerId(provider.id.toString()),
-            position: LatLng(provider.lat!, provider.lng!),
-            infoWindow: InfoWindow(title: provider.name),
-            icon: BitmapDescriptor.defaultMarker,
-            onTap: () {
-              emit(ProviderMarkerTappedState(provider)); // New state
-            },
-          );
-        }).toSet();
+    response.fold((providerList) {
+      markers = providerList.map((provider) {
+        return Marker(
+          markerId: MarkerId(provider.id.toString()),
+          position: LatLng(provider.lat!, provider.lng!),
+          infoWindow: InfoWindow(title: provider.name),
+          icon: BitmapDescriptor.defaultMarker,
+          onTap: () {
+            emit(ProviderMarkerTappedState(provider));
+          },
+        );
+      }).toSet();
+      if (!isClosed) {
         emit(NearbyProvidersSuccessState());
-      },
-      (failure) => emit(NearbyProvidersErrorState()),
-    );
+      }
+    }, (failure) {
+      if (!isClosed) {
+        emit(NearbyProvidersErrorState());
+      }
+    });
   }
 }

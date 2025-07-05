@@ -112,5 +112,9 @@
   "cash":"Cash",
   "credit":"Credit",
   "enterAmount":"Enter Amount",
-  "pay":"Pay"
+  "pay":"Pay",
+  "rateProvider": "Rate Provider",
+  "writeAReview": "Write a Review",
+  "howWasYourExperience":"How was your experience?",
+  "submit":"Submit"
 }

@@ -112,5 +112,9 @@
   "cash": "نقدي",
   "credit":"بطاقة ائتمان",
   "enterAmount":"ادخل القيمة",
-  "pay":"ادفع"
+  "pay":"ادفع",
+  "rateProvider":"قيم مقدم الخدمة",
+  "writeAReview":"اكتب تقييم",
+  "howWasYourExperience":"كيف كانت الخدمة",
+  "submit":"إرسال"
 }

@@ -349,4 +349,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pay => 'Pay';
+
+  @override
+  String get rateProvider => 'Rate Provider';
+
+  @override
+  String get writeAReview => 'Write a Review';
+
+  @override
+  String get howWasYourExperience => 'How was your experience?';
+
+  @override
+  String get submit => 'Submit';
 }

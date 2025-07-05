@@ -16,7 +16,12 @@ class RequestItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (pendingRequests.status == FilterRequestsStatus.completed) {
+          Navigator.pushNamed(context, RoutesManager.payment,
+              arguments: pendingRequests);
+        }
+      },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: BoxDecoration(
