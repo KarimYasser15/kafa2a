@@ -86,6 +86,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 } else if (state is PaymentSuccessState) {
                   UIUtils.hideLoading(context);
                   UIUtils.showMessage("Success");
+                  Navigator.pushReplacementNamed(
+                      context, RoutesManager.homeUser);
                   // Navigator.pushReplacement(
                   //   context,
                   //   MaterialPageRoute(
