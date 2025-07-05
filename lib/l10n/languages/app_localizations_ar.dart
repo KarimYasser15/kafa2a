@@ -336,40 +336,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get allRequests => 'كل الطلبات';
 
   @override
-  String get scheduledJobs => 'مواعيدي';
-
-  @override
-  String get yourAppointments => 'مواعيدك';
-
-  @override
-  String get appointmentsSubtitle =>
-      'تأكد من الضغط على تم عند إكمال خدمتك! حظاً سعيداً';
-
-  @override
-  String get done => 'تم';
-
-  @override
-  String get waitingToGetPaid => 'بانتظار الدفع!!';
-
-  @override
-  String get paidSuccessfully => 'تم الدفع بنجاح!! أحسنت يا أستا!!';
-
-  @override
-  String get appointments => 'مواعيدي';
-
-  @override
-  String get customerWantsToPay => 'العميل يريد دفع هذا المبلغ :) ';
-
-  @override
-  String get whatIsYourOffer => 'ما هو عرضك له؟';
-
-  @override
-  String get suspendReason => 'سبب الإيقاف';
-
-  @override
-  String get updateDocument => 'تحديث المستندات';
-
-  @override
   String get payment => 'الدفع';
 
   @override
@@ -395,4 +361,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get submit => 'إرسال';
+
+  @override
+  String get scheduledJobs => 'مواعيدي';
+
+  @override
+  String get yourAppointments => 'مواعيدك';
+
+  @override
+  String get appointmentsSubtitle => 'تأكد من الضغط على تم عند إكمال خدمتك! حظاً سعيداً';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String get waitingToGetPaid => 'بانتظار الدفع!!';
+
+  @override
+  String get paidSuccessfully => 'تم الدفع بنجاح!! أحسنت يا أستا!!';
+
+  @override
+  String get appointments => 'مواعيدي';
+
+  @override
+  String get customerWantsToPay => 'العميل يريد دفع هذا المبلغ :) ';
+
+  @override
+  String get whatIsYourOffer => 'ما هو عرضك له؟';
+
+  @override
+  String get suspendReason => 'سبب الإيقاف';
+
+  @override
+  String get updateDocument => 'تحديث المستندات';
 }

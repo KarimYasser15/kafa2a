@@ -267,8 +267,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failedToGetAcceptedOffers => 'Failed to Get Accepted Offers';
 
   @override
-  String get noPendingRequetsAtTheMoment =>
-      'No Pending Requests At The Moment!';
+  String get noPendingRequetsAtTheMoment => 'No Pending Requests At The Moment!';
 
   @override
   String get noRequestsAtTheMoment => 'No Requests At The Moment!';
@@ -337,40 +336,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get allRequests => 'All Requests';
 
   @override
-  String get scheduledJobs => 'Scheduled Jobs';
-
-  @override
-  String get yourAppointments => 'Your Appointments';
-
-  @override
-  String get appointmentsSubtitle =>
-      'make sure to press done when complete your service ! GOOD LUCK';
-
-  @override
-  String get done => 'Done';
-
-  @override
-  String get waitingToGetPaid => 'waiting to get paid !!';
-
-  @override
-  String get paidSuccessfully => 'paid successfully !! Well Done Osta !!';
-
-  @override
-  String get appointments => 'Appointments';
-
-  @override
-  String get customerWantsToPay => 'The customer wants to pay this amount :) ';
-
-  @override
-  String get whatIsYourOffer => 'What is your offer for him !';
-
-  @override
-  String get suspendReason => 'Suspend Reason';
-
-  @override
-  String get updateDocument => 'Update Document';
-
-  @override
   String get payment => 'Payment';
 
   @override
@@ -396,4 +361,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submit => 'Submit';
+
+  @override
+  String get scheduledJobs => 'Scheduled Jobs';
+
+  @override
+  String get yourAppointments => 'Your Appointments';
+
+  @override
+  String get appointmentsSubtitle => 'make sure to press done when complete your service ! GOOD LUCK';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get waitingToGetPaid => 'waiting to get paid !!';
+
+  @override
+  String get paidSuccessfully => 'paid successfully !! Well Done Osta !!';
+
+  @override
+  String get appointments => 'Appointments';
+
+  @override
+  String get customerWantsToPay => 'The customer wants to pay this amount :) ';
+
+  @override
+  String get whatIsYourOffer => 'What is your offer for him !';
+
+  @override
+  String get suspendReason => 'Suspend Reason';
+
+  @override
+  String get updateDocument => 'Update Document';
 }

@@ -62,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,8 +82,7 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -752,6 +749,60 @@ abstract class AppLocalizations {
   /// **'All Requests'**
   String get allRequests;
 
+  /// No description provided for @payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get payment;
+
+  /// No description provided for @cash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get cash;
+
+  /// No description provided for @credit.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit'**
+  String get credit;
+
+  /// No description provided for @enterAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Amount'**
+  String get enterAmount;
+
+  /// No description provided for @pay.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay'**
+  String get pay;
+
+  /// No description provided for @rateProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Provider'**
+  String get rateProvider;
+
+  /// No description provided for @writeAReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a Review'**
+  String get writeAReview;
+
+  /// No description provided for @howWasYourExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'How was your experience?'**
+  String get howWasYourExperience;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
   /// No description provided for @scheduledJobs.
   ///
   /// In en, this message translates to:
@@ -817,64 +868,9 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Document'**
   String get updateDocument;
-
-  /// No description provided for @payment.
-  ///
-  /// In en, this message translates to:
-  /// **'Payment'**
-  String get payment;
-
-  /// No description provided for @cash.
-  ///
-  /// In en, this message translates to:
-  /// **'Cash'**
-  String get cash;
-
-  /// No description provided for @credit.
-  ///
-  /// In en, this message translates to:
-  /// **'Credit'**
-  String get credit;
-
-  /// No description provided for @enterAmount.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter Amount'**
-  String get enterAmount;
-
-  /// No description provided for @pay.
-  ///
-  /// In en, this message translates to:
-  /// **'Pay'**
-  String get pay;
-
-  /// No description provided for @rateProvider.
-  ///
-  /// In en, this message translates to:
-  /// **'Rate Provider'**
-  String get rateProvider;
-
-  /// No description provided for @writeAReview.
-  ///
-  /// In en, this message translates to:
-  /// **'Write a Review'**
-  String get writeAReview;
-
-  /// No description provided for @howWasYourExperience.
-  ///
-  /// In en, this message translates to:
-  /// **'How was your experience?'**
-  String get howWasYourExperience;
-
-  /// No description provided for @submit.
-  ///
-  /// In en, this message translates to:
-  /// **'Submit'**
-  String get submit;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -883,25 +879,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'en':
-      return AppLocalizationsEn();
+    case 'ar': return AppLocalizationsAr();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }
