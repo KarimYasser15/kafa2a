@@ -748,6 +748,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All Requests'**
   String get allRequests;
+
+  /// No description provided for @scheduledJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled Jobs'**
+  String get scheduledJobs;
+
+  /// No description provided for @yourAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Appointments'**
+  String get yourAppointments;
+
+  /// No description provided for @appointmentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'make sure to press done when complete your service ! GOOD LUCK'**
+  String get appointmentsSubtitle;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @waitingToGetPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'waiting to get paid !!'**
+  String get waitingToGetPaid;
+
+  /// No description provided for @paidSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'paid successfully !! Well Done Osta !!'**
+  String get paidSuccessfully;
+
+  /// No description provided for @appointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointments'**
+  String get appointments;
+
+  /// No description provided for @customerWantsToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'The customer wants to pay this amount :) '**
+  String get customerWantsToPay;
+
+  /// No description provided for @whatIsYourOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your offer for him !'**
+  String get whatIsYourOffer;
+
+  /// No description provided for @suspendReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend Reason'**
+  String get suspendReason;
+
+  /// No description provided for @updateDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Document'**
+  String get updateDocument;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -28,7 +28,17 @@ class ProviderProfileScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: Column(
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: 1),
+              duration: Duration(milliseconds: 700),
+              builder: (context, value, child) => Opacity(
+                opacity: value,
+                child: Transform.translate(
+                  offset: Offset(0, (1 - value) * 30),
+                  child: child,
+                ),
+              ),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
@@ -83,13 +93,19 @@ class ProviderProfileScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 10.h,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
                                         children: List.generate(
                                           5,
                                           (index) => Icon(
-                                            Icons.star,
+                                            index <
+                                                    context
+                                                        .read<AuthCubit>()
+                                                        .provider!
+                                                        .rating!
+                                                        .toInt()
+                                                ? Icons.star
+                                                : Icons.star_border,
                                             color: Colors.amber,
+                                            size: 20.sp,
                                           ),
                                         ),
                                       ),
@@ -187,7 +203,9 @@ class ProviderProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ]),
+                ],
+              ),
+            ),
           ),
         ),
       ),

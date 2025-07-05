@@ -53,4 +53,22 @@ class ProviderOffersApiDataSource extends ProviderOffersRemoteDataSource {
       throw RemoteException(errorMessage);
     }
   }
+
+  @override
+  Future<void> completeRequest(String token, int requestId) async {
+    try {
+      await _dio.post(
+        'service-requests/$requestId/complete',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+      );
+    } catch (exception) {
+      String errorMessage = 'Failed to complete request';
+      if (exception is DioException) {
+        errorMessage = exception.response?.data['error'] ?? errorMessage;
+      }
+      throw RemoteException(errorMessage);
+    }
+  }
 }
