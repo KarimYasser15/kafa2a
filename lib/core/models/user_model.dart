@@ -35,8 +35,8 @@ class UserModel {
         nationalId: json['national_id'] as String?,
         gender: json['gender'] as String?,
         serviceId: json['service_id'] as String?,
-        lat: json['lat'] as double?,
-        lng: json['lng'] as double?,
+        lat: json['lat'] as String?,
+        lng: json['lng'] as String?,
         status: json['status'] as String?,
         suspendReason: json['suspend_reason'] as String?,
         rating: json['rating'] as int?,
@@ -59,8 +59,8 @@ class UserModel {
   String? serviceId;
   String type;
   DateTime updatedAt;
-  double? lat;
-  double? lng;
+  String? lat;
+  String? lng;
   String? status;
   String? suspendReason;
   int? rating;
