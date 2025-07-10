@@ -7,10 +7,12 @@ class OfferTextFormField extends StatelessWidget {
       {super.key,
       required this.controller,
       required this.validator,
-      required this.hintText});
+      required this.hintText,
+      this.textStyle});
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final String hintText;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class OfferTextFormField extends StatelessWidget {
         controller: controller,
         validator: validator,
         keyboardType: TextInputType.number,
+        style: textStyle,
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding: EdgeInsets.symmetric(horizontal: 10.w),

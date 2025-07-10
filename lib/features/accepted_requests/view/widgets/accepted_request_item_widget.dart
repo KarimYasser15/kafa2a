@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AcceptedRequestItemWidget extends StatelessWidget {
-  const AcceptedRequestItemWidget({super.key});
+  const AcceptedRequestItemWidget({super.key, required this.acceptedRequest});
+  final AllRequests acceptedRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                   children: [
                     Center(
                         child: Text(
-                      "200LE",
+                      acceptedRequest.price,
                       style: TextStyle(
                           fontSize: 17.sp, fontWeight: FontWeight.bold),
                     )),
@@ -39,7 +43,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                           color: ColorsManager.blue,
                         ),
                         Text(
-                          "Service Provider: Ziad Tarek",
+                          "${AppLocalizations.of(context).serviceProvider}: ${acceptedRequest.user.name}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         )
@@ -73,7 +77,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                       children: [
                         Icon(Icons.description, color: ColorsManager.blue),
                         Text(
-                          "Description",
+                          AppLocalizations.of(context).description,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -82,7 +86,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "Leaking Pipe Under My Kitchen Sink",
+                      acceptedRequest.description,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -94,7 +98,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                           color: Colors.red,
                         ),
                         Text(
-                          "Location",
+                          AppLocalizations.of(context).location,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -103,7 +107,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "ElDokki Street, Giza",
+                      acceptedRequest.lat,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -113,7 +117,7 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                         Icon(Icons.access_time_rounded,
                             color: ColorsManager.blue),
                         Text(
-                          "Time",
+                          AppLocalizations.of(context).time,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -122,22 +126,33 @@ class AcceptedRequestItemWidget extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "25-5-2025 - Friday - 2 pm",
+                      acceptedRequest.scheduledAt,
                     ),
                     SizedBox(height: 10.h),
                   ],
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  final Uri phoneUri =
+                      Uri(scheme: 'tel', path: acceptedRequest.user.phone);
+                  if (await canLaunchUrl(phoneUri)) {
+                    await launchUrl(phoneUri,
+                        mode: LaunchMode.externalApplication);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Could not launch phone dialer')),
+                    );
+                  }
+                },
                 child: Row(
                   children: [
                     Spacer(),
                     Text(
-                      "Chat With Provider",
+                      acceptedRequest.user.phone,
                     ),
                     Spacer(),
-                    Icon(Icons.chat)
+                    Icon(Icons.phone)
                   ],
                 ),
               ),

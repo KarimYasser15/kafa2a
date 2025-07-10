@@ -1,10 +1,11 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:kafa2a/config/strings_manager.dart';
-import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafa2a/core/di/service_locator.dart';
+import 'package:kafa2a/core/widgets/custom_navigation_bar.dart';
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/provider_home_tab.dart';
-import 'package:kafa2a/features/my_profile/presentation/my_profile_screen.dart';
-import 'package:kafa2a/features/requests/user/presentation/screens/user_requests_screen.dart';
+import 'package:kafa2a/features/my_profile/presentation/screens/provider/provider_profile_screen.dart';
+import 'package:kafa2a/features/home/provider/presentation/screens/scheduled_jobs_screen.dart';
 
 class ProviderMainScreen extends StatefulWidget {
   const ProviderMainScreen({super.key});
@@ -15,48 +16,55 @@ class ProviderMainScreen extends StatefulWidget {
 
 class _ProviderMainScreenState extends State<ProviderMainScreen> {
   int selectedTab = 0;
-  List<Widget> tabs = [
+
+  final List<Widget> tabs = [
     ProviderHomeTab(),
-    UserRequestsScreen(),
-    AcceptedRequestsScreen(),
-    Scaffold(
-      backgroundColor: Colors.deepOrange,
+    BlocProvider(
+      create: (context) => getIt.get<ProviderOffersCubit>(),
+      child: ScheduledJobsScreen(),
     ),
-    MyProfileScreen()
+    ProviderProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       extendBody: true,
-      body: tabs[selectedTab],
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12.r), topRight: Radius.circular(12.r)),
-        child: BottomNavigationBar(
-            onTap: (value) {
-              selectedTab = value;
-              setState(() {});
-            },
-            currentIndex: selectedTab,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: StringsManager.home,
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.edit_document),
-                  label: StringsManager.myRequests),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.handshake), label: StringsManager.accepted),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
-                label: StringsManager.chats,
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.account_circle),
-                  label: StringsManager.myProfile),
-            ]),
+      body: SafeArea(
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+          child: Container(
+            key: ValueKey<int>(selectedTab),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: tabs[selectedTab],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -1),
+            ),
+          ],
+        ),
+        child: CustomNavigationBar(
+          selectedIndex: selectedTab,
+          onTap: (index) {
+            setState(() {
+              selectedTab = index;
+            });
+          },
+          isProvider: true,
+        ),
       ),
     );
   }

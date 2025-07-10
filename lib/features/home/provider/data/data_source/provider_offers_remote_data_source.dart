@@ -6,4 +6,5 @@ abstract class ProviderOffersRemoteDataSource {
   Future<List<AllProviderRequests>> getAllRequests(String token);
   Future<SendOfferResponse> sendOffer(
       String token, SendOfferRequest sendOfferRequest);
+  Future<void> completeRequest(String token, int requestId);
 }

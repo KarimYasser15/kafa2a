@@ -8,4 +8,5 @@ abstract class ProviderOffersRepository {
   Future<Either<List<AllProviderRequests>, Failure>> getAllRequests();
   Future<Either<SendOfferResponse, Failure>> sendOffer(
       SendOfferRequest request);
+  Future<Either<void, Failure>> completeRequest(int requestId);
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/routes_manager.dart';
-import 'package:kafa2a/config/strings_manager.dart';
 import 'package:kafa2a/core/widgets/default_elevated_button.dart';
+import 'package:kafa2a/features/home/user/presentation/screens/map_tab.dart';
+import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class UserHomeTab extends StatefulWidget {
   const UserHomeTab({super.key});
@@ -17,11 +18,11 @@ class _UserHomeTabState extends State<UserHomeTab> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        Placeholder(),
+        MapTab(),
         Padding(
-          padding: EdgeInsets.only(bottom: 100.h, left: 20.w, right: 20.w),
+          padding: EdgeInsets.only(bottom: 120.h, left: 20.w, right: 20.w),
           child: DefaultElevatedButton(
-            label: StringsManager.requestService,
+            label: AppLocalizations.of(context).requestService,
             onPressed: () => Navigator.pushNamed(
               context,
               RoutesManager.requestAService,
