@@ -50,9 +50,11 @@ class ProviderOffersCubit extends Cubit<ProviderOffersStates> {
       sendOfferRequest,
     );
     result.fold(
-      (response) => emit(
-        SendOfferSuccessState(response.message!),
-      ),
+      (response) async {
+        emit(
+          SendOfferSuccessState(response.message!),
+        );
+      },
       (failure) => emit(
         SendOfferErrorState(failure.message),
       ),

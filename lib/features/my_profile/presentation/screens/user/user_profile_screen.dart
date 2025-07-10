@@ -24,6 +24,16 @@ class UserProfileScreen extends StatelessWidget {
         ),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          GestureDetector(
+            child: Container(
+              width: 100,
+              height: 50,
+              color: Colors.transparent, // Makes it tappable but invisible
+            ),
+            onTap: () => context.read<AuthCubit>().getNotification(),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(

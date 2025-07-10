@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kafa2a/core/constants.dart';
 import 'package:kafa2a/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
@@ -56,15 +54,11 @@ class PusherService {
         cluster: 'eu',
 
         onConnectionStateChange: (currentState, previousState) async {
-          print("Pusher state: $currentState");
-
           if (currentState == "CONNECTED") {
             try {
               await _pusher.subscribe(
                 channelName: 'private-user.$userId',
                 onEvent: (event) {
-                  print("📩 New Event: ${event.eventName} => ${event.data}");
-
                   flutterLocalNotificationsPlugin.show(
                     0,
                     "New Notification",
@@ -81,23 +75,15 @@ class PusherService {
                   );
                 },
               );
-            } catch (e) {
-              print("❌ Subscribe error: $e");
-            }
+            } catch (e) {}
           }
         },
 
-        onError: (message, code, error) {
-          print("Pusher error: $message ($code): $error");
-        },
+        onError: (message, code, error) {},
 
-        onSubscriptionSucceeded: (channelName, data) {
-          print("✅ Subscribed to $channelName");
-        },
+        onSubscriptionSucceeded: (channelName, data) {},
 
-        onEvent: (event) {
-          print("Event: ${event.eventName} => ${event.data}");
-        },
+        onEvent: (event) {},
 
         // ✅ Private channel authorizer (connects to Laravel)
         onAuthorizer: (channelName, socketId, options) async {
@@ -116,18 +102,13 @@ class PusherService {
               },
             );
             return response.data;
-          } catch (e) {
-            print("❌ Pusher authorizer error: $e");
-            rethrow;
-          }
+          } catch (e) {}
         },
       );
 
       // 6. Connect after init
       await _pusher.connect();
-    } catch (e) {
-      print("❌ Pusher init error: $e");
-    }
+    } catch (e) {}
   }
 
   Future<void> disconnect() async {

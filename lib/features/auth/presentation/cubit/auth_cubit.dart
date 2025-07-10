@@ -8,6 +8,8 @@ import 'package:injectable/injectable.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/error/failure.dart';
 import 'package:kafa2a/core/utils/access_location.dart';
+import 'package:kafa2a/core/utils/offer_handler.dart';
+import 'package:kafa2a/core/utils/offer_notifier.dart';
 import 'package:kafa2a/core/utils/pusher_notification.dart';
 import 'package:kafa2a/features/auth/data/models/log_out_response.dart';
 import 'package:kafa2a/features/auth/data/models/login_request.dart';
@@ -51,6 +53,7 @@ class AuthCubit extends Cubit<AuthStates> {
     user = response.fold((user) => user, (l) => null);
     response.fold(
       (userSuccess) async {
+        OfferHandler().initializeOfferListening();
         await pusherService.init(userId: userSuccess.id);
         emit(
           AuthSuccessState(),
@@ -179,5 +182,9 @@ class AuthCubit extends Cubit<AuthStates> {
     } catch (e) {
       emit(LocationNameSuccessState('${latLng.latitude}, ${latLng.longitude}'));
     }
+  }
+
+  Future getNotification() async {
+    await OfferNotifier.sendOffer("You received a new offer for: 200 EGP");
   }
 }

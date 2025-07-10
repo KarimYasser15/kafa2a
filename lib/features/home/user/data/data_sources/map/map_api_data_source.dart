@@ -25,7 +25,6 @@ class MapApiDataSource implements MapRemoteDataSource {
           .map((providers) => GetNearbyProvidersResponse.fromJson(providers))
           .toList();
     } catch (exception) {
-      print(exception.toString());
       String errorMessage = Messages.failedToGetNearbyProviders;
       if (exception is DioException) {
         errorMessage = exception.response?.data['message'] ?? errorMessage;

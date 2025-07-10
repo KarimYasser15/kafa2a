@@ -57,45 +57,38 @@ class GetNearbyProvidersResponse {
       selfiePath: json['selfie_path'] as String?,
       nationalId: json['national_id'] as String?,
       gender: json['gender'] as dynamic,
-      lat: (json['lat'] as num?)?.toDouble(),
-      lng: (json['lng'] as num?)?.toDouble(),
+      lat: _parseDouble(json['lat']),
+      lng: _parseDouble(json['lng']),
       address: json['address'] as String?,
       serviceId: json['service_id'] as String?,
       status: json['status'] as String?,
       suspendReason: json['suspend_reason'] as dynamic,
       rating: json['rating'] as int?,
       review: json['review'] as dynamic,
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
-      distance: (json['distance'] as num?)?.toDouble(),
+      createdAt: _parseDateTime(json['created_at']),
+      updatedAt: _parseDateTime(json['updated_at']),
+      distance: _parseDouble(json['distance']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'email_verified_at': emailVerifiedAt,
-        'type': type,
-        'phone': phone,
-        'police_certificate_path': policeCertificatePath,
-        'selfie_path': selfiePath,
-        'national_id': nationalId,
-        'gender': gender,
-        'lat': lat,
-        'lng': lng,
-        'address': address,
-        'service_id': serviceId,
-        'status': status,
-        'suspend_reason': suspendReason,
-        'rating': rating,
-        'review': review,
-        'created_at': createdAt?.toIso8601String(),
-        'updated_at': updatedAt?.toIso8601String(),
-        'distance': distance,
-      };
+  static double? _parseDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
+  }
+
+  static DateTime? _parseDateTime(dynamic value) {
+    if (value == null) return null;
+    if (value is DateTime) return value;
+    if (value is String) {
+      try {
+        return DateTime.parse(value);
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  }
 }

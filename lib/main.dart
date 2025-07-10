@@ -5,6 +5,7 @@ import 'package:kafa2a/config/app_theme.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/app_bloc_observer.dart';
 import 'package:kafa2a/core/di/service_locator.dart';
+import 'package:kafa2a/core/utils/notification_service.dart';
 import 'package:kafa2a/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:kafa2a/features/home/user/presentation/cubit/request_service/request_service_cubit.dart';
 import 'package:kafa2a/features/my_profile/presentation/cubit/profile_cubit.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver();
   await configureDependencies();
   await FlutterLocalization.instance.ensureInitialized();
+  await NotificationService.initialize();
   runApp(const Kafa2aApp());
 }
 

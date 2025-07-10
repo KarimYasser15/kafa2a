@@ -160,7 +160,7 @@ class CustomNavigationBar extends StatelessWidget {
               duration: const Duration(milliseconds: 200),
               child: Icon(
                 icon,
-                size: isSelected ? 30.sp : 28.sp,
+                size: isSelected ? 26.sp : 24.sp,
                 color: isSelected ? Colors.white : Colors.grey[400],
               ),
             ),
@@ -168,7 +168,7 @@ class CustomNavigationBar extends StatelessWidget {
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 200),
               style: TextStyle(
-                fontSize: isSelected ? 12.sp : 11.sp,
+                fontSize: isSelected ? 10.sp : 9.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 color: isSelected ? Colors.white : Colors.grey[400],
               ),

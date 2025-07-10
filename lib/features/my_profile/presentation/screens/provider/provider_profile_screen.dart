@@ -93,6 +93,8 @@ class ProviderProfileScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 10.h,
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: List.generate(
                                           5,
                                           (index) => Icon(
@@ -149,11 +151,7 @@ class ProviderProfileScreen extends StatelessWidget {
                                     .address),
                             ProviderProfileDataWidget(
                                 label: AppLocalizations.of(context).service,
-                                data: context
-                                    .read<AuthCubit>()
-                                    .provider!
-                                    .serviceId
-                                    .toString()),
+                                data: "Plumber"),
                           ],
                         ),
                       ),

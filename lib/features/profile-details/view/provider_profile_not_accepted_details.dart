@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/core/constants.dart';
-import 'package:kafa2a/core/widgets/ui_utils.dart';
-import 'package:kafa2a/features/home/user/presentation/screens/user_main_screen.dart';
-import 'package:kafa2a/features/offers/user/data/models/user_offers_response/offers.dart';
-import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart';
-import 'package:kafa2a/features/offers/user/presentation/cubit/offers_states.dart';
+import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ProviderProfileDetails extends StatelessWidget {
-  const ProviderProfileDetails({super.key, required this.offer});
-  final Offers offer;
+class ProviderProfileViewScreen extends StatelessWidget {
+  const ProviderProfileViewScreen({super.key, required this.offer});
+  final AllRequests offer;
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      throw 'Could not launch $launchUri';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +51,7 @@ class ProviderProfileDetails extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(70.r),
                         child: Image.network(
-                          '${ApiConstants.baseImageUrl}${offer.provider.selfiePath}',
+                          '${ApiConstants.baseImageUrl}${offer.user.selfiePath}',
                           width: 150.w,
                           height: 150.w,
                           fit: BoxFit.cover,
@@ -68,7 +76,7 @@ class ProviderProfileDetails extends StatelessWidget {
                       height: 20.h,
                     ),
                     Text(
-                      "${AppLocalizations.of(context).name}: ${offer.provider.name}",
+                      "${AppLocalizations.of(context).name}: ${offer.user.name}",
                       style: TextStyle(
                           fontSize: 20.sp, fontWeight: FontWeight.w700),
                     ),
@@ -76,7 +84,7 @@ class ProviderProfileDetails extends StatelessWidget {
                       height: 10.h,
                     ),
                     Text(
-                      "${AppLocalizations.of(context).address}: ${offer.provider.address}",
+                      "${AppLocalizations.of(context).address}: Nasr City",
                       style: TextStyle(
                           fontSize: 20.sp, fontWeight: FontWeight.w700),
                     ),
@@ -87,6 +95,18 @@ class ProviderProfileDetails extends StatelessWidget {
                       "${AppLocalizations.of(context).offer}: ${offer.price}",
                       style: TextStyle(
                           fontSize: 20.sp, fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: 10.h),
+                    GestureDetector(
+                      onTap: () => _makePhoneCall(offer.user.phone),
+                      child: Text(
+                        "${AppLocalizations.of(context).phoneNumber}: ${offer.user.phone}",
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
                     SizedBox(height: 10.h),
                     Row(
@@ -100,7 +120,7 @@ class ProviderProfileDetails extends StatelessWidget {
                           children: List.generate(
                             5,
                             (index) => Icon(
-                              index < offer.provider.rating!
+                              index < offer.user.rating!
                                   ? Icons.star
                                   : Icons.star_border,
                               color: Colors.amber,
@@ -116,42 +136,6 @@ class ProviderProfileDetails extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20.h,
-          ),
-          BlocListener<OffersCubit, OffersStates>(
-            listener: (context, state) {
-              if (state is ManageOfferLoadingState) {
-                UIUtils.showLoading(context);
-              } else if (state is ManageOfferErrorState) {
-                UIUtils.hideLoading(context);
-                UIUtils.showMessage(state.error);
-              } else if (state is AcceptOfferSuccessState) {
-                UIUtils.hideLoading(context);
-                UIUtils.showMessage(state.acceptOfferResponse.message!);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UserMainScreen(),
-                  ),
-                  (route) => true,
-                );
-              }
-            },
-            child: ElevatedButton(
-              onPressed: () =>
-                  context.read<OffersCubit>().acceptOffer(offer.id),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                      side: BorderSide(color: Colors.green, width: 1.2.w))),
-              child: Text(
-                AppLocalizations.of(context).acceptOffer,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          )
         ],
       ),
     );

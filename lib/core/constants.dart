@@ -1,7 +1,8 @@
 class ApiConstants {
   // 192.168.1.15
-  static const String baseUrl = 'http://10.0.2.2:8000/api/';
-  static const String baseImageUrl = "http://10.0.2.2:8000/storage/";
+  // 10
+  static const String baseUrl = 'http://192.168.1.15:8000/api/';
+  static const String baseImageUrl = "http://192.168.1.15:8000/storage/";
   static const String logOutEndPoint = 'logout';
   static const String loginProviderEndPoint = 'token';
   static const String loginUserEndPoint = 'token';

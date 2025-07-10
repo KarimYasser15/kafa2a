@@ -105,17 +105,17 @@ import 'package:kafa2a/features/offers/user/domain/use_cases/reject_offer.dart'
 import 'package:kafa2a/features/offers/user/presentation/cubit/offers_cubit.dart'
     as _i1017;
 import 'package:kafa2a/features/payment/data/data_sources/payment_api_data_source.dart'
-    as _i861;
+    as _i644;
 import 'package:kafa2a/features/payment/data/data_sources/payment_remote_data_source.dart'
-    as _i1047;
+    as _i340;
 import 'package:kafa2a/features/payment/data/repository/payment_repository_impl.dart'
-    as _i767;
+    as _i978;
 import 'package:kafa2a/features/payment/domain/repository/payment_repository.dart'
-    as _i433;
+    as _i154;
 import 'package:kafa2a/features/payment/domain/use_cases/pay_provider.dart'
-    as _i820;
+    as _i583;
 import 'package:kafa2a/features/payment/presentation/cubit/payment_cubit.dart'
-    as _i628;
+    as _i505;
 import 'package:kafa2a/features/requests/user/data/data_sources/remote/service_requests_remote_data_source.dart'
     as _i277;
 import 'package:kafa2a/features/requests/user/data/data_sources/user_requests_api_data_source.dart'
@@ -142,6 +142,18 @@ import 'package:kafa2a/features/requests/user/domain/use_cases/get_service_reque
     as _i157;
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart'
     as _i838;
+import 'package:kafa2a/features/reviews/data/data_source/review_provider_api_data_source.dart'
+    as _i416;
+import 'package:kafa2a/features/reviews/data/data_source/review_provider_remote_data_source.dart'
+    as _i1072;
+import 'package:kafa2a/features/reviews/data/repository/review_provider_repostiory_impl.dart'
+    as _i39;
+import 'package:kafa2a/features/reviews/domain/repository/review_provider_repository.dart'
+    as _i369;
+import 'package:kafa2a/features/reviews/domain/use_cases/review_provider.dart'
+    as _i1019;
+import 'package:kafa2a/features/reviews/presentation/cubit/review_provider_cubit.dart'
+    as _i45;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -163,8 +175,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => registerModule.dio);
     gh.singleton<_i755.AuthRemoteDataSource>(
         () => _i386.AuthApiRemoteDataSource(gh<_i361.Dio>()));
-    gh.factory<_i1047.PaymentRemoteDataSource>(
-        () => _i861.PaymentApiDataSource(gh<_i361.Dio>()));
+    gh.factory<_i340.PaymentRemoteDataSource>(
+        () => _i644.PaymentApiDataSource(gh<_i361.Dio>()));
     gh.factory<_i932.MapRemoteDataSource>(
         () => _i35.MapApiDataSource(gh<_i361.Dio>()));
     gh.factory<_i20.OffersUserRemoteDataSource>(
@@ -173,6 +185,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i652.UserRequestsApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i633.ProviderOffersRemoteDataSource>(
         () => _i0.ProviderOffersApiDataSource(gh<_i361.Dio>()));
+    gh.factory<_i1072.ReviewProviderRemoteDataSource>(
+        () => _i416.ReviewProviderApiDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i796.ProfileLocalDataSource>(() =>
         _i50.ProfileSharedPrefLocalDataSource(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i819.LocalDataSource>(
@@ -190,13 +204,14 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i361.Dio>(),
           gh<_i819.AuthLocalDataSource>(),
         ));
-    gh.factory<_i433.PaymentRepository>(() => _i767.PaymentRepositoryImpl(
-          gh<_i1047.PaymentRemoteDataSource>(),
-          gh<_i819.AuthLocalDataSource>(),
-        ));
     gh.lazySingleton<_i1052.ProviderOffersRepository>(
         () => _i723.ProviderOffersRepositoryImpl(
               gh<_i633.ProviderOffersRemoteDataSource>(),
+              gh<_i819.AuthLocalDataSource>(),
+            ));
+    gh.factory<_i369.ReviewProviderRepository>(
+        () => _i39.ReviewProviderRepostioryImpl(
+              gh<_i1072.ReviewProviderRemoteDataSource>(),
               gh<_i819.AuthLocalDataSource>(),
             ));
     gh.factory<_i607.OffersRepository>(() => _i958.OffersRepositoryImpl(
@@ -236,6 +251,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i766.AccessLocation>(),
           gh<_i197.GetNearbyCategories>(),
         ));
+    gh.factory<_i1019.ReviewProvider>(
+        () => _i1019.ReviewProvider(gh<_i369.ReviewProviderRepository>()));
+    gh.factory<_i45.ReviewProviderCubit>(
+        () => _i45.ReviewProviderCubit(gh<_i1019.ReviewProvider>()));
     gh.singleton<_i231.RejectOffer>(
         () => _i231.RejectOffer(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i95.AcceptOffer>(
@@ -244,6 +263,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i29.CancelRequest(gh<_i607.OffersRepository>()));
     gh.lazySingleton<_i888.GetOffers>(
         () => _i888.GetOffers(gh<_i607.OffersRepository>()));
+    gh.factory<_i154.PaymentRepository>(() => _i978.PaymentRepositoryImpl(
+          gh<_i340.PaymentRemoteDataSource>(),
+          gh<_i819.AuthLocalDataSource>(),
+        ));
     gh.factory<_i960.GetAllServiceRequests>(() =>
         _i960.GetAllServiceRequests(gh<_i974.ServiceRequestsRepository>()));
     gh.factory<_i157.GetServiceRequestById>(() =>
@@ -273,16 +296,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i616.SendOffer>(),
           gh<_i1052.ProviderOffersRepository>(),
         ));
-    gh.factory<_i820.PayProvider>(
-        () => _i820.PayProvider(gh<_i433.PaymentRepository>()));
     gh.factory<_i1017.OffersCubit>(() => _i1017.OffersCubit(
           gh<_i888.GetOffers>(),
           gh<_i95.AcceptOffer>(),
           gh<_i231.RejectOffer>(),
           gh<_i29.CancelRequest>(),
         ));
-    gh.factory<_i628.PaymentCubit>(
-        () => _i628.PaymentCubit(gh<_i820.PayProvider>()));
     gh.singleton<_i574.RequestService>(
         () => _i574.RequestService(gh<_i234.RequestServiceRepository>()));
     gh.factory<_i86.GetAllCategories>(
@@ -299,6 +318,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i23.LogOut>(),
           gh<_i766.AccessLocation>(),
         ));
+    gh.factory<_i583.PayProvider>(
+        () => _i583.PayProvider(gh<_i154.PaymentRepository>()));
+    gh.factory<_i505.PaymentCubit>(
+        () => _i505.PaymentCubit(gh<_i583.PayProvider>()));
     gh.factory<_i420.RequestServiceCubit>(() => _i420.RequestServiceCubit(
           gh<_i86.GetAllCategories>(),
           gh<_i574.RequestService>(),

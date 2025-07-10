@@ -35,8 +35,8 @@ class UserModel {
         nationalId: json['national_id'] as String?,
         gender: json['gender'] as String?,
         serviceId: json['service_id'] as String?,
-        lat: json['lat'] as double?,
-        lng: json['lng'] as double?,
+        lat: _parseDouble(json['lat']),
+        lng: _parseDouble(json['lng']),
         status: json['status'] as String?,
         suspendReason: json['suspend_reason'] as String?,
         rating: json['rating'] as int?,
@@ -65,4 +65,12 @@ class UserModel {
   String? suspendReason;
   int? rating;
   dynamic review;
+
+  static double? _parseDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
+  }
 }

@@ -21,19 +21,15 @@ class RequestServiceCubit extends Cubit<RequestServiceStates> {
   List<Category>? categories;
 
   Future<void> getAllCategories() async {
-    if (categories != null) {
-      emit(GetCategoriesSuccessState(categories!));
-    } else {
-      emit(GetCategoriesLoadingState());
-      Either<List<Category>, Failure> response = await _getAllCategories();
-      response.fold(
-        (categoriesSuccess) {
-          categories = categoriesSuccess;
-          emit(GetCategoriesSuccessState(categoriesSuccess));
-        },
-        (error) => emit(GetCategoriesErrorState(error.message)),
-      );
-    }
+    emit(GetCategoriesLoadingState());
+    Either<List<Category>, Failure> response = await _getAllCategories();
+    response.fold(
+      (categoriesSuccess) {
+        categories = categoriesSuccess;
+        emit(GetCategoriesSuccessState(categoriesSuccess));
+      },
+      (error) => emit(GetCategoriesErrorState(error.message)),
+    );
   }
 
   Future<void> requestService(RequestServiceRequest requestService) async {
@@ -44,6 +40,7 @@ class RequestServiceCubit extends Cubit<RequestServiceStates> {
       (_) {
         emit(RequestServiceSuccessState());
         emit(GetCategoriesSuccessState(categories!));
+        categories = null;
       },
       (error) => emit(RequestServiceErrorState(error.message)),
     );

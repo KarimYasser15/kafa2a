@@ -6,7 +6,6 @@ import 'package:kafa2a/core/widgets/loading_indicator.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_states.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/widgets/provider_offer_item_widget.dart';
-import 'package:kafa2a/l10n/languages/app_localizations.dart';
 
 class ProviderHomeTab extends StatelessWidget {
   const ProviderHomeTab({super.key});

@@ -11,6 +11,8 @@ import 'package:kafa2a/features/offers/user/presentation/screens/user_offers_scr
 import 'package:kafa2a/features/onboarding/onboarding_screen.dart';
 import 'package:kafa2a/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:kafa2a/features/payment/presentation/screens/payment_screen.dart';
+import 'package:kafa2a/features/reviews/presentation/cubit/review_provider_cubit.dart';
+import 'package:kafa2a/features/reviews/presentation/screens/review_provider_screen.dart';
 import 'package:kafa2a/features/suspension/provider_suspension_main_screen.dart';
 
 class RoutesManager {
@@ -77,6 +79,13 @@ class RoutesManager {
             child: PaymentScreen(),
           ),
         );
+      case reviewProvider:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt.get<ReviewProviderCubit>(),
+                  child: ProviderRatingScreen(),
+                ),
+            settings: settings);
     }
     return null;
   }

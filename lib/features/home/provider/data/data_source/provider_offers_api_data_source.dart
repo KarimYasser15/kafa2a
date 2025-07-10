@@ -24,7 +24,6 @@ class ProviderOffersApiDataSource extends ProviderOffersRemoteDataSource {
           .toList();
       return providerRequests;
     } catch (exception) {
-      print(exception.toString());
       String errorMessage = Messages.failedToGetRequests;
       if (exception is DioException) {
         errorMessage = exception.response?.data['error'] ?? errorMessage;

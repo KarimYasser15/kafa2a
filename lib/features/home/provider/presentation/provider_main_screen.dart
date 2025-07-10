@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kafa2a/core/di/service_locator.dart';
 import 'package:kafa2a/core/widgets/custom_navigation_bar.dart';
-import 'package:kafa2a/features/accepted_requests/view/accepted_requests_screen.dart';
+import 'package:kafa2a/features/home/provider/presentation/cubit/provider_offers_cubit.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/provider_home_tab.dart';
 import 'package:kafa2a/features/my_profile/presentation/screens/provider/provider_profile_screen.dart';
-import 'package:kafa2a/features/requests/user/presentation/screens/user_requests_screen.dart';
 import 'package:kafa2a/features/home/provider/presentation/screens/scheduled_jobs_screen.dart';
 
 class ProviderMainScreen extends StatefulWidget {
@@ -18,7 +19,10 @@ class _ProviderMainScreenState extends State<ProviderMainScreen> {
 
   final List<Widget> tabs = [
     ProviderHomeTab(),
-    ScheduledJobsScreen(),
+    BlocProvider(
+      create: (context) => getIt.get<ProviderOffersCubit>(),
+      child: ScheduledJobsScreen(),
+    ),
     ProviderProfileScreen(),
   ];
 

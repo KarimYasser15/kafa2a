@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:kafa2a/config/colors_manager.dart';
 import 'package:kafa2a/config/routes_manager.dart';
 import 'package:kafa2a/core/constants.dart';
+import 'package:kafa2a/features/profile-details/view/provider_profile_not_accepted_details.dart';
 import 'package:kafa2a/features/requests/user/data/models/get_all_requests/all_requests.dart';
 import 'package:kafa2a/features/requests/user/presentation/cubit/user_requests_cubit.dart';
 import 'package:kafa2a/l10n/languages/app_localizations.dart';
@@ -20,6 +21,13 @@ class RequestItemWidget extends StatelessWidget {
         if (pendingRequests.status == FilterRequestsStatus.completed) {
           Navigator.pushNamed(context, RoutesManager.payment,
               arguments: pendingRequests);
+        } else if (pendingRequests.status == FilterRequestsStatus.accepted) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ProviderProfileViewScreen(offer: pendingRequests),
+              ));
         }
       },
       child: Container(
